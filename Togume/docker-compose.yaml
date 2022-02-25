@@ -1,0 +1,21 @@
+version: '3.4'
+services:
+
+  end:
+    image: enderwar/controlaccounts:latest
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5011
+
+    ports:
+      - 5011:5011
+
+  gateway:  
+    image: bleedcloud/gateway:latest
+    ports:
+      - 7001:7001
+
+  client:  
+    image: frontendtaa:latest
+    ports:
+      - 4200:80
