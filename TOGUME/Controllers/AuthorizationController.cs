@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Mail;
 
 namespace TOGUME.Controllers
 {
@@ -26,7 +27,7 @@ namespace TOGUME.Controllers
 
         [Route("Registration")]
         [HttpPost]
-        public IActionResult Register([FromBody] JRegister model)
+        public IActionResult Register([FromBody] JPreRegister model)
         {
             Console.WriteLine("Registration method started");
             if (model != null && model.Password == model.SecondPassword)
@@ -44,6 +45,7 @@ namespace TOGUME.Controllers
 
                     db.account.Add(new Account { email = model.Email, password = GetHashString(model.Password) });
                     db.SaveChanges();
+
                     Console.WriteLine("Registration successful\nRegistration method finished");
                     return Ok();
 
@@ -51,8 +53,147 @@ namespace TOGUME.Controllers
 
             }
             Console.WriteLine("Registration input = null or password!=secondpassword\nRegistration method finished");
-            return BadRequest(); 
+            return BadRequest();
         }
+
+
+
+        [Route("Registration2")]
+        [HttpPost]
+        public async Task<IActionResult> Register2([FromBody] JPreRegister model)
+        {
+            Console.WriteLine("Registration method started");
+            if (model != null && model.Password == model.SecondPassword)
+            {
+                using ApplicationContext db = new ApplicationContext();
+                {
+                    foreach (var l in db.account.ToList())
+                    {
+                        if (l.email == model.Email)
+                        {
+                            Console.WriteLine("User with this Email AlredyExist\nRegistration method finished");
+                            return BadRequest("AlredyExist"); //400
+                        }
+                    }
+                    int codein = Random();
+                    SendEmailAsync(model.Email, codein);
+
+                    db.code.Add(new Code { Email = model.Email, code = codein });
+                    // db.account.Add(new Account { email = model.Email, password = GetHashString(model.Password) });
+                    db.SaveChanges();
+
+                    Console.WriteLine("Registration code send successful\nRegistration method finished");
+                    return Ok();
+
+                }
+
+            }
+            Console.WriteLine("Registration input = null or password!=secondpassword\nRegistration method finished");
+            return BadRequest();
+        }
+
+
+
+        private int Random()
+        {
+            Random rnd = new Random();
+            return rnd.Next(1, 9);
+        }
+
+
+        [Route("Confrim")]
+        [HttpPost]
+        public IActionResult Register([FromBody] JRegisterWithCode model)
+        {
+            Console.WriteLine("Registration method started");
+            if (model != null && model.Password == model.SecondPassword)
+            {
+                using ApplicationContext db = new ApplicationContext();
+                {
+                    bool exist = false;
+                    foreach (var l in db.account.ToList())
+                    {
+                        if (l.email == model.Email)
+                        {
+                            Console.WriteLine("User with this Email AlredyExist\nRegistration method finished");
+                            return BadRequest("AlredyExist"); //400
+                        }
+                    }
+                    foreach (var c in db.code.ToList())
+                    {
+                        if (c.Email == model.Email)
+                        {
+                            if (c.code == model.Code)
+                            {
+                                db.account.Add(new Account { email = model.Email, password = GetHashString(model.Password) });
+                                db.code.Remove(c);
+                                db.SaveChanges();
+                                exist = true;
+                                Console.WriteLine("Registration successful\nRegistration method finished");
+                                return Ok();
+                            }
+                        }
+                    }
+
+                    if (!exist)
+                    {
+                        return BadRequest(new { code = "error" });
+                    }
+                    else
+                    {
+                        foreach (var c in db.code.ToList())
+                        {
+                            if (c.Email == model.Email)
+                            {
+                                db.code.Remove(c);
+                                db.SaveChanges();
+                            }
+
+
+                        }
+
+                    }
+
+
+
+                }
+
+            }
+
+            Console.WriteLine("Registration input = null or password!=secondpassword\nRegistration method finished");
+            return BadRequest();
+        }
+
+
+
+
+
+
+
+
+        private static async Task SendEmailAsync(string email, int code)
+        {
+            var builder = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json");
+            var config = builder.Build();
+            MailAddress from = new MailAddress(config["Mail:Adress"], "TOGUME");
+            MailAddress to = new MailAddress(email);
+            MailMessage m = new MailMessage(from, to);
+            m.Subject = "Флюрка?";
+            m.Body = $" код {code}";
+            SmtpClient smtp = new SmtpClient(config["Mail:Host"], 587);
+            smtp.Credentials = new System.Net.NetworkCredential(config["Mail:Adress"], config["Mail:Password"]);
+            smtp.EnableSsl = true;
+            await smtp.SendMailAsync(m);
+            Console.WriteLine("Письмо отправлено");
+        }
+
+
+
+
+
+
+
         string GetHashString(string password)
         {
             //переводим строку в байт-массим

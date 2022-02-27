@@ -7,7 +7,8 @@ namespace TOGUME
     {
         public ApplicationContext() { }
         public DbSet<Account> account{ get; set; }
-     
+        public DbSet<Code> code { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
