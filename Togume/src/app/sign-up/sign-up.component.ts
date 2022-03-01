@@ -11,7 +11,7 @@ import { SignUpService } from '../services/sign-up.service';
 export class SignUpComponent implements OnInit {
 
   user = this.appComp.user
-  secondPassword:string =''
+  secondPassword:string = ""
   error:any
   showConfForm:boolean = false
   code:number = NaN

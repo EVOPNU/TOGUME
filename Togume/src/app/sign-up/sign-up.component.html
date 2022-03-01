@@ -14,7 +14,18 @@
 
         <input [(ngModel)]="user.Password" type="password" name="passwordreg">
     </div>
-    <button type="submit">sign-up</button>
+    <div>
+        <label>Repeat password</label>
+        
+        <br>
+
+        <input [(ngModel)]="secondPassword" type="password" name="secondpasswordreg">
+        <br>
+        <label *ngIf="(secondPassword !== user.Password) && (secondPassword !== '')">Пароли не совпадают</label>
+    </div>
+    <!-- кликабельность кнопок от правильности пароля -->
+    <button type="submit" *ngIf="(secondPassword == user.Password) && user.Password!=='' && user.Email !==''">sign-up</button>
+    <button *ngIf="(secondPassword !== user.Password) || user.Password =='' || user.Email ==''" disabled>sign-up</button>
 </form>
 
 <!-- условие для открытия окна подтверждения -->
@@ -22,7 +33,7 @@
     <div>
         <label>code</label> 
         <br>
-        <input>
+        <input [(ngModel)]="code" name="code">
     </div>
     <button type="submit">Подтвердить</button>
 </form>
