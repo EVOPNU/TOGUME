@@ -17,3 +17,13 @@
     <button type="submit">LogIn</button>
     <button (click)="logInCheck()">Check</button>
 </form>
+
+<br>
+
+<form *ngIf="!error" (ngSubmit)="logInConfirmantion()" name="confirm">
+    <input>
+
+    <br>
+
+    <button type="submit">Подтвердить код</button>
+</form>

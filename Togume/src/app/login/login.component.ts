@@ -20,6 +20,8 @@ export class LoginComponent implements OnInit {
 
     // this.appComp.user  --- сущность User для всех компонентов
     user = this.appComp.user
+    error:any
+    code:number = NaN
   ngOnInit(): void {
 
   }
@@ -30,7 +32,12 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('access_token',data.access_token)
     },error=>{
       console.log(error)
+      this.error = error
     })
+  }
+
+  logInConfirmantion(){
+    this.httpService.logInConfirmantion(this.code)
   }
 
   logInCheck(){
