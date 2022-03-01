@@ -18,9 +18,6 @@ export class HttpService {
     localStorage.removeItem('access_token')
   }
 
-  logInConfirmantion(code:number){
-    this.http.post('',code)
-  }
 
   get logInBool():Boolean{
     if (localStorage.getItem('access_token') !== null){

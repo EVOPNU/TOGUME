@@ -1,1 +1,28 @@
 <p>sign-up works!</p>
+<form (ngSubmit)="registration()" name="reg" *ngIf="!showConfForm">
+    <div>
+        <label>Email</label> 
+
+        <br>
+
+        <input [(ngModel)]="user.Email" type="email" name="emailreg">
+    </div>
+    <div>
+        <label>Password</label>
+        
+        <br>
+
+        <input [(ngModel)]="user.Password" type="password" name="passwordreg">
+    </div>
+    <button type="submit">sign-up</button>
+</form>
+
+<!-- условие для открытия окна подтверждения -->
+<form *ngIf="error && showConfForm" (ngSubmit)="registrationConfirmation()" name="regname">
+    <div>
+        <label>code</label> 
+        <br>
+        <input>
+    </div>
+    <button type="submit">Подтвердить</button>
+</form>

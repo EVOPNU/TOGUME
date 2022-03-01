@@ -36,9 +36,6 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  logInConfirmantion(){
-    this.httpService.logInConfirmantion(this.code)
-  }
 
   logInCheck(){
      console.log(this.httpService.logInBool)
