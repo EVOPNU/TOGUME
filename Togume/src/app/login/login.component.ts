@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     public appComp:AppComponent) { }
 
     // this.appComp.user  --- сущность User для всех компонентов
-    user = this.appComp.user
+    user:User = new User(NaN,'','','')
     error:any
     code:number = NaN
   ngOnInit(): void {

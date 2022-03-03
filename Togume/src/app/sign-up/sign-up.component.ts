@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppComponent } from '../app.component';
 import { SignUpService } from '../services/sign-up.service';
+import { User } from '../services/user';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,7 +11,7 @@ import { SignUpService } from '../services/sign-up.service';
 })
 export class SignUpComponent implements OnInit {
 
-  user = this.appComp.user
+  user:User = new User(NaN,'','','')
   secondPassword:string = ""
   error:any
   showConfForm:boolean = false

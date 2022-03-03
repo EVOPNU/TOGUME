@@ -22,6 +22,7 @@
         <input [(ngModel)]="secondPassword" type="password" name="secondpasswordreg">
         <br>
         <label *ngIf="(secondPassword !== user.Password) && (secondPassword !== '')">Пароли не совпадают</label>
+        <label *ngIf="(secondPassword == user.Password) && (secondPassword !== '') && user.Password !==''">Пароли совпадают</label>
     </div>
     <!-- кликабельность кнопок от правильности пароля -->
     <button type="submit" *ngIf="(secondPassword == user.Password) && user.Password!=='' && user.Email !==''">sign-up</button>
