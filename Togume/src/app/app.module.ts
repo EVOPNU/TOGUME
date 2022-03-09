@@ -10,11 +10,11 @@ import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { AuthGuard } from './services/auth.guard';
+import { AuthGuard } from './services/guard/auth.guard';
 
 export const appRoutes:Routes=[
-  {path:'profile', component:ProfileComponent},
-  // {path:'profile', canActivate:[AuthGuard] ,component:ProfileComponent},
+  // {path:'profile', component:ProfileComponent},
+  {path:'profile', canActivate:[AuthGuard] ,component:ProfileComponent},
   {path:'logIn', component:LoginComponent},
   {path:'registration', component:SignUpComponent},
 ]

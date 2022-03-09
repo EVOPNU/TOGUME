@@ -1,4 +1,9 @@
+
+// import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Account } from '../services/account/account';
+import { AccountService } from '../services/account/account.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +12,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor(private accountData:AccountService,
+    router:Router,
+    rout:ActivatedRoute) { }
+
+  id:number = NaN
+  account:Account |undefined
 
   ngOnInit(): void {
+    this.accountData.getUserById(this.id) .subscribe((data:any)=>{
+      this.account = data
+    }, error=>{
+      console.log(error)
+    })
   }
 
 }
