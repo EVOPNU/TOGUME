@@ -45,7 +45,10 @@ namespace User.Controllers
                         }
 
                     }
-                }else return BadRequest(ModelState.);
+                }
+                else {
+                    Console.WriteLine("id!=idchange");
+                    return BadRequest(); }
             }
             Console.WriteLine("Usern don't exist");
             return BadRequest();
