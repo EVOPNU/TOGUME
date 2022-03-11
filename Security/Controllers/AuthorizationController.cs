@@ -92,8 +92,16 @@ namespace SecurityT.Controllers
                     }
                     int codein = Random();
                     SendEmailAsync(model.Email, codein);
+                    foreach (var l in db.code.ToList())
+                    {
+                        if(l.Email == model.Email)
+                        {
+                            db.code.Remove(l);
+                            db.SaveChanges();
+                        }
+                    }
 
-                    db.code.Add(new Code { Email = model.Email, code = codein });
+                        db.code.Add(new Code { Email = model.Email, code = codein , dateCreate = DateTime.Now});
                     // db.account.Add(new Account { email = model.Email, password = GetHashString(model.Password) });
                     db.SaveChanges();
 
@@ -136,6 +144,8 @@ namespace SecurityT.Controllers
                     }
                     foreach (var c in db.code.ToList())
                     {
+
+                       
                         if (c.Email == model.Email)
                         {
                             if (c.code == model.Code)
@@ -166,6 +176,42 @@ namespace SecurityT.Controllers
             return BadRequest();
         }
 
+        [Route("rg")]
+        [HttpPost]
+        public IActionResult Rg()
+        {
+            
+                using ApplicationContext db = new ApplicationContext();
+                {
+                 if(db.code.FirstOrDefault(x => x.Email == "ma@mail.ru").code == 10)
+                {
+                    Console.WriteLine("Eeeeaaaaaa");
+                };
+                   // db.account.Add(new Account { email = "2020102@mail.ru", password = GetHashString("User"), dateTimeCreate = DateTime.Now }) ;
+            // db.code.Add(new Code { Email = "ma@mail.ru", code = 12 });
+              //  db.code.Add(new Code { Email = "ma@mail.ru", code = 13 });
+                //db.code.Add(new Code { Email = "ma@mail.ru", code = 10 });
+              // db.code.Add(new Code { Email = "ma@mail.ru", code = 11 });
+               // db.code.Add(new Code { Email = "ma@mail.ru", code = 10 });
+               // db.SaveChanges();
+
+                Console.WriteLine("Registration successful\nRegistration method finished");
+                                return Ok(db.code.LastOrDefault(x => x.Email == "ma@mail.ru").code == 10);
+                           
+                   
+
+                    
+
+
+
+
+                }
+
+            
+
+            Console.WriteLine("Registration input = null or password!=secondpassword\nRegistration method finished");
+            return BadRequest();
+        }
 
 
 
@@ -181,8 +227,8 @@ namespace SecurityT.Controllers
             MailAddress from = new MailAddress(config["Mail:Adress"], "TOGUME");
             MailAddress to = new MailAddress(email);
             MailMessage m = new MailMessage(from, to);
-            m.Subject = "Флюрка?";
-            m.Body = $" код {code}";
+            m.Subject = "Код подтверждения";
+            m.Body = $" код , нет кот - {code}";
             SmtpClient smtp = new SmtpClient(config["Mail:Host"], 587);
             smtp.Credentials = new System.Net.NetworkCredential(config["Mail:Adress"], config["Mail:Password"]);
             smtp.EnableSsl = true;

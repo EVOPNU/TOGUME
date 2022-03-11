@@ -15,7 +15,7 @@ namespace User.Controllers
 
 
 
-
+        //проверять для каждого
 
         [Route("change/password")]
         [HttpPut]
@@ -23,25 +23,29 @@ namespace User.Controllers
         public IActionResult ChangePassword([FromBody] JChangePassword model)
         {
             Console.WriteLine("Change password...");
+
             if (model != null)
             {
-
-                using ApplicationContext db = new ApplicationContext();
+                int id = Convert.ToInt32(Request.Headers["Id"].ToString());
+                if (id == model.id)
                 {
-
-                    foreach (var l in db.account.ToList())
+                    using ApplicationContext db = new ApplicationContext();
                     {
-                        if (l.id == model.id && l.password == GetHashString(model.oldPassword))
-                        {
-                            l.password = GetHashString(model.newPassword);
-                            db.SaveChanges();
-                            Console.WriteLine("Password change successful");
-                            return Ok(l);
-                            //тестиииить
-                        }
-                    }
 
-                }
+                        foreach (var l in db.account.ToList())
+                        {
+                            if (l.id == model.id && l.password == GetHashString(model.oldPassword))
+                            {
+                                l.password = GetHashString(model.newPassword);
+                                db.SaveChanges();
+                                Console.WriteLine("Password change successful");
+                                return Ok();
+                                //тестиииить
+                            }
+                        }
+
+                    }
+                }else return BadRequest(ModelState.);
             }
             Console.WriteLine("Usern don't exist");
             return BadRequest();
@@ -70,16 +74,17 @@ namespace User.Controllers
         }
 
 
-        //хз через айди в хедерах или через так айди делать
+        //сделать запрос через хедеры айдишник
         [Route("")]
-        [HttpGet("{id}")]
+        [HttpGet("")]
 
-        public IActionResult GetUserById(int id)
+        public IActionResult GetUserById()
         {
+             int id = Convert.ToInt32(Request.Headers["Id"].ToString());
             Console.WriteLine("Scan bd...");
             using ApplicationContext db = new ApplicationContext();
             {
-
+              
                 foreach (var l in db.account.ToList())
                 {
                     if(l.id == id)
