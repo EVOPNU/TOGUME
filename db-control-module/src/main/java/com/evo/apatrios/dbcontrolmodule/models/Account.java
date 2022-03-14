@@ -1,5 +1,6 @@
 package com.evo.apatrios.dbcontrolmodule.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -11,39 +12,56 @@ import java.util.Date;
 @Table
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Account {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "email")
     private String email;
 
+    @Column(name = "password")
     private String password;
 
+    @Column(name = "firstName")
     private String firstName;
 
+    @Column(name = "lastName")
     private String lastName;
 
+    @Column(name = "thirdName")
     private String thirdName;
 
+    @Column(name = "birthday")
     private Date birthday;
 
+    @Column(name = "groupUniversity")
     private String groupUniversity;
 
-    private String Faculty;
+    @Column(name = "faculty")
+    private String faculty;
 
+    @Column(name = "nickname")
     private String nickname;
 
+    @Column(name = "statusInProfile")
     private String statusInProfile;
 
+    @Column(name = "countOfFriends")
     private Integer countOfFriends;
 
+    @Column(name = "countOfFollowers")
     private Integer countOfFollowers;
 
+    @Column(name = "countOfPhotos")
     private Integer countOfPhotos;
 
+    @Column(name = "countOfPosts")
     private Integer countOfPosts;
 
+    @Column(name = "mainPhoto")
     private String mainPhoto;
 
     @CreationTimestamp
@@ -71,7 +89,7 @@ public class Account {
                 ", thirdName='" + thirdName + '\'' +
                 ", birthday=" + birthday.toString() +
                 ", groupUniversity='" + groupUniversity + '\'' +
-                ", Faculty='" + Faculty + '\'' +
+                ", Faculty='" + faculty + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", statusInProfile='" + statusInProfile + '\'' +
                 ", countOfFriends=" + countOfFriends +

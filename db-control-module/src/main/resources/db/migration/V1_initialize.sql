@@ -5,27 +5,27 @@ DROP TABLE IF EXISTS in_groups CASCADE;
 DROP TABLE IF EXISTS invitations CASCADE;
 
 CREATE TABLE accounts(
-                        Id serial primary key ,
-                        Email varchar(150),
-                        Password varchar(255),
-                        FirstName varchar(255),
-                        LastName varchar(255),
-                        ThirdName varchar(255),
-                        BirthDay datetime,
-                        GroupUniversity varchar(255),
-                        Faculty varchar(255),
-                        NickName varchar(255),
-                        StatusInProfile varchar(255),
-                        CountOfFrends integer,
-                        CountOfFolowers integer,
-                        CountOfPhoto integer,
-                        CountOfPosts integer,
-                        MainPhoto varchar(255),
+                        id serial primary key ,
+                        email varchar(150),
+                        password varchar(255),
+                        firstName varchar(255),
+                        lastName varchar(255),
+                        thirdName varchar(255),
+                        birthDay datetime,
+                        groupUniversity varchar(255),
+                        faculty varchar(255),
+                        nickName varchar(255),
+                        statusInProfile varchar(255),
+                        countOfFriends integer,
+                        countOfFollowers integer,
+                        countOfPhoto integer,
+                        countOfPosts integer,
+                        mainPhoto varchar(255),
                         dt_create timestamp NOT NULL DEFAULT NOW()
 );
 CREATE TABLE codes(
-                     Id serial primary key ,
-                     Email varchar(150),
+                     id serial primary key ,
+                     email varchar(150),
                      code integer,
                      dt_create timestamp NOT NULL DEFAULT NOW()
 
@@ -41,6 +41,7 @@ CREATE TABLE in_groups(
                           group_id integer,
                           user_id integer,
                           role varchar(45),
+                          primary key (group_id, user_id),
                           CONSTRAINT FK_users_group_user_id
                               FOREIGN KEY (user_id) references accounts (id),
                           CONSTRAINT FK_users_groups_group_id
@@ -82,7 +83,21 @@ CREATE TABLE messages (
                                 dt_create timestamp NOT NULL DEFAULT NOW(),
                                 dt_update timestamp NOT NULL DEFAULT NOW(),
                                 message varchar(255) NOT NULL,
-                                sender_id bigint NOT NULL,
+                                user_id bigint NOT NULL,
                                 CONSTRAINT FK_message_user_id
-                                    FOREIGN KEY (sender_id) references accounts (id)
+                                    FOREIGN KEY (user_id) references accounts (id)
+);
+CREATE TABLE chats(
+  id serial primary key,
+  name varchar(255),
+  path varchar(255)
+);
+CREATE TABLE chat_members(
+  chat_id int not null ,
+  user_id int not null,
+  primary key (chat_id, user_id),
+  CONSTRAINT FK_chat_mem_user_id
+      FOREIGN KEY (user_id) references accounts (id),
+  CONSTRAINT FK_chat_mem_chat_id
+      FOREIGN KEY (chat_id) references chats (id)
 );
