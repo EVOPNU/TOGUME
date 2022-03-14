@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Entity
 @Data
-@Table
+@Table(name = "messages")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Message {
@@ -39,6 +39,23 @@ public class Message {
     @Column(name = "user_id")
     private Integer userId;
 
+    public Date getDtCreate() {
+        return dtCreate;
+    }
+
+    @PrePersist
+    public void setDtCreate() {
+        this.dtCreate = this.dtUpdate = new Date();
+    }
+
+    public Date getDtModify() {
+        return dtUpdate;
+    }
+
+    @PreUpdate
+    public void setDtModify() {
+        this.dtUpdate = new Date();
+    }
     @Override
     public String toString() {
         return "Message{" +

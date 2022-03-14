@@ -11,7 +11,7 @@ CREATE TABLE accounts(
                         firstName varchar(255),
                         lastName varchar(255),
                         thirdName varchar(255),
-                        birthDay datetime,
+                        birthDay timestamp,
                         groupUniversity varchar(255),
                         faculty varchar(255),
                         nickName varchar(255),
