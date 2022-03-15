@@ -5,7 +5,7 @@ export class Account {
         public firstName: string,
         public lastName: string,
         public thirdName: string,
-        public birthDay: Date,
+        public birthDay: string,
         public groupUniversity: string,
         public fakulty: string,
         public nickName: string,
@@ -15,5 +15,5 @@ export class Account {
         public countOfPhoto: number,
         public countOfPosts: number,
         public mainPhoto: string,
-        public dataTimeCreate: Date ){}
+        public dataTimeCreate: string){}
 }

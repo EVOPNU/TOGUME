@@ -1,1 +1,21 @@
-<p>profile works!</p>
+<div id="sectionSidesInner">
+    <section id="rightColumnInner">
+        <div>
+            <label>{{account.firstName}} {{account.lastName}}</label>
+        </div>
+        <div>
+            <div>{{account.statusInProfile}}</div>
+            <button (click)="clickChecker()" *ngIf="!clickChange">внести изменения</button>
+            <div *ngIf="clickChange">
+                <input [(ngModel)]="account.statusInProfile">
+                <button (click)="changeMediaStatus()">обновить</button>
+            </div>
+        </div>
+        <div>
+            <div>{{account.birthDay}}</div>
+        </div>
+    </section>
+    <section id="leftColumnInner">
+        
+    </section>
+</div>
