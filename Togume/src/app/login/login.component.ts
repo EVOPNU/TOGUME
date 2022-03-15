@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppComponent } from '../app.component';
-import { HttpService } from '../services/http.service';
+import { HttpService } from '../services/login/http.service';
 import { User } from '../services/user';
 
 @Component({
@@ -39,5 +39,11 @@ export class LoginComponent implements OnInit {
 
   logInCheck(){
      console.log(this.httpService.logInBool)
+     localStorage.setItem('access_token','lal')
+     console.log(localStorage.getItem('access_token'))
+  }
+
+  logOut(){
+    localStorage.removeItem('access_token')
   }
 }

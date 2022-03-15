@@ -10,13 +10,15 @@ import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { AuthGuard } from './services/auth.guard';
+import { AuthGuard } from './services/guard/auth.guard';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 export const appRoutes:Routes=[
-  {path:'profile', component:ProfileComponent},
-  // {path:'profile', canActivate:[AuthGuard] ,component:ProfileComponent},
+  // {path:'profile', component:ProfileComponent},
+  {path:'profile', canActivate:[AuthGuard] ,component:ProfileComponent},
   {path:'logIn', component:LoginComponent},
   {path:'registration', component:SignUpComponent},
+  {path:'notfound', component:NotFoundPageComponent},
 ]
 
 @NgModule({
@@ -24,7 +26,8 @@ export const appRoutes:Routes=[
     AppComponent,
     ProfileComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    NotFoundPageComponent
   ],
   imports: [
     BrowserModule,
