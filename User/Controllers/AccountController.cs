@@ -290,7 +290,7 @@ namespace User.Controllers
             return BadRequest();
 
         }
-        [Route("change/changenickname")]
+        [Route("change/nickname")]
         [HttpPut]
         public IActionResult ChangeNickName([FromBody] JChangeNickName model)
         {

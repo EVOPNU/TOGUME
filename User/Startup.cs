@@ -31,7 +31,7 @@ namespace User
             app.UseRouting();
             app.UseCors();
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
 
 
             app.UseEndpoints(endpoints =>

@@ -150,7 +150,7 @@ namespace SecurityT.Controllers
                         {
                             if (c.code == model.Code)
                             {
-                                db.account.Add(new Account { email = model.Email, password = GetHashString(model.Password) });
+                                db.account.Add(new Account { email = model.Email, password = GetHashString(model.Password), dateTimeCreate = DateTime.Now,birthDay = DateTime.Now });
                                 db.code.Remove(c);
                                 db.SaveChanges();
                                 exist = true;
@@ -176,43 +176,7 @@ namespace SecurityT.Controllers
             return BadRequest();
         }
 
-        [Route("rg")]
-        [HttpPost]
-        public IActionResult Rg()
-        {
-            
-                using ApplicationContext db = new ApplicationContext();
-                {
-                 if(db.code.FirstOrDefault(x => x.Email == "ma@mail.ru").code == 10)
-                {
-                    Console.WriteLine("Eeeeaaaaaa");
-                };
-                   // db.account.Add(new Account { email = "2020102@mail.ru", password = GetHashString("User"), dateTimeCreate = DateTime.Now }) ;
-            // db.code.Add(new Code { Email = "ma@mail.ru", code = 12 });
-              //  db.code.Add(new Code { Email = "ma@mail.ru", code = 13 });
-                //db.code.Add(new Code { Email = "ma@mail.ru", code = 10 });
-              // db.code.Add(new Code { Email = "ma@mail.ru", code = 11 });
-               // db.code.Add(new Code { Email = "ma@mail.ru", code = 10 });
-               // db.SaveChanges();
-
-                Console.WriteLine("Registration successful\nRegistration method finished");
-                                return Ok(db.code.LastOrDefault(x => x.Email == "ma@mail.ru").code == 10);
-                           
-                   
-
-                    
-
-
-
-
-                }
-
-            
-
-            Console.WriteLine("Registration input = null or password!=secondpassword\nRegistration method finished");
-            return BadRequest();
-        }
-
+       
 
 
 
