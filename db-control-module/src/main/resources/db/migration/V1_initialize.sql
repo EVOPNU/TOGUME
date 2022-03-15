@@ -5,56 +5,56 @@ DROP TABLE IF EXISTS in_groups CASCADE;
 DROP TABLE IF EXISTS invitations CASCADE;
 
 CREATE TABLE accounts(
-                        id serial primary key ,
-                        email varchar(150),
-                        password varchar(255),
-                        firstName varchar(255),
-                        lastName varchar(255),
-                        thirdName varchar(255),
-                        birthDay timestamp,
-                        groupUniversity varchar(255),
-                        faculty varchar(255),
-                        nickName varchar(255),
-                        statusInProfile varchar(255),
-                        countOfFriends integer,
-                        countOfFollowers integer,
-                        countOfPhoto integer,
-                        countOfPosts integer,
-                        mainPhoto varchar(255),
-                        dt_create timestamp NOT NULL DEFAULT NOW()
+    id serial primary key ,
+    email varchar(150),
+    password varchar(255),
+    firstName varchar(255),
+    lastName varchar(255),
+    thirdName varchar(255),
+    birthDay timestamp,
+    groupUniversity varchar(255),
+    faculty varchar(255),
+    nickName varchar(255),
+    statusInProfile varchar(255),
+    countOfFriends integer,
+    countOfFollowers integer,
+    countOfPhoto integer,
+    countOfPosts integer,
+    mainPhoto varchar(255),
+    dt_create timestamp NOT NULL DEFAULT NOW()
 );
 CREATE TABLE codes(
-                     id serial primary key ,
-                     email varchar(150),
-                     code integer,
-                     dt_create timestamp NOT NULL DEFAULT NOW()
+    id serial primary key ,
+    email varchar(150),
+    code integer,
+    dt_create timestamp NOT NULL DEFAULT NOW()
 
 );
 CREATE TABLE custom_groups(
-                       id serial primary key ,
-                       name varchar(45),
-                       description varchar(455),
-                       access varchar(45),
-                       amount integer
+    id serial primary key ,
+    name varchar(45),
+    description varchar(455),
+    access varchar(45),
+    amount integer
 );
 CREATE TABLE in_groups(
-                          group_id integer,
-                          user_id integer,
-                          role varchar(45),
-                          primary key (group_id, user_id),
-                          CONSTRAINT FK_users_group_user_id
-                              FOREIGN KEY (user_id) references accounts (id),
-                          CONSTRAINT FK_users_groups_group_id
-                              FOREIGN KEY (group_id) references custom_groups (id)
+    group_id integer,
+    user_id integer,
+    role varchar(45),
+    primary key (group_id, user_id),
+    CONSTRAINT FK_users_group_user_id
+        FOREIGN KEY (user_id) references accounts (id),
+    CONSTRAINT FK_users_groups_group_id
+        FOREIGN KEY (group_id) references custom_groups (id)
 );
 CREATE TABLE invitations(
-                            group_id int not null,
-                            user_id int not null,
-                            primary key (group_id, user_id),
-                            CONSTRAINT FK_users_group_user_id
-                                FOREIGN KEY (user_id) references accounts (id),
-                            CONSTRAINT FK_users_groups_group_id
-                                FOREIGN KEY (group_id) references custom_groups (id)
+    group_id int not null,
+    user_id int not null,
+    primary key (group_id, user_id),
+    CONSTRAINT FK_users_group_user_id
+        FOREIGN KEY (user_id) references accounts (id),
+    CONSTRAINT FK_users_groups_group_id
+        FOREIGN KEY (group_id) references custom_groups (id)
 );
 CREATE TABLE news(
     id serial primary key ,
@@ -78,14 +78,14 @@ CREATE TABLE images (
         FOREIGN KEY (news_id) references news(id)
 );
 CREATE TABLE messages (
-                                message_id serial primary key,
-                                chat_id bigint NOT NULL,
-                                dt_create timestamp NOT NULL DEFAULT NOW(),
-                                dt_update timestamp NOT NULL DEFAULT NOW(),
-                                message varchar(255) NOT NULL,
-                                user_id bigint NOT NULL,
-                                CONSTRAINT FK_message_user_id
-                                    FOREIGN KEY (user_id) references accounts (id)
+    message_id serial primary key,
+    chat_id bigint NOT NULL,
+    dt_create timestamp NOT NULL DEFAULT NOW(),
+    dt_update timestamp NOT NULL DEFAULT NOW(),
+    message varchar(255) NOT NULL,
+    user_id bigint NOT NULL,
+    CONSTRAINT FK_message_user_id
+        FOREIGN KEY (user_id) references accounts (id)
 );
 CREATE TABLE chats(
   id serial primary key,
