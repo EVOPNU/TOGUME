@@ -1,0 +1,11 @@
+version: '3'
+services:
+
+  end:
+    image: enderwar/togumeusers:latest
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5262
+
+    ports:
+      - 5262:5262
