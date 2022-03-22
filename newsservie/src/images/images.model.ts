@@ -2,18 +2,22 @@ import { Column, DataType, Model, Table } from "sequelize-typescript";
 
 interface CreateImageAtts {
     image: string;
-    NewsID: number;
+    news_id: number;
+    dt_create: Date;
 }
 
-@Table({tableName: 'images', updatedAt: false})
+@Table({tableName: 'image', updatedAt: false, createdAt: false})
 export class Image extends Model<Image, CreateImageAtts> {
 
     @Column({type: DataType.INTEGER, autoIncrement: true, unique: true, primaryKey: true})
-    ImageID: number;
+    id: number;
 
     @Column({type: DataType.STRING})
     image: string;
 
     @Column({type: DataType.INTEGER})
-    NewsID: number;
+    news_id: number;            
+
+    @Column({type: DataType.DATE, allowNull: true})
+    dt_create: Date;
 }

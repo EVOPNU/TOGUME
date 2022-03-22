@@ -15,7 +15,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
       port: 3306,
       username: 'root',
       password: 'root',
-      database: 'togume',
+      database: 'togumetest',
       models: [News, Image],
       autoLoadModels: true
     }),
@@ -23,7 +23,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
       rootPath: path.resolve( __dirname,'..', 'images'),
     }),
     NewsModule,
-    ImagesModule
+    ImagesModule,
   ],
   controllers: [],
   providers: [],

@@ -8,7 +8,7 @@ import { Image } from 'src/images/images.model';
 @Module({
   controllers: [NewsController],
   imports: [
-    SequelizeModule.forFeature([News, Image]),
+    SequelizeModule.forFeature([News, Image])
   ],
   providers: [NewsService],
 

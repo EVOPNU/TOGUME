@@ -7,7 +7,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 @Module({
   controllers: [ImagesController],
   imports: [
-    SequelizeModule.forFeature([Image]),
+    SequelizeModule.forFeature([Image])
   ],
   providers: [ImagesService]
 })

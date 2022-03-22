@@ -1,28 +1,33 @@
 import { Column, CreatedAt, DataType, Model, Table } from "sequelize-typescript";
 
 interface NewsCreationAtts {
-    UserID: number;
-    GroupID: number;
+    user_id: number;
+    group_id: number;
     title: string;
     content: string;
+    dt_create: Date;
 }
 
-@Table({tableName: 'news', updatedAt: false})
-export class News extends Model<News, NewsCreationAtts> {   
+@Table({tableName: 'news', updatedAt: false, createdAt: false})
+export class News extends Model<News, NewsCreationAtts> {  
     
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
-    NewsID: number;
+    id: number;
 
     @Column({type: DataType.INTEGER, allowNull: true})
-    UserID: number;
+    user_id: number;
 
     @Column({type: DataType.INTEGER})
-    GroupID: number;
+    group_id: number;
 
     @Column({type: DataType.STRING, allowNull: true})
     title: string;
 
     @Column({type: DataType.STRING, allowNull: true})
     content: string;
+
+    @Column({type: DataType.DATE, allowNull: true})
+    dt_create: Date;
+    
 
 }

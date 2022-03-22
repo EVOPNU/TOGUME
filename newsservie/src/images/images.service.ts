@@ -10,7 +10,7 @@ import { CreateImageDto } from "./dto/create-image.dto";
 @Injectable()
 export class ImagesService {
 
-    constructor(@InjectModel(Image)private imageRepository: typeof Image) {}
+    constructor(@InjectModel(Image) private imageRepository: typeof Image) {}
 
     async createImage(image): Promise<string> {
         try {
@@ -28,16 +28,17 @@ export class ImagesService {
 
     async create(dto: CreateImageDto, image: any) {
         const imageName = await this.createImage(image);
-        const _image = await this.imageRepository.create({...dto, image: imageName});
+        const dateNow = new Date;
+        const _image = await this.imageRepository.create({...dto, image: imageName, dt_create: dateNow});
         return _image;
     }
 
     async findAllByNewsId(id: number) {
-        return this.imageRepository.findAll({where:{NewsID: id}});
+        return this.imageRepository.findAll({where:{news_id: id}});
     }
 
     async findOneByImageId(id: number) {
-        return this.imageRepository.findOne({where:{ImageID: id}})
+        return this.imageRepository.findOne({where:{id: id}})
     }
 
     async findAll() {
@@ -45,6 +46,6 @@ export class ImagesService {
     }
 
     async deleteImage(id: number) {
-        return this.imageRepository.destroy({where:{ImageID: id}});
+        return this.imageRepository.destroy({where:{id: id}});
     }
 }

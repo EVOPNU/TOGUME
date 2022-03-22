@@ -1,3 +1,3 @@
 export class CreateImageDto {
-    NewsID: number;
+    news_iD: number;
 }

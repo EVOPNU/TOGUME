@@ -15,11 +15,15 @@ export class NewsService {
                 @InjectModel(Image) private imageRepository: typeof Image) {}
 
     async createNews(dto: CreateNewsDto) {
-        return this.newsRepository.create(dto);
+        const dateNow = new Date;
+        console.log(dateNow);
+        return this.newsRepository.create({...dto, dt_create: dateNow});
+        // const news = await this.newsRepository.create({...dto, dt_create: dateNow});
+
     }
 
     async findById(id: number) {
-        return this.newsRepository.findOne({where:{NewsID: id}});
+        return this.newsRepository.findOne({where:{id: id}})
     }
 
     async findAll() {
@@ -27,14 +31,19 @@ export class NewsService {
     }
 
     async deleteNews(dto: DeleteNewsDto) {
-        if(dto.groupId && dto.userDeleteId && dto.newsId) {
-            const userCreate = await this.newsRepository.findOne({where:{NewsID: dto.newsId}});
-            if(dto.userDeleteId === userCreate.UserID) {
-                await this.newsRepository.destroy({where:{NewsID: dto.newsId}});
-                await this.imageRepository.destroy({where:{NewsID: dto.newsId}});
+        if(dto.group_id && dto.user_delete_id && dto.id) {
+            const userCreate = await this.newsRepository.findOne({where:{id: dto.id}});
+            if(dto.user_delete_id === userCreate.user_id) {
+                await this.newsRepository.destroy({where:{id: dto.id}});
+                await this.imageRepository.destroy({where:{news_id: dto.id}});
                 return HttpStatus.OK;
             }
             else {
+                try{
+                    await fetch('http://localhost:5062/api/v1/Groups/Yura');
+                }catch(err) {
+                    throw new HttpException('Произошла ошибка при попытке отправить запрос на сервис проверки роли', HttpStatus.INTERNAL_SERVER_ERROR)
+                }
                 await fetch('http:localhost:5062/api/v1/Groups/Yura', {
                     method: 'POST',
                     headers: {
@@ -43,14 +52,15 @@ export class NewsService {
                     body: JSON.stringify(dto)
                 }).then(async response => {
                     if(response.status === 200) {
-                        await this.newsRepository.destroy({where:{NewsID: dto.newsId}});
-                        await this.imageRepository.destroy({where:{NewsID: dto.newsId}});
+                        await this.newsRepository.destroy({where:{id: dto.id}});
+                        await this.imageRepository.destroy({where:{news_id: dto.id}});
                         return HttpStatus.OK;
                     }
                     else {
+                        console.log('qeqe');
                         throw new HttpException('Пользователь не может удалить новость, т.к. не является администратором или её создателем', HttpStatus.FORBIDDEN);
                     }
-                })
+                });
             }
         }
         else {
@@ -59,8 +69,8 @@ export class NewsService {
     }
 
     async updateNews(id: number, dto: UpdateNewsDto) {
-        await this.newsRepository.update(dto, {where: {NewsID: id}});
-        const user = await this.newsRepository.findOne({where: {NewsID: id}});
+        await this.newsRepository.update(dto, {where: {id: id}});
+        const user = await this.newsRepository.findOne({where: {id: id}});
         return user;
     }
 
