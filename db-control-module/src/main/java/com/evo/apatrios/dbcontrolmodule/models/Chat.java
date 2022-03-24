@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
-@Data
-@Table
+//@Entity
+//@Data
+//@Table(name = "chats")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Chat {

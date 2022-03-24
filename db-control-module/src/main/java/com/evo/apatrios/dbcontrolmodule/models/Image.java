@@ -8,9 +8,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@Data
-@Table
+//@Entity
+//@Data
+//@Table(name = "images")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Image {
@@ -23,7 +23,8 @@ public class Image {
     private String image;
 
     @Column(name = "news_id")
-    private Integer news_id;
+    @OneToOne(mappedBy = "image_news")
+    private GroupNews news;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -44,7 +45,7 @@ public class Image {
         return "Image{" +
                 "id=" + id +
                 ", image='" + image + '\'' +
-                ", news_id=" + news_id +
+//                ", news_id=" + news.getId()+
                 ", dtCreate=" + dtCreate +
                 '}';
     }

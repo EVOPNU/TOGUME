@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS accounts CASCADE;
 DROP TABLE IF EXISTS codes CASCADE;
-DROP TABLE IF EXISTS custom_groups CASCADE;
-DROP TABLE IF EXISTS in_groups CASCADE;
+DROP TABLE IF EXISTS publics CASCADE;
+DROP TABLE IF EXISTS in_publics CASCADE;
 DROP TABLE IF EXISTS invitations CASCADE;
 DROP TABLE IF EXISTS news CASCADE;
 DROP TABLE IF EXISTS images CASCADE;
@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS chats CASCADE;
 DROP TABLE IF EXISTS chat_members CASCADE;
 
 CREATE TABLE accounts(
-    id serial primary key ,
+    id int primary key ,
     email varchar(150),
     password varchar(255),
     firstName varchar(255),
@@ -29,74 +29,79 @@ CREATE TABLE accounts(
     dt_create timestamp NOT NULL DEFAULT NOW()
 );
 CREATE TABLE codes(
-    id serial primary key ,
+    id int primary key ,
     email varchar(150),
     code integer,
     dt_create timestamp NOT NULL DEFAULT NOW()
 
 );
-CREATE TABLE custom_groups(
-    id serial primary key ,
+CREATE TABLE publics(
+    id int  primary key ,
     name varchar(45),
     description varchar(455),
     access varchar(45),
     amount integer
 );
-CREATE TABLE in_groups(
-    group_id integer,
-    user_id integer,
+CREATE TABLE in_publics(
+    public_id int not null ,
+    user_id int not null ,
     role varchar(45),
-    primary key (group_id, user_id),
-    CONSTRAINT FK_users_group_user_id
+    primary key (public_id, user_id),
+    CONSTRAINT FK_users_public_user_id
         FOREIGN KEY (user_id) references accounts (id),
-    CONSTRAINT FK_users_groups_group_id
-        FOREIGN KEY (group_id) references custom_groups (id)
+    CONSTRAINT FK_users_public_public_id
+        FOREIGN KEY (public_id) references publics (id)
 );
 CREATE TABLE invitations(
-    group_id int not null,
+    public_id int not null,
     user_id int not null,
-    primary key (group_id, user_id),
-    CONSTRAINT FK_users_group_user_id
+    primary key (public_id, user_id),
+    CONSTRAINT FK_inv_users_public_user_id
         FOREIGN KEY (user_id) references accounts (id),
-    CONSTRAINT FK_users_groups_group_id
-        FOREIGN KEY (group_id) references custom_groups (id)
+    CONSTRAINT FK_inv_users_public_public_id
+        FOREIGN KEY (public_id) references publics (id)
 );
 CREATE TABLE news(
-    id serial primary key ,
+    id int primary key ,
     user_id int not null,
-    group_id int not null,
-    title varchar(255),
-    content varchar(255),
+    public_id int not null,
+    title varchar(255) null,
+    content varchar(255) null,
     dt_create timestamp NOT NULL DEFAULT NOW(),
     CONSTRAINT FK_news_user_id
         FOREIGN KEY (user_id) references accounts (id),
-    CONSTRAINT FK_news_group_id
-        FOREIGN KEY (group_id) references custom_groups (id)
+    CONSTRAINT FK_news_public_id
+        FOREIGN KEY (public_id) references publics (id)
 );
 
 CREATE TABLE images (
-    id serial primary key ,
-    image varchar(255),
+    id int primary key ,
+    image varchar(255) null,
     news_id int not null ,
     dt_create timestamp NOT NULL DEFAULT NOW(),
     CONSTRAINT FK_images_news_id
         FOREIGN KEY (news_id) references news(id)
 );
+
+CREATE TABLE chats(
+    id int primary key,
+    name varchar(255) null ,
+    path varchar(255) null
+);
+
 CREATE TABLE messages (
-    message_id serial primary key,
-    chat_id bigint NOT NULL,
+    message_id int primary key,
+    chat_id int NOT NULL,
     dt_create timestamp NOT NULL DEFAULT NOW(),
     dt_update timestamp NOT NULL DEFAULT NOW(),
     message varchar(255) NOT NULL,
-    user_id bigint NOT NULL,
+    user_id int NOT NULL,
     CONSTRAINT FK_message_user_id
-        FOREIGN KEY (user_id) references accounts (id)
+        FOREIGN KEY (user_id) references accounts (id),
+    CONSTRAINT FK_message_chat_id
+        FOREIGN KEY (chat_id) references chats (id)
 );
-CREATE TABLE chats(
-  id serial primary key,
-  name varchar(255),
-  path varchar(255)
-);
+
 CREATE TABLE chat_members(
   chat_id int not null ,
   user_id int not null,

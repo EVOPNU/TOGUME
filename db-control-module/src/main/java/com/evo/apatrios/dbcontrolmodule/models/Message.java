@@ -9,10 +9,10 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@Data
-@Table(name = "messages")
-@NoArgsConstructor
+//@Entity
+//@Data
+//@Table(name = "messages")
+//@NoArgsConstructor
 @AllArgsConstructor
 public class Message {
 

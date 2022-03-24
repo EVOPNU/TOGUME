@@ -3,14 +3,16 @@ package com.evo.apatrios.dbcontrolmodule.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
-@Entity
-@Table
-@Data
+//@Entity
+//@Table(name = "accounts")
+//@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Account {
@@ -77,6 +79,10 @@ public class Account {
     public void setDtCreate(){
         this.dtCreate =new Date();
     }
+
+    @OneToMany(mappedBy = "user")
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<GroupNews> news;
 
     @Override
     public String toString() {

@@ -5,10 +5,14 @@ spring:
     #    username: postgres
     #    password: admin
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/togumetest
+    url: jdbc:mysql://localhost:3306/togumetest?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
     password: root
+#  flyway:
+#    create-schemas: true
   jpa:
+    hibernate:
+      ddl-auto: none
     show-sql: true
     properties:
       hibernate:

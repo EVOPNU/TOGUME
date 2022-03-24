@@ -41,6 +41,13 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.22</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -58,6 +65,41 @@
 <!--                    <configFiles>src/main/resources/flyway.conf</configFiles>-->
 <!--                </configuration>-->
 <!--            </plugin>-->
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>6.0.1</version>
+                <executions>
+                    <execution>
+                        <id>create-db</id>
+                        <goals>
+                            <goal>migrate</goal>
+                        </goals>
+                        <configuration>
+                            <driver> com.mysql.cj.jdbc.Driver</driver>
+                            <url>jdbc:mysql://localhost:3306/togumetest</url>
+                            <user>root</user>
+                            <password>root</password>
+                            <placeholders>
+                                <DATABASE.NAME>togumetest</DATABASE.NAME>
+                            </placeholders>
+                            <locations>
+                                <location>src/main/resources/db/migration/V1__initialize.sql</location>
+                            </locations>
+
+                            <configFiles>src/main/resources/flyway.conf</configFiles>
+
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>8.0.22</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

@@ -8,10 +8,10 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@Data
-@Table
-@NoArgsConstructor
+//@Entity
+//@Data
+//@Table(name = "codes")
+//@NoArgsConstructor
 @AllArgsConstructor
 public class Code {
     @Id

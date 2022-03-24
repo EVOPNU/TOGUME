@@ -3,12 +3,14 @@ package com.evo.apatrios.dbcontrolmodule.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.List;
 
-@Entity
-@Data
-@Table
+//@Entity
+//@Data
+//@Table(name = "publics")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Group {
@@ -27,6 +29,10 @@ public class Group {
 
     @Column(name = "amount")
     private Integer amount;
+
+    @OneToMany(mappedBy = "publics ")
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<GroupNews> news;
 
     @Override
     public String toString() {

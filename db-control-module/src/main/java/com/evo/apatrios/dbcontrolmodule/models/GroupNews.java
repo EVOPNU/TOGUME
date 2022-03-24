@@ -8,10 +8,10 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@Data
-@Table
-@NoArgsConstructor
+//@Entity
+//@Data
+//@Table(name = "news")
+//@NoArgsConstructor
 @AllArgsConstructor
 public class GroupNews {
     @Id
@@ -19,10 +19,17 @@ public class GroupNews {
     private Integer id;
 
     @Column(name = "user_id")
-    private Integer userId;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private Account user;
 
-    @Column(name = "group_id")
-    private Integer groupId;
+    @OneToOne(mappedBy = "news_image")
+    private Image image;
+
+    @Column(name = "public_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "public_id", nullable = false)
+    private Group group;
 
     @Column(name = "title")
     private String title;
@@ -48,9 +55,9 @@ public class GroupNews {
     public String toString() {
         return "GroupNews{" +
                 "id=" + id +
-                ", userId=" + userId +
-                ", groupId=" + groupId +
-                ", title='" + title + '\'' +
+//                ", userId=" + user.getId()+
+//                ", groupId=" + group.getId() +
+//                ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", dtCreate=" + dtCreate +
                 '}';
