@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Groups", "Groups.csproj", "{8E1B6524-BAAE-4F8D-B540-92B2E4143A9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Groups", "Groups.csproj", "{8E1B6524-BAAE-4F8D-B540-92B2E4143A9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroupsTest", "..\GroupsTest\GroupsTest.csproj", "{37647206-243E-40EE-8415-E279BF5B72A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{8E1B6524-BAAE-4F8D-B540-92B2E4143A9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E1B6524-BAAE-4F8D-B540-92B2E4143A9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E1B6524-BAAE-4F8D-B540-92B2E4143A9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37647206-243E-40EE-8415-E279BF5B72A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37647206-243E-40EE-8415-E279BF5B72A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37647206-243E-40EE-8415-E279BF5B72A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37647206-243E-40EE-8415-E279BF5B72A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
