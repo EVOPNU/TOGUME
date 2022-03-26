@@ -6,6 +6,6 @@ export class ServeStaticController{
 
     @Get(':image')
     async GetRedirect(@Req() req, @Res() res) {
-        return  res.redirect(307, `http://localhost:4000${req.originalUrl}`);
+        return  res.redirect(307, `http://localhost:3000${req.originalUrl}`);
     }
 }
