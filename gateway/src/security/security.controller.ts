@@ -6,6 +6,6 @@ export class SecurityController {
 
     @Get('/')
     valid(@Req() req, @Res() res) {
-        return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
+        return res.redirect(307, `http://localhost:5113${req.originalUrl}`);
     }
 }
