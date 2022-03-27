@@ -6,16 +6,17 @@ namespace SecurityT
     public class ApplicationContext : DbContext
     {
         public ApplicationContext() { }
-        public DbSet<Account> account{ get; set; }
-        public DbSet<Code> code { get; set; }
+        public DbSet<Account> accounts{ get; set; }
+        public DbSet<Code> codes { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySql(
-                //"server=localhost;user=root;password=root;database=taa;",
-               "server=localhost;user=root;password=EnderWarAdmin;database=togume;",
-                new MySqlServerVersion(new Version(8, 0, 27))
+              //"server=localhost;user=root;password=root;database=taa;",
+              "server=db;user=root;password=root;database=togumetest;",
+                // "server=localhost;user=root;password=root;database=togumetest;",
+                new MySqlServerVersion(new Version(8, 0, 23))
             );
         }
     }

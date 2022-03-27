@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Steam\\source\\repos\\Togume\\Security\\Security.csproj": {}
+    "C:\\Users\\Steam\\source\\repos\\TOGUME\\Security\\Security.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Steam\\source\\repos\\Togume\\Security\\Security.csproj": {
+    "C:\\Users\\Steam\\source\\repos\\TOGUME\\Security\\Security.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Steam\\source\\repos\\Togume\\Security\\Security.csproj",
+        "projectUniqueName": "C:\\Users\\Steam\\source\\repos\\TOGUME\\Security\\Security.csproj",
         "projectName": "Security",
-        "projectPath": "C:\\Users\\Steam\\source\\repos\\Togume\\Security\\Security.csproj",
+        "projectPath": "C:\\Users\\Steam\\source\\repos\\TOGUME\\Security\\Security.csproj",
         "packagesPath": "C:\\Users\\Steam\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Steam\\source\\repos\\Togume\\Security\\obj\\",
+        "outputPath": "C:\\Users\\Steam\\source\\repos\\TOGUME\\Security\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Steam\\AppData\\Roaming\\NuGet\\NuGet.Config",

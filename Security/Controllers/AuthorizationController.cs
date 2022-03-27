@@ -82,7 +82,7 @@ namespace SecurityT.Controllers
             {
                 using ApplicationContext db = new ApplicationContext();
                 {
-                    foreach (var l in db.account.ToList())
+                    foreach (var l in db.accounts.ToList())
                     {
                         if (l.email == model.Email)
                         {
@@ -92,16 +92,16 @@ namespace SecurityT.Controllers
                     }
                     int codein = Random();
                     SendEmailAsync(model.Email, codein);
-                    foreach (var l in db.code.ToList())
+                    foreach (var l in db.codes.ToList())
                     {
                         if(l.Email == model.Email)
                         {
-                            db.code.Remove(l);
+                            db.codes.Remove(l);
                             db.SaveChanges();
                         }
                     }
 
-                        db.code.Add(new Code { Email = model.Email, code = codein , dateCreate = DateTime.Now});
+                        db.codes.Add(new Code { Email = model.Email, code = codein , dt_create = DateTime.Now});
                     // db.account.Add(new Account { email = model.Email, password = GetHashString(model.Password) });
                     db.SaveChanges();
 
@@ -134,7 +134,7 @@ namespace SecurityT.Controllers
                 using ApplicationContext db = new ApplicationContext();
                 {
                     bool exist = false;
-                    foreach (var l in db.account.ToList())
+                    foreach (var l in db.accounts.ToList())
                     {
                         if (l.email == model.Email)
                         {
@@ -142,7 +142,7 @@ namespace SecurityT.Controllers
                             return BadRequest("AlredyExist"); //400
                         }
                     }
-                    foreach (var c in db.code.ToList())
+                    foreach (var c in db.codes.ToList())
                     {
 
                        
@@ -150,8 +150,8 @@ namespace SecurityT.Controllers
                         {
                             if (c.code == model.Code)
                             {
-                                db.account.Add(new Account { email = model.Email, password = GetHashString(model.Password), dateTimeCreate = DateTime.Now,birthDay = DateTime.Now });
-                                db.code.Remove(c);
+                                db.accounts.Add(new Account { email = model.Email, password = GetHashString(model.Password), dt_create = DateTime.Now,birthDay = DateTime.Now });
+                                db.codes.Remove(c);
                                 db.SaveChanges();
                                 exist = true;
                                 Console.WriteLine("Registration successful\nRegistration method finished");
@@ -253,7 +253,7 @@ namespace SecurityT.Controllers
             Console.WriteLine("Auntification...");
             using ApplicationContext db = new ApplicationContext();
             {
-                foreach (var l in db.account.ToList())
+                foreach (var l in db.accounts.ToList())
                 {
                     if (l.email == email && l.password == GetHashString(password))
                     {

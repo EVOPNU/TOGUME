@@ -32,7 +32,7 @@ namespace User.Controllers
                     using ApplicationContext db = new ApplicationContext();
                     {
 
-                        foreach (var l in db.account.ToList())
+                        foreach (var l in db.accounts.ToList())
                         {
                             if (l.id == model.id && l.password == GetHashString(model.oldPassword))
                             {
@@ -46,11 +46,13 @@ namespace User.Controllers
 
                     }
                 }
-                else {
+                else
+                {
                     Console.WriteLine("id!=idchange");
-                    return BadRequest(); }
+                    return BadRequest();
+                }
             }
-            Console.WriteLine("Usern don't exist");     
+            Console.WriteLine("Usern don't exist");
             return BadRequest();
 
         }
@@ -70,9 +72,9 @@ namespace User.Controllers
                     using ApplicationContext db = new ApplicationContext();
                     {
 
-                        foreach (var l in db.account.ToList())
+                        foreach (var l in db.accounts.ToList())
                         {
-                            if (l.id == model.id )
+                            if (l.id == model.id)
                             {
                                 l.firstName = model.newFirstName;
                                 db.SaveChanges();
@@ -109,7 +111,7 @@ namespace User.Controllers
                     using ApplicationContext db = new ApplicationContext();
                     {
 
-                        foreach (var l in db.account.ToList())
+                        foreach (var l in db.accounts.ToList())
                         {
                             if (l.id == model.id)
                             {
@@ -148,7 +150,7 @@ namespace User.Controllers
                     using ApplicationContext db = new ApplicationContext();
                     {
 
-                        foreach (var l in db.account.ToList())
+                        foreach (var l in db.accounts.ToList())
                         {
                             if (l.id == model.id)
                             {
@@ -187,7 +189,7 @@ namespace User.Controllers
                     using ApplicationContext db = new ApplicationContext();
                     {
 
-                        foreach (var l in db.account.ToList())
+                        foreach (var l in db.accounts.ToList())
                         {
                             if (l.id == model.id)
                             {
@@ -227,7 +229,7 @@ namespace User.Controllers
                     using ApplicationContext db = new ApplicationContext();
                     {
 
-                        foreach (var l in db.account.ToList())
+                        foreach (var l in db.accounts.ToList())
                         {
                             if (l.id == model.id)
                             {
@@ -251,7 +253,7 @@ namespace User.Controllers
             return BadRequest();
 
         }
-        
+
         [Route("change/changefakulty")]
         [HttpPut]
         public IActionResult ChangeFakulty([FromBody] JChangeFakulty model)
@@ -266,7 +268,7 @@ namespace User.Controllers
                     using ApplicationContext db = new ApplicationContext();
                     {
 
-                        foreach (var l in db.account.ToList())
+                        foreach (var l in db.accounts.ToList())
                         {
                             if (l.id == model.id)
                             {
@@ -304,7 +306,7 @@ namespace User.Controllers
                     using ApplicationContext db = new ApplicationContext();
                     {
 
-                        foreach (var l in db.account.ToList())
+                        foreach (var l in db.accounts.ToList())
                         {
                             if (l.id == model.id)
                             {
@@ -343,7 +345,7 @@ namespace User.Controllers
                     using ApplicationContext db = new ApplicationContext();
                     {
 
-                        foreach (var l in db.account.ToList())
+                        foreach (var l in db.accounts.ToList())
                         {
                             if (l.id == model.id)
                             {
@@ -382,7 +384,7 @@ namespace User.Controllers
                     using ApplicationContext db = new ApplicationContext();
                     {
 
-                        foreach (var l in db.account.ToList())
+                        foreach (var l in db.accounts.ToList())
                         {
                             if (l.id == model.id)
                             {
@@ -434,14 +436,14 @@ namespace User.Controllers
 
         public IActionResult GetUserById()
         {
-             int id = Convert.ToInt32(Request.Headers["Id"].ToString());
+            int id = Convert.ToInt32(Request.Headers["Id"].ToString());
             Console.WriteLine("Scan bd...");
             using ApplicationContext db = new ApplicationContext();
             {
-              
-                foreach (var l in db.account.ToList())
+
+                foreach (var l in db.accounts.ToList())
                 {
-                    if(l.id == id)
+                    if (l.id == id)
                     {
                         Console.WriteLine("User find");
                         return Ok(l);
@@ -452,5 +454,6 @@ namespace User.Controllers
             Console.WriteLine("User dosen't find");
             return BadRequest();
         }
-    } //айдишник в хедеры при валид
+    } //сделать метод поиска по айди
+    //и пустую апишку для сани 
 }

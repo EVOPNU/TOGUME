@@ -22,7 +22,7 @@
 
         public string? mainPhoto { get; set; }
 
-        public DateTime dateTimeCreate { get; set; }
+        public DateTime dt_create { get; set; }
 
 
 

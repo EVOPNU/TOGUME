@@ -7,6 +7,6 @@
         public string Email { get; set; }
         public int code { get; set; }
 
-        public DateTime dateCreate { get; set; }
+        public DateTime dt_create { get; set; }
     }
 }
