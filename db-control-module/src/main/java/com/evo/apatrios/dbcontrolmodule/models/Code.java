@@ -8,10 +8,10 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.util.Date;
 
-//@Entity
-//@Data
-//@Table(name = "codes")
-//@NoArgsConstructor
+@Entity
+@Data
+@Table(name = "codes")
+@NoArgsConstructor
 @AllArgsConstructor
 public class Code {
     @Id
@@ -28,6 +28,13 @@ public class Code {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "dt_create", updatable = false)
     private Date dtCreate;
+
+    public Code(String email, Integer code) {
+        this.id=null;
+        this.email = email;
+        this.code = code;
+        this.dtCreate = new Date();
+    }
 
     public Date getDtCreate(){
         return dtCreate;

@@ -5,12 +5,12 @@ DROP TABLE IF EXISTS in_publics CASCADE;
 DROP TABLE IF EXISTS invitations CASCADE;
 DROP TABLE IF EXISTS news CASCADE;
 DROP TABLE IF EXISTS images CASCADE;
-DROP TABLE IF EXISTS messages CASCADE;
+DROP TABLE IF EXISTS message_entity CASCADE;
 DROP TABLE IF EXISTS chats CASCADE;
 DROP TABLE IF EXISTS chat_members CASCADE;
 
 CREATE TABLE accounts(
-    id int primary key ,
+    id int primary key NOT NULL AUTO_INCREMENT,
     email varchar(150),
     password varchar(255),
     firstName varchar(255),
@@ -29,14 +29,14 @@ CREATE TABLE accounts(
     dt_create timestamp NOT NULL DEFAULT NOW()
 );
 CREATE TABLE codes(
-    id int primary key ,
+    id int primary key NOT NULL AUTO_INCREMENT,
     email varchar(150),
     code integer,
     dt_create timestamp NOT NULL DEFAULT NOW()
 
 );
 CREATE TABLE publics(
-    id int  primary key ,
+    id int  primary key NOT NULL AUTO_INCREMENT,
     name varchar(45),
     description varchar(455),
     access varchar(45),
@@ -62,7 +62,7 @@ CREATE TABLE invitations(
         FOREIGN KEY (public_id) references publics (id)
 );
 CREATE TABLE news(
-    id int primary key ,
+    id int primary key NOT NULL AUTO_INCREMENT,
     user_id int not null,
     public_id int not null,
     title varchar(255) null,
@@ -75,7 +75,7 @@ CREATE TABLE news(
 );
 
 CREATE TABLE images (
-    id int primary key ,
+    id int primary key NOT NULL AUTO_INCREMENT,
     image varchar(255) null,
     news_id int not null ,
     dt_create timestamp NOT NULL DEFAULT NOW(),
@@ -84,13 +84,13 @@ CREATE TABLE images (
 );
 
 CREATE TABLE chats(
-    id int primary key,
+    id int primary key NOT NULL AUTO_INCREMENT,
     name varchar(255) null ,
     path varchar(255) null
 );
 
-CREATE TABLE messages (
-    message_id int primary key,
+CREATE TABLE message_entity (
+    message_id int primary key NOT NULL AUTO_INCREMENT,
     chat_id int NOT NULL,
     dt_create timestamp NOT NULL DEFAULT NOW(),
     dt_update timestamp NOT NULL DEFAULT NOW(),

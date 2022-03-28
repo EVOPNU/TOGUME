@@ -1,6 +1,16 @@
 version: '3'
 services:
 
+#  db-controller:
+#    image: apatrios/db-control-module:latest
+#    ports:
+#      - 8080:8080
+#    depends_on:
+#      - db
+#    command: bash -c "/apps/wait-for-service.sh db 3306 && /apps/entrypoint.sh"
+
+
+
   db:
     #    image: postgres
     #    restart: always
