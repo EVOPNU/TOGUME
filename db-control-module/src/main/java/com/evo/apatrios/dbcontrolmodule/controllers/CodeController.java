@@ -2,7 +2,6 @@ package com.evo.apatrios.dbcontrolmodule.controllers;
 
 import com.evo.apatrios.dbcontrolmodule.dtos.CodeDto;
 import com.evo.apatrios.dbcontrolmodule.dtos.transfer.New;
-import com.evo.apatrios.dbcontrolmodule.models.Code;
 import com.evo.apatrios.dbcontrolmodule.services.CodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;

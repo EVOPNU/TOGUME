@@ -16,7 +16,6 @@ import java.util.Date;
 public class CodeDto {
 
     @Null(groups ={New.class})
-//    @JsonView({})
     private Integer id;
 
     @NotNull(groups = {New.class})
