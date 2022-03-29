@@ -81,7 +81,7 @@
                         </goals>
                         <configuration>
 <!--                            <driver> com.mysql.cj.jdbc.Driver</driver>-->
-                            <url>jdbc:mysql://localhost:3306/togumetest</url>
+                            <url>jdbc:mysql://db:3306/togumetest</url>
                             <user>root</user>
                             <password>root</password>
                             <placeholders>
