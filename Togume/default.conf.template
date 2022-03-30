@@ -9,6 +9,6 @@ server {
     }
 
     location /api {
-        proxy_pass http://gateway:5219/api;
+        proxy_pass http://gateway:4000/api;
     }
 }

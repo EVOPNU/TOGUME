@@ -1,0 +1,19 @@
+#profileHeadInner{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+#rightColumnInner{
+    justify-content: left;
+}
+.infoInProfileInner{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+
+#photo1{
+    width: 210px;
+    height: 210px;
+    background: #C4C4C4;
+    border-radius: 5px;
+}

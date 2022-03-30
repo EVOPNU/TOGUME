@@ -9,10 +9,13 @@ export class AccountService {
   // account:Account | undefined
   myHeader = new HttpHeaders().set('access_token','Bearer '+localStorage.getItem('access_token'))
   constructor(public http:HttpClient) { }
-
+  // тестовая апи
+  test(){
+    return this.http.get('')
+  }
   // Получить пользователя по ID
-  getUserById(id:Account['id']){
-    return this.http.get('/api/v1/user/account/'+id, {headers:this.myHeader})
+  getUserById(){
+    return this.http.get('/api/v1/user/account', {headers:this.myHeader})
   }
 
   // сменить пароль

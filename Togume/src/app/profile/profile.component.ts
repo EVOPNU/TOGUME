@@ -18,16 +18,21 @@ export class ProfileComponent implements OnInit {
     public rout:ActivatedRoute,
     public accountHttp:AccountService) { }
 
-  id:number = NaN;
+  profileMore:boolean=false
+  id:number = 1;
   clickChange:boolean=false
   account:Account = new Account(NaN,'почта','пароль','Alex','Awler','отчество','ДР','ПО-11','ФКФН','Авлер','Волк в цирке не выступает',NaN,NaN,NaN,NaN,'','Дата создания')
   ngOnInit(): void {
-    this.accountHttp.getUserById(this.id) .subscribe((data:any)=>{
+    this.accountHttp.getUserById() .subscribe((data:any)=>{
       this.account = data
     }, error=>{
       console.log(error)
       // this.router.navigateByUrl('/notfound')
     })
+  }
+  test(){
+    this.accountHttp.test()
+    .subscribe((data:any)=>{},error=>{console.log(error)})
   }
   clickChecker(){
     this.clickChange=!this.clickChange
@@ -36,6 +41,9 @@ export class ProfileComponent implements OnInit {
     this.accountHttp.changeMediaStatus(this.account.id,this.account.statusInProfile).subscribe((data:any)=>{},error=>{console.log(error)});
     console.log(this.account.statusInProfile)
     this.clickChange=!this.clickChange 
+  }
+  profileMoreInfo(){
+    this.profileMore = !this.profileMore
   }
 
 }

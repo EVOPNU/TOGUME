@@ -1,21 +1,63 @@
-<div id="sectionSidesInner">
-    <section id="rightColumnInner">
-        <div>
-            <label>{{account.firstName}} {{account.lastName}}</label>
+<div id="sectionSidesInner" class="container">
+    <section id="profileHeadInner">
+        <div id="leftColumnInner">
+            <div id="photo1"></div>
         </div>
-        <div>
-            <div>{{account.statusInProfile}}</div>
-            <button (click)="clickChecker()" *ngIf="!clickChange">внести изменения</button>
-            <div *ngIf="clickChange">
-                <input [(ngModel)]="account.statusInProfile">
-                <button (click)="changeMediaStatus()">обновить</button>
+        
+        <div id="rightColumnInner">
+            <!-- header / верхняя строчка профиля -->
+            <div class="name">
+                <a href="/profile">{{account.firstName}} {{account.lastName}}</a>
+            </div>
+
+            <!-- info block / блок информации об аккаунте -->
+
+            <div>
+                 <div class="infoInProfileInner">
+                     <label>День рождения</label>
+                     <span>{{account.birthDay}}</span>
+                 </div>
+                 <div class="infoInProfileInner">
+                     <label>Факультет</label>
+                     <span>{{account.fakulty}}</span>
+                 </div>
+                 <div class="infoInProfileInner">
+                     <label>Группа</label>
+                     <span>{{account.groupUniversity}}</span>
+                 </div>
+                 <div><a (click)="profileMoreInfo()">Показать подробную информацию</a></div>
+                 <div *ngIf="profileMore">
+                    <div class="infoInProfileInner">
+                        <label>Группа</label>
+                        <span>{{account.groupUniversity}}</span>
+                    </div>
+                    <div class="infoInProfileInner">
+                        <label>Группа</label>
+                        <span>{{account.groupUniversity}}</span>
+                    </div>
+                    <div class="infoInProfileInner">
+                        <label>Группа</label>
+                        <span>{{account.groupUniversity}}</span>
+                    </div>
+                 </div>
             </div>
         </div>
-        <div>
-            <div>{{account.birthDay}}</div>
-        </div>
     </section>
-    <section id="leftColumnInner">
-        
-    </section>
+
 </div>
+
+
+
+
+
+
+
+
+<!-- <div>
+                <div>{{account.statusInProfile}}</div>
+                <button (click)="clickChecker()" *ngIf="!clickChange">внести изменения</button>
+                <div *ngIf="clickChange">
+                    <input [(ngModel)]="account.statusInProfile">
+                    <button (click)="changeMediaStatus()">обновить</button>
+                </div>
+            </div> -->

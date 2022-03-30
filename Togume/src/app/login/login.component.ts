@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('access_token',data.access_token)
     },error=>{
       console.log(error)
+      console.log(localStorage.getItem('access_token'))
       this.error = error
     })
   }

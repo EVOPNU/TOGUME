@@ -2,20 +2,28 @@ version: '3.4'
 services:
 
   end:
-    image: enderwar/controlaccounts:latest
+    image: enderwar/togumeusers:latest
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:5011
+      - ASPNETCORE_URLS=http://+:5262
 
     ports:
-      - 5011:5011
+      - 5262:5262
+
+  vainrik-backend:
+    image: vainrik/groups:latest
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5062
+    ports:
+      - 5062:5062
 
   gateway:  
     image: bleedcloud/gateway:latest
     ports:
-      - 7001:7001
+      - 4000:4000
 
   client:  
-    image: frontendtaa:latest
+    image: frontendtogume:latest
     ports:
       - 4200:80
