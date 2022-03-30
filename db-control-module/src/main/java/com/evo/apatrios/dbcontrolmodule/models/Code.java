@@ -26,7 +26,7 @@ public class Code {
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "dt_create", updatable = false)
+    @Column(name = "dt_create", updatable = false, nullable = false)
     private Date dtCreate;
 
     public Code(String email, Integer code) {

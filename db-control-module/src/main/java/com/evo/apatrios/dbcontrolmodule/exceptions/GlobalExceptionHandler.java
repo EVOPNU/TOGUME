@@ -13,6 +13,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler
     public ResponseEntity<?> handleCodeNotFoundException(CodeNotFoundException exception){
         log.error(exception.getMessage(), exception);
-        return new ResponseEntity<>(new ProjError(HttpStatus.NOT_FOUND.value(), exception.getMessage()), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new ProjError(HttpStatus.NOT_FOUND.value(), exception.getErrorMessage()), HttpStatus.NOT_FOUND);
     }
 }
