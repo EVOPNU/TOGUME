@@ -31,7 +31,6 @@ export class SignUpComponent implements OnInit {
     this.signUpService.registration(this.user.Email,this.user.Password,this.secondPassword)
     .subscribe((data:any)=>{
       this.showConfForm = !this.showConfForm
-      this.router.navigateByUrl("/main")
     },error=>{
       console.log(error)
       this.error=error
@@ -40,6 +39,7 @@ export class SignUpComponent implements OnInit {
 
   registrationConfirmation(){
     this.signUpService.registrationConfirmation(this.user.Email,this.user.Password,this.secondPassword,this.code)
+    this.router.navigateByUrl("/main")
   }
 
 }

@@ -14,12 +14,11 @@
 
             <div>
                  <div class="infoInProfileInner">
-                     <label>День рождения</label>
-                     <span>{{account.birthDay}}</span>
+                     <p>{{account.statusInProfile}}</p>
                  </div>
                  <div class="infoInProfileInner">
-                     <label>Факультет</label>
-                     <span>{{account.fakulty}}</span>
+                     <label>День рождения</label>
+                     <span>{{account.birthDay}}</span>
                  </div>
                  <div class="infoInProfileInner">
                      <label>Группа</label>
@@ -28,18 +27,41 @@
                  <div><a (click)="profileMoreInfo()">Показать подробную информацию</a></div>
                  <div *ngIf="profileMore">
                     <div class="infoInProfileInner">
-                        <label>Группа</label>
-                        <span>{{account.groupUniversity}}</span>
-                    </div>
-                    <div class="infoInProfileInner">
-                        <label>Группа</label>
-                        <span>{{account.groupUniversity}}</span>
+                        <label>Факультет</label>
+                        <span>{{account.fakulty}}</span>
                     </div>
                     <div class="infoInProfileInner">
                         <label>Группа</label>
                         <span>{{account.groupUniversity}}</span>
                     </div>
                  </div>
+            </div>
+            <hr>
+            <div class="countInfo">
+                <div class="count">
+                    <div>Друзья</div>
+                    <div>
+                        {{account.countOfFrends}}
+                    </div>
+                </div>
+                <div class="count">
+                    <div>Количество подписок</div>
+                    <div>
+                        {{account.countOfFolowers}}
+                    </div>
+                </div>
+                <div class="count">
+                    <div>Фото</div>
+                    <div>
+                        {{account.countOfPhoto}}
+                    </div>
+                </div>
+                <div class="count">
+                    <div>Посты</div>
+                    <div>
+                        {{account.countOfPosts}}
+                    </div>
+                </div>
             </div>
         </div>
     </section>

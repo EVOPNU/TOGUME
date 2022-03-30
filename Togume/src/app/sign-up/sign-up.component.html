@@ -1,4 +1,3 @@
-<p>sign-up works!</p>
 <form (ngSubmit)="registration()" name="reg" *ngIf="!showConfForm">
     <div>
         <label>Email</label> 
@@ -25,8 +24,7 @@
         <label *ngIf="(secondPassword == user.Password) && (secondPassword !== '') && user.Password !==''">Пароли совпадают</label>
     </div>
     <!-- кликабельность кнопок от правильности пароля -->
-    <button type="submit" *ngIf="(secondPassword == user.Password) && user.Password!=='' && user.Email !==''">sign-up</button>
-    <button *ngIf="(secondPassword !== user.Password) || user.Password =='' || user.Email ==''" disabled>sign-up</button>
+    <button [disabled]="(secondPassword !== user.Password) || user.Password =='' || user.Email ==''">sign-up</button>
 </form>
 
 <!-- условие для открытия окна подтверждения -->

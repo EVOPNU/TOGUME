@@ -12,6 +12,8 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthGuard } from './services/guard/auth.guard';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { GroupComponent } from './group/group.component';
+import { ConfigurationComponent } from './configuration/configuration.component';
 
 export const appRoutes:Routes=[
   // {path:'profile', component:ProfileComponent},
@@ -27,7 +29,9 @@ export const appRoutes:Routes=[
     ProfileComponent,
     LoginComponent,
     SignUpComponent,
-    NotFoundPageComponent
+    NotFoundPageComponent,
+    GroupComponent,
+    ConfigurationComponent
   ],
   imports: [
     BrowserModule,
