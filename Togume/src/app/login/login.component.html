@@ -1,20 +1,22 @@
-<form (ngSubmit)="logIn()" name="login">
-    <div>
-        <label>Email</label> 
-
-        <br>
-
-        <input [(ngModel)]="user.Email" type="email" name="email">
-    </div>
-    <div>
-        <label>Password</label>
-        
-        <br>
-
-        <input [(ngModel)]="user.Password" type="password" name="password">
-    </div>
-    <button type="submit">LogIn</button>
-    <button type="button" (click)="logInCheck()">Take a token</button>
-    <button type="button" (click)="logOut()">LogOut</button>
-</form>
+<div class="container">
+    <form (ngSubmit)="logIn()" name="login">
+        <div>
+            <label>Email</label> 
+    
+            <br>
+    
+            <input [(ngModel)]="user.Email" type="email" name="email">
+        </div>
+        <div>
+            <label>Password</label>
+            
+            <br>
+    
+            <input [(ngModel)]="user.Password" type="password" name="password">
+        </div>
+        <button type="submit">LogIn</button>
+        <button type="button" (click)="logInCheck()">Take a token</button>
+        <button type="button" (click)="logOut()">LogOut</button>
+    </form>
+</div>
 
