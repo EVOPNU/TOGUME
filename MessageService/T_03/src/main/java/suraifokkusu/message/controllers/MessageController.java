@@ -3,11 +3,11 @@ package suraifokkusu.message.controllers;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import suraifokkusu.message.dto.MessageDTO;
 import suraifokkusu.message.dto.transfer.*;
+
 import suraifokkusu.message.exceptions.InvalidAttributeValueException;
 import suraifokkusu.message.exceptions.MessageNotFoundException;
 import suraifokkusu.message.services.MessageService;
@@ -15,7 +15,7 @@ import suraifokkusu.message.services.MessageService;
 import java.util.List;
 
     @RestController
-    @RequestMapping("/message")
+    @RequestMapping("/api/v1/message")
     public class MessageController {
     private final MessageService service;
     @Autowired
@@ -23,18 +23,15 @@ import java.util.List;
         this.service = service;
     }
 
-    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-                    produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping()
     @JsonView(Exist.class)
     public List<MessageDTO> simpleUsersFindAll() {
         return service.findAll();
     }
 
 
-        @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-                produces = MediaType.APPLICATION_JSON_VALUE,
-            value = "/admin")
-        @JsonView({AdminDetail.class, Detail.class})
+    @GetMapping(value="/admin")
+    @JsonView(AdminDetail.class)
         public List<MessageDTO> AdminFindAll() {
             return service.findAll();
         }
@@ -42,33 +39,31 @@ import java.util.List;
 
     @GetMapping(value = "/{id}")
     @JsonView(Exist.class)
-    public MessageDTO findById(@PathVariable Long id) {
+    public MessageDTO findById(@PathVariable Integer id) {
         return service.findById(id).orElseThrow(MessageNotFoundException::new);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces =
-            MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping()
     @JsonView(Exist.class)
     public MessageDTO save(@Validated(New.class) @RequestBody MessageDTO dto) {
         if (dto.getMessage_id()!=null){
-            throw  new InvalidAttributeValueException("MESSAGE ID MUST BE NULL");
+            throw new InvalidAttributeValueException("MESSAGE ID MUST BE NULL");
         }
         return service.save(dto).orElseThrow(MessageNotFoundException::new);
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces =
-                MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping()
     @JsonView(Exist.class)
     public MessageDTO update(@Validated(Update.class) @RequestBody MessageDTO dto) {
         if (dto.getMessage_id() ==null){
-            throw  new InvalidAttributeValueException("MESSAGE ID MUST NOT BE NULL");
+            throw new InvalidAttributeValueException("MESSAGE ID MUST NOT BE NULL");
         }
         return service.save(dto).orElseThrow(MessageNotFoundException::new);
         }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable Integer id) {
         service.deleteById(id);
     }
 }

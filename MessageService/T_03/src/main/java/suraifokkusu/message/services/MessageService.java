@@ -1,5 +1,6 @@
 package suraifokkusu.message.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,14 +14,15 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class MessageService {
-    private ModelMapper modelMapper;
+    //private ModelMapper modelMapper;
     private MessageRepository messageRepository;
 
-    @Autowired
-    public void setModelMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
-    }
+//    @Autowired
+//    public void setModelMapper(ModelMapper modelMapper) {
+//        this.modelMapper = modelMapper;
+//    }
     @Autowired
     public void setMessageRepository(MessageRepository messageRepository) {
         this.messageRepository = messageRepository;
@@ -29,30 +31,37 @@ public class MessageService {
 
     @Transactional
     public List<MessageDTO> findAll() {
-        return messageRepository.findAll().stream().map(this::entityToDto).collect(Collectors.toList());
+        return messageRepository.findAll().stream()
+                .map(MessageDTO::new)
+                .collect(Collectors.toList());
     }
 
     @Transactional
-    public Optional<MessageDTO> findById(Long id) {
-        return messageRepository.findById(id).map(this::entityToDto);
+    public Optional<MessageDTO> findById(Integer id) {
+        return messageRepository.findById(id).map(MessageDTO::new);
     }
 
     @Transactional
     public Optional<MessageDTO> save(MessageDTO messageDTO)
     {
-        return Optional.of(messageRepository.save(dtoToEntity(messageDTO))).map(this::entityToDto);
+        return Optional.of(messageRepository.save(new MessageEntity(messageDTO.getMessage_id(),
+                messageDTO.getChat_id(), messageDTO.getDate_departure(), messageDTO.getDate_of_change(),
+                messageDTO.getMessage(), messageDTO.getSender_id())))
+                .map(MessageDTO::new);
     }
 
     @Transactional
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
      messageRepository.deleteById(id);
     }
 
-    private MessageEntity dtoToEntity(MessageDTO dto){
-        return modelMapper.map(dto, MessageEntity.class);
-    }
-
-    private MessageDTO entityToDto(MessageEntity message){
-        return modelMapper.map(message, MessageDTO.class);
-    }
+//    private MessageEntity dtoToEntity(MessageDTO dto){
+//        log.info(dto.toString());
+//
+////        return modelMapper.map(dto, MessageEntity.class);
+//    }
+//    private MessageDTO entityToDto(MessageEntity message){
+//        log.info(message.toString());
+////        return modelMapper.map(message, MessageDTO.class);
+//    }
 }
