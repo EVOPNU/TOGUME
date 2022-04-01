@@ -18,6 +18,7 @@ import { ConfigurationComponent } from './configuration/configuration.component'
 export const appRoutes:Routes=[
   // {path:'profile', component:ProfileComponent},
   {path:'profile/:id', canActivate:[AuthGuard] ,component:ProfileComponent},
+  {path:'settings', canActivate:[AuthGuard] ,component:ConfigurationComponent},
   {path:'logIn', component:LoginComponent},
   {path:'registration', component:SignUpComponent},
   {path:'notfound', component:NotFoundPageComponent},
