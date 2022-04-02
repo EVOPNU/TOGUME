@@ -37,11 +37,11 @@ export class ProfileComponent implements OnInit {
   clickChecker(){
     this.clickChange=!this.clickChange
   }
-  changeMediaStatus(){
-    this.accountHttp.changeMediaStatus(this.account.id,this.account.statusInProfile).subscribe((data:any)=>{},error=>{console.log(error)});
-    console.log(this.account.statusInProfile)
-    this.clickChange=!this.clickChange 
-  }
+  // changeMediaStatus(){
+  //   this.accountHttp.changeMediaStatus(this.account.id,this.account.statusInProfile).subscribe((data:any)=>{},error=>{console.log(error)});
+  //   console.log(this.account.statusInProfile)
+  //   this.clickChange=!this.clickChange 
+  // }
   profileMoreInfo(){
     this.profileMore = !this.profileMore
   }

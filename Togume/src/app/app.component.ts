@@ -1,4 +1,5 @@
 
+import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AuthGuard } from './services/guard/auth.guard';
 import { HttpService } from './services/login/http.service';
@@ -16,10 +17,13 @@ export class AppComponent implements OnInit{
 
   }
   user:User = new User(0,'','','')
+  id:any
 
   ngOnInit(): void {
+    let header = new HttpHeaders()
     this.httpService.getId().subscribe((data:any)=>{
       this.user.id = data
+      this.id = header.get('id')
     })
   }
   title = 'Togume';

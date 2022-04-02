@@ -2,30 +2,67 @@
 <div class="container">
     <div>
         <form>
+            <label>Пароль</label>
+            <input type="text" [(ngModel)]="accountDataTemp.password">
+            <button type="submit">Изменить</button>
+        </form>
+    </div>
+    <div>
+        <form>
             <label>Фамилия</label>
             <input type="text">
-            <button>Изменить</button>
+            <button type="submit">Изменить</button>
         </form>
     </div>
     <div>
         <form>
             <label>Имя</label>
             <input type="text">
-            <button>Изменить</button>
+            <button type="submit">Изменить</button>
         </form>
     </div>
     <div>
         <form>
             <label>Отчество</label>
             <input type="text">
-            <button>Изменить</button>
+            <button type="submit">Изменить</button>
+        </form>
+    </div>
+    <div>
+        <form>
+            <label>День рождение</label>
+            <input type="text" placeholder="год" [(ngModel)]="birthDay.year">
+            <input type="text" placeholder="месяц" [(ngModel)]="birthDay.month">
+            <input type="text" placeholder="дата" [(ngModel)]="birthDay.day">
+            <button type="submit">Изменить</button>
+        </form>
+    </div>
+    <div>
+        <form>
+            <label>Группа</label>
+            <input type="text">
+            <button type="submit">Изменить</button>
         </form>
     </div>
     <div>
         <form>
             <label>Факультет</label>
             <input type="text">
-            <button>Изменить</button>
+            <button type="submit">Изменить</button>
+        </form>
+    </div>
+    <div>
+        <form>
+            <label>Ник</label>
+            <input type="text">
+            <button type="submit">Изменить</button>
+        </form>
+    </div>
+    <div>
+        <form>
+            <label>Статус</label>
+            <input type="text">
+            <button type="submit">Изменить</button>
         </form>
     </div>
     
