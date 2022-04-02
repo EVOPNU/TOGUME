@@ -14,14 +14,17 @@ import { AuthGuard } from './services/guard/auth.guard';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { GroupComponent } from './group/group.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
+import { FeedComponent } from './feed/feed.component';
 
 export const appRoutes:Routes=[
   // {path:'profile', component:ProfileComponent},
+  {path:'', canActivate:[AuthGuard] ,component:FeedComponent},
+  {path:'feed', canActivate:[AuthGuard] ,component:FeedComponent},
   {path:'profile/:id', canActivate:[AuthGuard] ,component:ProfileComponent},
   {path:'settings', canActivate:[AuthGuard] ,component:ConfigurationComponent},
   {path:'logIn', component:LoginComponent},
   {path:'registration', component:SignUpComponent},
-  {path:'notfound', component:NotFoundPageComponent},
+  {path:'**', component:NotFoundPageComponent},
 ]
 
 @NgModule({
@@ -32,7 +35,8 @@ export const appRoutes:Routes=[
     SignUpComponent,
     NotFoundPageComponent,
     GroupComponent,
-    ConfigurationComponent
+    ConfigurationComponent,
+    FeedComponent
   ],
   imports: [
     BrowserModule,
