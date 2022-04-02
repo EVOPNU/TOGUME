@@ -15,7 +15,7 @@ export class ConfigurationComponent implements OnInit {
       'month': '1',
       'day' : '1'
     }
-  //git commit -m "some fix API urls in accountService.ts, delete all input id:Account['id'] in accountService // start design configuration.comp.t
+  //
 
   constructor(public accountServiceHTTP:AccountService) { }
 
