@@ -124,7 +124,7 @@ namespace SecurityT.Controllers
         }
 
 
-        [Route("Confrim")]
+        [Route("Confirm")]
         [HttpPost]
         public IActionResult Register([FromBody] JRegisterWithCode model)
         {

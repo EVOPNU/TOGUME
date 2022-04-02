@@ -27,14 +27,13 @@ namespace User.Controllers
             if (model != null)
             {
                 int id = Convert.ToInt32(Request.Headers["Id"].ToString());
-                if (id == model.id)
-                {
+
                     using ApplicationContext db = new ApplicationContext();
                     {
 
                         foreach (var l in db.accounts.ToList())
                         {
-                            if (l.id == model.id && l.password == GetHashString(model.oldPassword))
+                            if (l.id == id && l.password == GetHashString(model.oldPassword))
                             {
                                 l.password = GetHashString(model.newPassword);
                                 db.SaveChanges();
@@ -45,12 +44,8 @@ namespace User.Controllers
                         }
 
                     }
-                }
-                else
-                {
-                    Console.WriteLine("id!=idchange");
-                    return BadRequest();
-                }
+                
+                
             }
             Console.WriteLine("Usern don't exist");
             return BadRequest();
@@ -67,14 +62,13 @@ namespace User.Controllers
             if (model != null)
             {
                 int id = Convert.ToInt32(Request.Headers["Id"].ToString());
-                if (id == model.id)
-                {
+                
                     using ApplicationContext db = new ApplicationContext();
                     {
 
                         foreach (var l in db.accounts.ToList())
                         {
-                            if (l.id == model.id)
+                            if (l.id == id)
                             {
                                 l.firstName = model.newFirstName;
                                 db.SaveChanges();
@@ -85,12 +79,7 @@ namespace User.Controllers
                         }
 
                     }
-                }
-                else
-                {
-                    Console.WriteLine("id!=idchange");
-                    return BadRequest();
-                }
+                
             }
             Console.WriteLine("Usern don't exist");
             return BadRequest();
@@ -106,14 +95,13 @@ namespace User.Controllers
             if (model != null)
             {
                 int id = Convert.ToInt32(Request.Headers["Id"].ToString());
-                if (id == model.id)
-                {
+
                     using ApplicationContext db = new ApplicationContext();
                     {
 
                         foreach (var l in db.accounts.ToList())
                         {
-                            if (l.id == model.id)
+                            if (l.id == id)
                             {
                                 l.lastName = model.newLastName;
                                 db.SaveChanges();
@@ -124,12 +112,7 @@ namespace User.Controllers
                         }
 
                     }
-                }
-                else
-                {
-                    Console.WriteLine("id!=idchange");
-                    return BadRequest();
-                }
+                
             }
             Console.WriteLine("Usern don't exist");
             return BadRequest();
@@ -145,14 +128,14 @@ namespace User.Controllers
             if (model != null)
             {
                 int id = Convert.ToInt32(Request.Headers["Id"].ToString());
-                if (id == model.id)
-                {
+
+
                     using ApplicationContext db = new ApplicationContext();
                     {
 
                         foreach (var l in db.accounts.ToList())
                         {
-                            if (l.id == model.id)
+                            if (l.id == id)
                             {
                                 l.thirdName = model.newThirdName;
                                 db.SaveChanges();
@@ -163,12 +146,7 @@ namespace User.Controllers
                         }
 
                     }
-                }
-                else
-                {
-                    Console.WriteLine("id!=idchange");
-                    return BadRequest();
-                }
+                
             }
             Console.WriteLine("Usern don't exist");
             return BadRequest();
@@ -184,14 +162,13 @@ namespace User.Controllers
             if (model != null)
             {
                 int id = Convert.ToInt32(Request.Headers["Id"].ToString());
-                if (id == model.id)
-                {
+                
                     using ApplicationContext db = new ApplicationContext();
                     {
 
                         foreach (var l in db.accounts.ToList())
                         {
-                            if (l.id == model.id)
+                            if (l.id == id)
                             {
                                 l.birthDay = model.newBirthDay;
                                 db.SaveChanges();
@@ -202,12 +179,7 @@ namespace User.Controllers
                         }
 
                     }
-                }
-                else
-                {
-                    Console.WriteLine("id!=idchange");
-                    return BadRequest();
-                }
+                
             }
             Console.WriteLine("Usern don't exist");
             return BadRequest();
@@ -224,14 +196,13 @@ namespace User.Controllers
             if (model != null)
             {
                 int id = Convert.ToInt32(Request.Headers["Id"].ToString());
-                if (id == model.id)
-                {
+
                     using ApplicationContext db = new ApplicationContext();
                     {
 
                         foreach (var l in db.accounts.ToList())
                         {
-                            if (l.id == model.id)
+                            if (l.id == id)
                             {
                                 l.groupUniversity = model.newGroupUniversity;
                                 db.SaveChanges();
@@ -242,12 +213,7 @@ namespace User.Controllers
                         }
 
                     }
-                }
-                else
-                {
-                    Console.WriteLine("id!=idchange");
-                    return BadRequest();
-                }
+              
             }
             Console.WriteLine("Usern don't exist");
             return BadRequest();
@@ -263,16 +229,15 @@ namespace User.Controllers
             if (model != null)
             {
                 int id = Convert.ToInt32(Request.Headers["Id"].ToString());
-                if (id == model.id)
-                {
+
                     using ApplicationContext db = new ApplicationContext();
                     {
 
                         foreach (var l in db.accounts.ToList())
                         {
-                            if (l.id == model.id)
+                            if (l.id == id)
                             {
-                                l.fakulty = model.newFakulty;
+                                l.faculty = model.newFakulty;
                                 db.SaveChanges();
                                 Console.WriteLine("Fakulty change successful");
                                 return Ok();
@@ -281,12 +246,7 @@ namespace User.Controllers
                         }
 
                     }
-                }
-                else
-                {
-                    Console.WriteLine("id!=idchange");
-                    return BadRequest();
-                }
+               
             }
             Console.WriteLine("Usern don't exist");
             return BadRequest();
@@ -301,14 +261,13 @@ namespace User.Controllers
             if (model != null)
             {
                 int id = Convert.ToInt32(Request.Headers["Id"].ToString());
-                if (id == model.id)
-                {
+
                     using ApplicationContext db = new ApplicationContext();
                     {
 
                         foreach (var l in db.accounts.ToList())
                         {
-                            if (l.id == model.id)
+                            if (l.id == id)
                             {
                                 l.nickName = model.newNickName;
                                 db.SaveChanges();
@@ -319,12 +278,7 @@ namespace User.Controllers
                         }
 
                     }
-                }
-                else
-                {
-                    Console.WriteLine("id!=idchange");
-                    return BadRequest();
-                }
+                
             }
             Console.WriteLine("Usern don't exist");
             return BadRequest();
@@ -340,14 +294,13 @@ namespace User.Controllers
             if (model != null)
             {
                 int id = Convert.ToInt32(Request.Headers["Id"].ToString());
-                if (id == model.id)
-                {
+
                     using ApplicationContext db = new ApplicationContext();
                     {
 
                         foreach (var l in db.accounts.ToList())
                         {
-                            if (l.id == model.id)
+                            if (l.id == id)
                             {
                                 l.statusInProfile = model.newStatusProfile;
                                 db.SaveChanges();
@@ -358,12 +311,7 @@ namespace User.Controllers
                         }
 
                     }
-                }
-                else
-                {
-                    Console.WriteLine("id!=idchange");
-                    return BadRequest();
-                }
+                
             }
             Console.WriteLine("Usern don't exist");
             return BadRequest();
@@ -379,14 +327,13 @@ namespace User.Controllers
             if (model != null)
             {
                 int id = Convert.ToInt32(Request.Headers["Id"].ToString());
-                if (id == model.id)
-                {
+
                     using ApplicationContext db = new ApplicationContext();
                     {
 
                         foreach (var l in db.accounts.ToList())
                         {
-                            if (l.id == model.id)
+                            if (l.id == id)
                             {
                                 l.mainPhoto = model.newMainPhoto;
                                 db.SaveChanges();
@@ -397,12 +344,7 @@ namespace User.Controllers
                         }
 
                     }
-                }
-                else
-                {
-                    Console.WriteLine("id!=idchange");
-                    return BadRequest();
-                }
+               
             }
             Console.WriteLine("Usern don't exist");
             return BadRequest();

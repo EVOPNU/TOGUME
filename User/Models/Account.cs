@@ -11,12 +11,12 @@
         public string? thirdName { get; set; }
         public DateTime birthDay { get; set; }
         public string? groupUniversity { get; set; }
-        public string? fakulty { get; set; }
+        public string? faculty { get; set; }
         public string? nickName { get; set; }
         public string? statusInProfile { get; set; }
 
-        public int? countOfFrends   { get; set; }
-        public int? countOfFolowers { get; set; }
+        public int? countOfFriends   { get; set; }
+        public int? countOfFollowers { get; set; }
         public int? countOfPhoto { get; set; }
         public int? countOfPosts { get; set; }
 
