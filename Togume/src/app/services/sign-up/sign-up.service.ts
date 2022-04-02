@@ -14,6 +14,6 @@ export class SignUpService {
   }
 
   registrationConfirmation(Email:User['Email'], Password:User['Password'],SecondPassword:string, code:number){
-    this.http.post('/api/v1/Authorization/Confrim',{Email, Password, SecondPassword, code})
+    this.http.post('/api/v1/Authorization/Confirm',{Email, Password, SecondPassword, code})
   }
 }

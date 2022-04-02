@@ -29,7 +29,8 @@
     </form>
     
     <!-- условие для открытия окна подтверждения -->
-    <form *ngIf="error && showConfForm" (ngSubmit)="registrationConfirmation()" name="regname">
+    <form *ngIf="!error && showConfForm" (ngSubmit)="registrationConfirmation()" name="regname">
+    <!-- <form *ngIf="!error" (ngSubmit)="registrationConfirmation()" name="regname"> -->
         <div>
             <label>code</label> 
             <br>

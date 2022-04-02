@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
   profileMore:boolean=false
   id:number = 1;
   clickChange:boolean=false
-  account:Account = new Account(NaN,'почта','пароль','Alex','Awler','отчество','ДР','ПО-11','ФКФН','Авлер','Волк в цирке не выступает',NaN,NaN,NaN,NaN,'','Дата создания')
+  account:Account = new Account(0,'почта','пароль','Alex','Awler','отчество','ДР','ПО-11','ФКФН','Авлер','Волк в цирке не выступает',NaN,NaN,NaN,NaN,'','Дата создания')
   ngOnInit(): void {
     this.accountHttp.getUserById() .subscribe((data:any)=>{
       this.account = data

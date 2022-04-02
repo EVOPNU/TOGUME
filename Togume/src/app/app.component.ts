@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { AuthGuard } from './services/guard/auth.guard';
 import { HttpService } from './services/login/http.service';
@@ -14,7 +15,7 @@ export class AppComponent implements OnInit{
     public guardService:AuthGuard){
 
   }
-  user:User = new User(NaN,'','','')
+  user:User = new User(0,'','','')
 
   ngOnInit(): void {
     this.httpService.getId().subscribe((data:any)=>{
