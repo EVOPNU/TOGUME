@@ -40,6 +40,21 @@ namespace SecurityT.Controllers
             Console.WriteLine("Validation method finished");
             return Ok(); //new { id = jti }
         }
+        [Route("idinbody")]
+        [HttpGet]
+        [Authorize]
+        public IActionResult ValidinBody()
+        {
+            Console.WriteLine("To ValidationinBody...");
+            var jsonToken = new JwtSecurityTokenHandler().ReadToken(Request.Headers["Authorization"].ToString().Remove(0, 7));
+
+            var tokenS = jsonToken as JwtSecurityToken;
+            var jti = tokenS.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.Sub).Value;
+
+           // Response.Headers.Add("Id", jti);
+            Console.WriteLine("ValidationinBody method finished");
+            return Ok(new { id = jti }); //
+        }
         //[Route("Registration")]
         //[HttpPost]
         //public IActionResult Register([FromBody] JPreRegister model)
@@ -77,39 +92,51 @@ namespace SecurityT.Controllers
         [HttpPost]
         public async Task<IActionResult> Register2([FromBody] JPreRegister model)
         {
-            Console.WriteLine("Registration method started");
-            if (model != null && model.Password == model.SecondPassword)
+            try
             {
-                using ApplicationContext db = new ApplicationContext();
+                Console.WriteLine("Registration method started");
+                if (model != null && model.Password == model.SecondPassword)
                 {
-                    foreach (var l in db.accounts.ToList())
+                    throw new Exception("Длина имени меньше 2 символов");
+                    using ApplicationContext db = new ApplicationContext();
                     {
-                        if (l.email == model.Email)
+                        foreach (var l in db.accounts.ToList())
                         {
-                            Console.WriteLine("User with this Email AlredyExist\nRegistration method finished");
-                            return BadRequest("AlredyExist"); //400
+                            if (l.email == model.Email)
+                            {
+                                Console.WriteLine("User with this Email AlredyExist\nRegistration method finished");
+                                return BadRequest("AlredyExist"); //400
+                            }
                         }
-                    }
-                    int codein = Random();
-                    SendEmailAsync(model.Email, codein);
-                    foreach (var l in db.codes.ToList())
-                    {
-                        if(l.Email == model.Email)
+                        int codein = Random();
+                        SendEmailAsync(model.Email, codein);
+                        foreach (var l in db.codes.ToList())
                         {
-                            db.codes.Remove(l);
-                            db.SaveChanges();
+                            if (l.Email == model.Email)
+                            {
+                                db.codes.Remove(l);
+                                db.SaveChanges();
+                            }
                         }
+
+                        db.codes.Add(new Code { Email = model.Email, code = codein, dt_create = DateTime.Now });
+                        // db.account.Add(new Account { email = model.Email, password = GetHashString(model.Password) });
+                        db.SaveChanges();
+
+                        Console.WriteLine("Registration code send successful\nRegistration method finished");
+                        
+
                     }
-
-                        db.codes.Add(new Code { Email = model.Email, code = codein , dt_create = DateTime.Now});
-                    // db.account.Add(new Account { email = model.Email, password = GetHashString(model.Password) });
-                    db.SaveChanges();
-
-                    Console.WriteLine("Registration code send successful\nRegistration method finished");
-                    return Ok();
 
                 }
-
+            }
+            catch (Exception ex)
+            {
+               
+                Console.WriteLine($"Исключение: {ex.Message}");
+                Console.WriteLine($"Метод: {ex.TargetSite}");
+                Console.WriteLine($"Трассировка стека: {ex.StackTrace}");
+                 //return Ok(new {message = ex.Message,target = ex.TargetSite, trace = ex.StackTrace });
             }
             Console.WriteLine("Registration input = null or password!=secondpassword\nRegistration method finished");
             return BadRequest();
