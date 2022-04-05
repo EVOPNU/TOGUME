@@ -1,35 +1,35 @@
-<p>configuration works!</p>
+
 <div class="container">
     <div>
-        <form>
+        <form (ngSubmit)="changePassword()">
             <label>Пароль</label>
-            <input type="text" [(ngModel)]="accountDataTemp.password">
+            <input type="text" placeholder="" [(ngModel)]="accountDataTemp.password">
             <button type="submit">Изменить</button>
         </form>
     </div>
     <div>
-        <form>
+        <form (ngSubmit)="changeLastName()">
             <label>Фамилия</label>
-            <input type="text">
+            <input type="text" placeholder="" [(ngModel)]="accountDataTemp.lastName">
             <button type="submit">Изменить</button>
         </form>
     </div>
     <div>
-        <form>
+        <form (ngSubmit)="changeFirstName()">
             <label>Имя</label>
-            <input type="text">
+            <input type="text" placeholder="" [(ngModel)]="accountDataTemp.firstName">
             <button type="submit">Изменить</button>
         </form>
     </div>
     <div>
-        <form>
+        <form (ngSubmit)="changePatronymic()">
             <label>Отчество</label>
-            <input type="text">
+            <input type="text" placeholder="" [(ngModel)]="accountDataTemp.thirdName">
             <button type="submit">Изменить</button>
         </form>
     </div>
     <div>
-        <form>
+        <form (ngSubmit)="changeBirthDay()">
             <label>День рождение</label>
             <input type="text" placeholder="год" [(ngModel)]="birthDay.year">
             <input type="text" placeholder="месяц" [(ngModel)]="birthDay.month">
@@ -38,30 +38,30 @@
         </form>
     </div>
     <div>
-        <form>
+        <form (ngSubmit)="changeUniversityGroup()">
             <label>Группа</label>
-            <input type="text">
+            <input type="text" placeholder="" [(ngModel)]="accountDataTemp.groupUniversity">
             <button type="submit">Изменить</button>
         </form>
     </div>
     <div>
-        <form>
+        <form (ngSubmit)="changeFaculty()">
             <label>Факультет</label>
-            <input type="text">
+            <input type="text" placeholder="" [(ngModel)]="accountDataTemp.fakulty">
             <button type="submit">Изменить</button>
         </form>
     </div>
     <div>
-        <form>
+        <form (ngSubmit)="changeNickname()">
             <label>Ник</label>
-            <input type="text">
+            <input type="text" placeholder="" [(ngModel)]="accountDataTemp.nickName">
             <button type="submit">Изменить</button>
         </form>
     </div>
     <div>
-        <form>
+        <form (ngSubmit)="changeMediaStatus()">
             <label>Статус</label>
-            <input type="text">
+            <input type="text" placeholder="" [(ngModel)]="accountDataTemp.statusInProfile">
             <button type="submit">Изменить</button>
         </form>
     </div>
