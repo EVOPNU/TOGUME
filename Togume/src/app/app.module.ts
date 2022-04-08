@@ -15,6 +15,8 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
 import { GroupComponent } from './group/group.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { FeedComponent } from './feed/feed.component';
+import { GroupCreateComponent } from './group-create/group-create.component';
+import { GroupMenuComponent } from './group-menu/group-menu.component';
 
 export const appRoutes:Routes=[
   // {path:'profile', component:ProfileComponent},
@@ -36,7 +38,9 @@ export const appRoutes:Routes=[
     NotFoundPageComponent,
     GroupComponent,
     ConfigurationComponent,
-    FeedComponent
+    FeedComponent,
+    GroupCreateComponent,
+    GroupMenuComponent
   ],
   imports: [
     BrowserModule,
