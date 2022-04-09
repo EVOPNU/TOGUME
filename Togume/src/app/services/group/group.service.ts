@@ -6,4 +6,60 @@ import { Injectable } from '@angular/core';
 export class GroupService {
 
   constructor() { }
+
+  createNewGroup(){
+
+  }
+
+  changeDataOfGroup(){
+
+  }
+
+  addNewUserInGroup(){
+
+  }
+  
+  showAllUsersGroups(){
+
+  }
+
+  applicationForMembership(){
+
+  }
+
+  showAllApplicationForMembershipOfGroup(){
+
+  }
+
+  showAllUsersApplicationForMembership(){
+
+  }
+
+  deleteApplicationForMembership(){
+
+  }
+
+  appointAsModerator(){
+
+  }
+
+  deleteOrLeaveOfGroup(){
+
+  }
+
+  destroyGroup(){
+
+  }
+  // ????
+  dataOfGroup(){
+
+  }
+
+  showAllMembers(){
+
+  }
+
+  showAllGroups(){
+    
+  }
 }
