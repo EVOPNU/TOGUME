@@ -16,50 +16,109 @@ exports.NewsController = void 0;
 const common_1 = require("@nestjs/common");
 const node_fetch_1 = require("node-fetch");
 let NewsController = class NewsController {
-    async getRedirect(req, res) {
-        await (0, node_fetch_1.default)('http://localhost:5000/api/v1/user/account/').then(response => {
+    async getRedirect(req, res, headers) {
+        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+            method: 'GET',
+            headers: { 'Authorization': `${headers.authorization}` }
+        }).then(async (response) => {
             if (response.status == 200) {
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
+                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: { 'Id': `${response.headers.get('Id')}` }
+                }).then(response2 => {
+                    response2.json().then(data => {
+                        res.set('Id', `${response.headers.get('Id')}`);
+                        const status = response2.status;
+                        return res.status(status).json(data);
+                    });
+                });
             }
             else {
                 return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
-    async GetRedirect(req, res) {
-        await (0, node_fetch_1.default)('http://localhost:5000/api/v1/user/account/').then(response => {
+    async GetRedirect(req, res, headers) {
+        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+            method: 'GET',
+            headers: { 'Authorization': `${headers.authorization}` }
+        }).then(async (response) => {
             if (response.status == 200) {
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
+                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: { 'Id': `${response.headers.get('Id')}` }
+                }).then(response2 => {
+                    response2.json().then(data => {
+                        res.set('Id', `${response.headers.get('Id')}`);
+                        const status = response2.status;
+                        return res.status(status).json(data);
+                    });
+                });
             }
             else {
                 return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
-    async DeleteRedirect(req, res) {
-        await (0, node_fetch_1.default)('http://localhost:5000/api/v1/user/account/').then(response => {
+    async DeleteRedirect(req, res, headers, body) {
+        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+            method: 'GET',
+            headers: { 'Authorization': `${headers.authorization}` }
+        }).then(async (response) => {
             if (response.status == 200) {
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
+                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'DELETE',
+                    headers: { 'Id': `${response.headers.get('Id')}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                }).then(response2 => {
+                    return res.status(response2.status).send({});
+                });
             }
             else {
                 return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
-    async PostRedirect(req, res) {
-        await (0, node_fetch_1.default)('http://localhost:5000/api/v1/user/account/').then(response => {
+    async PostRedirect(req, res, headers, body) {
+        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+            method: 'GET',
+            headers: { 'Authorization': `${headers.authorization}` }
+        }).then(async (response) => {
             if (response.status == 200) {
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
+                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'POST',
+                    headers: { 'Id': `${response.headers.get('Id')}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                }).then(response2 => {
+                    response2.json().then(data => {
+                        res.set('Id', `${response.headers.get('Id')}`);
+                        const status = response2.status;
+                        return res.status(status).json(data);
+                    });
+                });
             }
             else {
                 return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
-    async PutRedirect(req, res) {
-        await (0, node_fetch_1.default)('http://localhost:5000/api/v1/user/account/').then(response => {
+    async PutRedirect(req, res, headers, body) {
+        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+            method: 'GET',
+            headers: { 'Authorization': `${headers.authorization}` }
+        }).then(async (response) => {
             if (response.status == 200) {
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
+                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'PUT',
+                    headers: { 'Id': `${response.headers.get('Id')}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                }).then(response2 => {
+                    response2.json().then(data => {
+                        res.set('Id', `${response.headers.get('Id')}`);
+                        const status = response2.status;
+                        return res.status(status).json(data);
+                    });
+                });
             }
             else {
                 return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
@@ -71,40 +130,48 @@ __decorate([
     (0, common_1.Get)(''),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Headers)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], NewsController.prototype, "getRedirect", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Headers)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], NewsController.prototype, "GetRedirect", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Headers)()),
+    __param(3, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], NewsController.prototype, "DeleteRedirect", null);
 __decorate([
     (0, common_1.Post)(''),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Headers)()),
+    __param(3, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], NewsController.prototype, "PostRedirect", null);
 __decorate([
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Headers)()),
+    __param(3, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], NewsController.prototype, "PutRedirect", null);
 NewsController = __decorate([

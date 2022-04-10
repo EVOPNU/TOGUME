@@ -1,3 +1,3 @@
 export declare class ServeStaticController {
-    GetRedirect(req: any, res: any): Promise<void>;
+    GetRedirect(req: any, res: any, headers: any): Promise<void>;
 }

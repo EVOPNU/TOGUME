@@ -16,7 +16,7 @@ exports.SecurityController = void 0;
 const common_1 = require("@nestjs/common");
 let SecurityController = class SecurityController {
     valid(req, res) {
-        return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
+        return res.redirect(307, `http://localhost:5113${req.originalUrl}`);
     }
 };
 __decorate([

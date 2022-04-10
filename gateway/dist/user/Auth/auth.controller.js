@@ -24,6 +24,12 @@ let AuthController = class AuthController {
     async confirm(req, res) {
         return res.redirect(307, `http://localhost:5113${req.originalUrl}`);
     }
+    valid(req, res) {
+        return res.redirect(307, `http://localhost:5113${req.originalUrl}`);
+    }
+    id_in_body(req, res) {
+        return res.redirect(307, `http://localhost:5113${req.originalUrl}`);
+    }
 };
 __decorate([
     (0, common_1.Post)('/Login/'),
@@ -49,8 +55,24 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "confirm", null);
+__decorate([
+    (0, common_1.Get)('/'),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "valid", null);
+__decorate([
+    (0, common_1.Get)('/idinbody/'),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "id_in_body", null);
 AuthController = __decorate([
-    (0, common_1.Controller)('/api/v1/user/Authorization/')
+    (0, common_1.Controller)('/api/v1/Authorization/')
 ], AuthController);
 exports.AuthController = AuthController;
 //# sourceMappingURL=auth.controller.js.map

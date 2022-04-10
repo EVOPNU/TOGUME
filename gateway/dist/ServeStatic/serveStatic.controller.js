@@ -16,8 +16,11 @@ exports.ServeStaticController = void 0;
 const common_1 = require("@nestjs/common");
 const node_fetch_1 = require("node-fetch");
 let ServeStaticController = class ServeStaticController {
-    async GetRedirect(req, res) {
-        await (0, node_fetch_1.default)('http://localhost:5000/api/v1/user/account/').then(response => {
+    async GetRedirect(req, res, headers) {
+        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+            method: 'GET',
+            headers: { 'Authorization': `${headers.authorization}` }
+        }).then(async (response) => {
             if (response.status == 200) {
                 return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
             }
@@ -31,8 +34,9 @@ __decorate([
     (0, common_1.Get)(':image'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Headers)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], ServeStaticController.prototype, "GetRedirect", null);
 ServeStaticController = __decorate([

@@ -1,42 +1,73 @@
-import { Controller, Post, Req, Res, Get, HttpStatus, Head } from "@nestjs/common";
+import { Controller, Post, Req, Res, Get, HttpStatus, Headers, Body } from "@nestjs/common";
 import fetch from "node-fetch";
 
 @Controller('/api/v1/Groups/')
 export class GroupsController {
 
     @Post('/create/')
-    async createGroup(@Req() req, @Res() res) {
-        return await fetch('http://localhost:5113/api/v1/authorization').then(async response => {
+    async createGroup(@Req() req, @Res() res, @Headers() headers, @Body() body) {
+        await fetch('http://localhost:5113/api/v1/authorization', {
+            method: 'GET', 
+            headers: {'Authorization':`${headers.authorization}`}
+        }).then(async response => {
             if(response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
-            }
+                fetch(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'POST',
+                    headers: {'Id' : `${response.headers.get('Id')}`, 'Content-Type':'application/json'},
+                    body: JSON.stringify(body)
+                }).then(response2 => {
+                    response2.json().then(data => {
+                        res.set('Id', `${response.headers.get('Id')}`);
+                        const status = response2.status;
+                        return res.status(status).json(data);
+                    });
+                });            
+            }   
             else {
                 return res.status(HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
 
-    @Post('/update/:sender')
-    async sender(@Req() req, @Res() res) {
-        return await fetch('http://localhost:5113/api/v1/authorization').then(async response => {
+    @Post('/update/')
+    async sender(@Req() req, @Res() res, @Headers() headers, @Body() body) {
+        await fetch('http://localhost:5113/api/v1/authorization', {
+            method: 'GET', 
+            headers: {'Authorization':`${headers.authorization}`}
+        }).then(async response => {
             if(response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
-            }
+                fetch(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'POST',
+                    headers: {'Id' : `${response.headers.get('Id')}`, 'Content-Type':'application/json'},
+                    body: JSON.stringify(body)
+                }).then(response2 => {
+                    response2.json().then(data => {
+                        res.set('Id', `${response.headers.get('Id')}`);
+                        const status = response2.status;
+                        return res.status(status).json(data);
+                    });
+                });            
+            }   
             else {
                 return res.status(HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
-        }); 
+        });
     }
 
     @Get('/add/:acess/:groupID/:userID/')
-    async addUser(@Req() req, @Res() res) {
-        return await fetch('http://localhost:5113/api/v1/authorization').then(async response => {
+    async addUser(@Req() req, @Res() res, @Headers() headers) {
+        await fetch('http://localhost:5113/api/v1/authorization', {
+            method: 'GET', 
+            headers: {'Authorization':`${headers.authorization}`}
+        }).then(async response => {
             if(response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
-            }
+                fetch(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: {'Id' : `${response.headers.get('Id')}`}
+                }).then(response2 => {
+                    return res.status(response2.status).send({});
+                });            
+            }   
             else {
                 return res.status(HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
@@ -44,51 +75,87 @@ export class GroupsController {
     }
 
     @Get('/us/:userid')
-    async GetByUserId(@Req() req, @Res() res) {
-        return await fetch('http://localhost:5113/api/v1/authorization').then(async response => {
+    async GetByUserId(@Req() req, @Res() res, @Headers() headers) {
+        await fetch('http://localhost:5113/api/v1/authorization', {
+            method: 'GET', 
+            headers: {'Authorization':`${headers.authorization}`}
+        }).then(async response => {
             if(response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
-            }
+                fetch(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: {'Id' : `${response.headers.get('Id')}`}
+                }).then(response2 => {
+                    return res.status(response2.status).send({});
+                });            
+            }   
             else {
                 return res.status(HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
 
-    @Get('/request/:groupid/:userid/')
-    async request(@Req() req, @Res() res) {
-        return await fetch('http://localhost:5113/api/v1/authorization').then(async response => {
+    @Get('/req/:groupid/')
+    async request(@Req() req, @Res() res, @Headers() headers) {
+        await fetch('http://localhost:5113/api/v1/authorization', {
+            method: 'GET', 
+            headers: {'Authorization':`${headers.authorization}`}
+        }).then(async response => {
             if(response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
-            }
+                fetch(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: {'Id' : `${response.headers.get('Id')}`}
+                }).then(response2 => {
+                    return res.status(response2.status).send({});
+                });            
+            }   
             else {
                 return res.status(HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
 
-    @Get('/invge/:groupid/:sender/')
-    async listRequest(@Req() req, @Res() res) {
-        return await fetch('http://localhost:5113/api/v1/authorization').then(async response => {
+    @Get('/invgr/:groupid/')
+    async listRequest(@Req() req, @Res() res, @Headers() headers) {
+        await fetch('http://localhost:5113/api/v1/authorization', {
+            method: 'GET', 
+            headers: {'Authorization':`${headers.authorization}`}
+        }).then(async response => {
             if(response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
-            }
+                fetch(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: {'Id' : `${response.headers.get('Id')}`}
+                }).then(response2 => {
+                    response2.json().then(data => {
+                        res.set('Id', `${response.headers.get('Id')}`);
+                        const status = response2.status;
+                        return res.status(status).json(data);
+                    });
+                });            
+            }   
             else {
                 return res.status(HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
 
-    @Get('/invus/:userid')
-    async usersInvites(@Req() req, @Res() res) {
-        return await fetch('http://localhost:5113/api/v1/authorization').then(async response => {
+    @Get('/invus/')
+    async usersInvites(@Req() req, @Res() res, @Headers() headers) {
+        await fetch('http://localhost:5113/api/v1/authorization', {
+            method: 'GET', 
+            headers: {'Authorization':`${headers.authorization}`}
+        }).then(async response => {
             if(response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
-            }
+                fetch(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: {'Id' : `${response.headers.get('Id')}`}
+                }).then(response2 => {
+                    response2.json().then(data => {
+                        res.set('Id', `${response.headers.get('Id')}`);
+                        const status = response2.status;
+                        return res.status(status).json(data);
+                    });
+                });            
+            }   
             else {
                 return res.status(HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
@@ -96,51 +163,79 @@ export class GroupsController {
     }
 
     @Get('/not/:groupid/:userid')
-    async deleteRequest(@Req() req, @Res() res) {
-        return await fetch('http://localhost:5113/api/v1/authorization').then(async response => {
+    async deleteRequest(@Req() req, @Res() res, @Headers() headers) {
+        await fetch('http://localhost:5113/api/v1/authorization', {
+            method: 'GET', 
+            headers: {'Authorization':`${headers.authorization}`}
+        }).then(async response => {
             if(response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
-            }
+                fetch(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: {'Id' : `${response.headers.get('Id')}`}
+                }).then(response2 => {
+                    return res.status(response2.status).send({});
+                });            
+            }   
             else {
                 return res.status(HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
 
-    @Get('/right/:groupid/:userid/:sender')
-    async getRight(@Req() req, @Res() res) {
-        return await fetch('http://localhost:5113/api/v1/authorization').then(async response => {
+    @Get('/right/:groupid/:userid/')
+    async getRight(@Req() req, @Res() res, @Headers() headers) {
+        await fetch('http://localhost:5113/api/v1/authorization', {
+            method: 'GET', 
+            headers: {'Authorization':`${headers.authorization}`}
+        }).then(async response => {
             if(response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
-            }
+                fetch(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: {'Id' : `${response.headers.get('Id')}`}
+                }).then(response2 => {
+                    return res.status(response2.status).send({});
+                });            
+            }   
             else {
                 return res.status(HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
 
-    @Get('/delete/:groupid/:userid/:sender')
-    async deleteUser(@Req() req, @Res() res) {
-        return await fetch('http://localhost:5113/api/v1/authorization').then(async response => {
+    @Get('/delete/:groupid/:userid/')
+    async deleteUser(@Req() req, @Res() res, @Headers() headers) {
+        await fetch('http://localhost:5113/api/v1/authorization', {
+            method: 'GET', 
+            headers: {'Authorization':`${headers.authorization}`}
+        }).then(async response => {
             if(response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
-            }
+                fetch(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: {'Id' : `${response.headers.get('Id')}`}
+                }).then(response2 => {
+                    return res.status(response2.status).send({});
+                });            
+            }   
             else {
                 return res.status(HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
 
-    @Get('/exterminatus/:groupid/:sender')
-    async removeGroup(@Req() req, @Res() res) {
-        return await fetch('http://localhost:5113/api/v1/authorization').then(async response => {
+    @Get('/exterminatus/:groupid/')
+    async removeGroup(@Req() req, @Res() res, @Headers() headers) {
+        await fetch('http://localhost:5113/api/v1/authorization', {
+            method: 'GET', 
+            headers: {'Authorization':`${headers.authorization}`}
+        }).then(async response => {
             if(response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
-            }
+                fetch(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: {'Id' : `${response.headers.get('Id')}`}
+                }).then(response2 => {
+                    return res.status(response2.status).send({});
+                });            
+            }   
             else {
                 return res.status(HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
@@ -148,12 +243,19 @@ export class GroupsController {
     }
 
     @Get('/gr/:groupid')
-    async GetDataGroup(@Req() req, @Res() res) {
-        return await fetch('http://localhost:5113/api/v1/authorization').then(async response => {
+    async GetDataGroup(@Req() req, @Res() res, @Headers() headers) {
+        await fetch('http://localhost:5113/api/v1/authorization', {
+            method: 'GET', 
+            headers: {'Authorization':`${headers.authorization}`}
+        }).then(async response => {
             if(response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
-            }
+                fetch(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: {'Id' : `${response.headers.get('Id')}`}
+                }).then(response2 => {
+                    return res.status(response2.status).send({});
+                });            
+            }   
             else {
                 return res.status(HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
@@ -161,12 +263,23 @@ export class GroupsController {
     }
 
     @Get('/ingroup/:groupid')
-    async UsersOfGroup(@Req() req, @Res() res) {
-        return await fetch('http://localhost:5113/api/v1/authorization').then(async response => {
+    async UsersOfGroup(@Req() req, @Res() res, @Headers() headers) {
+        await fetch('http://localhost:5113/api/v1/authorization', {
+            method: 'GET', 
+            headers: {'Authorization':`${headers.authorization}`}
+        }).then(async response => {
             if(response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
-            }
+                fetch(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: {'Id' : `${response.headers.get('Id')}`}
+                }).then(response2 => {
+                    response2.json().then(data => {
+                        res.set('Id', `${response.headers.get('Id')}`);
+                        const status = response2.status;
+                        return res.status(status).json(data);
+                    });
+                });            
+            }   
             else {
                 return res.status(HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
@@ -174,12 +287,23 @@ export class GroupsController {
     }
 
     @Get('/allgroups/')
-    async allGroups(@Req() req, @Res() res) {
-        return await fetch('http://localhost:5113/api/v1/authorization').then(async response => {
+    async allGroups(@Req() req, @Res() res, @Headers() headers) {
+        await fetch('http://localhost:5113/api/v1/authorization', {
+            method: 'GET', 
+            headers: {'Authorization':`${headers.authorization}`}
+        }).then(async response => {
             if(response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
-            }
+                fetch(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: {'Id' : `${response.headers.get('Id')}`}
+                }).then(response2 => {
+                    response2.json().then(data => {
+                        res.set('Id', `${response.headers.get('Id')}`);
+                        const status = response2.status;
+                        return res.status(status).json(data);
+                    });
+                });            
+            }   
             else {
                 return res.status(HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
@@ -187,12 +311,23 @@ export class GroupsController {
     }
 
     @Get('/us/:userID')
-    async usersGroup(@Req() req, @Res() res) {
-        return await fetch('http://localhost:5113/api/v1/authorization').then(async response => {
+    async usersGroup(@Req() req, @Res() res, @Headers() headers) {
+        await fetch('http://localhost:5113/api/v1/authorization', {
+            method: 'GET', 
+            headers: {'Authorization':`${headers.authorization}`}
+        }).then(async response => {
             if(response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
-            }
+                fetch(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: {'Id' : `${response.headers.get('Id')}`}
+                }).then(response2 => {
+                    response2.json().then(data => {
+                        res.set('Id', `${response.headers.get('Id')}`);
+                        const status = response2.status;
+                        return res.status(status).json(data);
+                    });
+                });            
+            }   
             else {
                 return res.status(HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }

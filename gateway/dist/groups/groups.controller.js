@@ -16,169 +16,300 @@ exports.GroupsController = void 0;
 const common_1 = require("@nestjs/common");
 const node_fetch_1 = require("node-fetch");
 let GroupsController = class GroupsController {
-    async createGroup(req, res) {
-        console.log('12313');
-        return await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization').then(async (response) => {
-            console.log('qeeq');
+    async createGroup(req, res, headers, body) {
+        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+            method: 'GET',
+            headers: { 'Authorization': `${headers.authorization}` }
+        }).then(async (response) => {
             if (response.status == 200) {
-                console.log('12344');
-                res.set('Id', response.headers.get('Id'));
-                console.log('qeq21r');
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
+                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'POST',
+                    headers: { 'Id': `${response.headers.get('Id')}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                }).then(response2 => {
+                    response2.json().then(data => {
+                        res.set('Id', `${response.headers.get('Id')}`);
+                        const status = response2.status;
+                        return res.status(status).json(data);
+                    });
+                });
             }
             else {
                 return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
-    async sender(req, res) {
-        return await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization').then(async (response) => {
+    async sender(req, res, headers, body) {
+        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+            method: 'GET',
+            headers: { 'Authorization': `${headers.authorization}` }
+        }).then(async (response) => {
             if (response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
+                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'POST',
+                    headers: { 'Id': `${response.headers.get('Id')}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                }).then(response2 => {
+                    response2.json().then(data => {
+                        res.set('Id', `${response.headers.get('Id')}`);
+                        const status = response2.status;
+                        return res.status(status).json(data);
+                    });
+                });
             }
             else {
                 return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
-    async addUser(req, res) {
-        return await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization').then(async (response) => {
+    async addUser(req, res, headers) {
+        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+            method: 'GET',
+            headers: { 'Authorization': `${headers.authorization}` }
+        }).then(async (response) => {
             if (response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
+                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: { 'Id': `${response.headers.get('Id')}` }
+                }).then(response2 => {
+                    return res.status(response2.status).send({});
+                });
             }
             else {
                 return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
-    async GetByUserId(req, res) {
-        return await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization').then(async (response) => {
+    async GetByUserId(req, res, headers) {
+        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+            method: 'GET',
+            headers: { 'Authorization': `${headers.authorization}` }
+        }).then(async (response) => {
             if (response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
+                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: { 'Id': `${response.headers.get('Id')}` }
+                }).then(response2 => {
+                    return res.status(response2.status).send({});
+                });
             }
             else {
                 return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
-    async request(req, res) {
-        return await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization').then(async (response) => {
+    async request(req, res, headers) {
+        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+            method: 'GET',
+            headers: { 'Authorization': `${headers.authorization}` }
+        }).then(async (response) => {
             if (response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
+                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: { 'Id': `${response.headers.get('Id')}` }
+                }).then(response2 => {
+                    return res.status(response2.status).send({});
+                });
             }
             else {
                 return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
-    async listRequest(req, res) {
-        return await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization').then(async (response) => {
+    async listRequest(req, res, headers) {
+        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+            method: 'GET',
+            headers: { 'Authorization': `${headers.authorization}` }
+        }).then(async (response) => {
             if (response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
+                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: { 'Id': `${response.headers.get('Id')}` }
+                }).then(response2 => {
+                    response2.json().then(data => {
+                        res.set('Id', `${response.headers.get('Id')}`);
+                        const status = response2.status;
+                        return res.status(status).json(data);
+                    });
+                });
             }
             else {
                 return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
-    async usersInvites(req, res) {
-        return await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization').then(async (response) => {
+    async usersInvites(req, res, headers) {
+        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+            method: 'GET',
+            headers: { 'Authorization': `${headers.authorization}` }
+        }).then(async (response) => {
             if (response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
+                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: { 'Id': `${response.headers.get('Id')}` }
+                }).then(response2 => {
+                    response2.json().then(data => {
+                        res.set('Id', `${response.headers.get('Id')}`);
+                        const status = response2.status;
+                        return res.status(status).json(data);
+                    });
+                });
             }
             else {
                 return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
-    async deleteRequest(req, res) {
-        return await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization').then(async (response) => {
+    async deleteRequest(req, res, headers) {
+        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+            method: 'GET',
+            headers: { 'Authorization': `${headers.authorization}` }
+        }).then(async (response) => {
             if (response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
+                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: { 'Id': `${response.headers.get('Id')}` }
+                }).then(response2 => {
+                    return res.status(response2.status).send({});
+                });
             }
             else {
                 return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
-    async getRight(req, res) {
-        return await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization').then(async (response) => {
+    async getRight(req, res, headers) {
+        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+            method: 'GET',
+            headers: { 'Authorization': `${headers.authorization}` }
+        }).then(async (response) => {
             if (response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
+                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: { 'Id': `${response.headers.get('Id')}` }
+                }).then(response2 => {
+                    return res.status(response2.status).send({});
+                });
             }
             else {
                 return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
-    async deleteUser(req, res) {
-        return await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization').then(async (response) => {
+    async deleteUser(req, res, headers) {
+        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+            method: 'GET',
+            headers: { 'Authorization': `${headers.authorization}` }
+        }).then(async (response) => {
             if (response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
+                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: { 'Id': `${response.headers.get('Id')}` }
+                }).then(response2 => {
+                    return res.status(response2.status).send({});
+                });
             }
             else {
                 return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
-    async removeGroup(req, res) {
-        return await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization').then(async (response) => {
+    async removeGroup(req, res, headers) {
+        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+            method: 'GET',
+            headers: { 'Authorization': `${headers.authorization}` }
+        }).then(async (response) => {
             if (response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
+                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: { 'Id': `${response.headers.get('Id')}` }
+                }).then(response2 => {
+                    return res.status(response2.status).send({});
+                });
             }
             else {
                 return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
-    async GetDataGroup(req, res) {
-        return await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization').then(async (response) => {
+    async GetDataGroup(req, res, headers) {
+        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+            method: 'GET',
+            headers: { 'Authorization': `${headers.authorization}` }
+        }).then(async (response) => {
             if (response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
+                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: { 'Id': `${response.headers.get('Id')}` }
+                }).then(response2 => {
+                    return res.status(response2.status).send({});
+                });
             }
             else {
                 return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
-    async UsersOfGroup(req, res) {
-        return await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization').then(async (response) => {
+    async UsersOfGroup(req, res, headers) {
+        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+            method: 'GET',
+            headers: { 'Authorization': `${headers.authorization}` }
+        }).then(async (response) => {
             if (response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
+                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: { 'Id': `${response.headers.get('Id')}` }
+                }).then(response2 => {
+                    response2.json().then(data => {
+                        res.set('Id', `${response.headers.get('Id')}`);
+                        const status = response2.status;
+                        return res.status(status).json(data);
+                    });
+                });
             }
             else {
                 return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
-    async allGroups(req, res) {
-        return await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization').then(async (response) => {
+    async allGroups(req, res, headers) {
+        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+            method: 'GET',
+            headers: { 'Authorization': `${headers.authorization}` }
+        }).then(async (response) => {
             if (response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
+                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: { 'Id': `${response.headers.get('Id')}` }
+                }).then(response2 => {
+                    response2.json().then(data => {
+                        res.set('Id', `${response.headers.get('Id')}`);
+                        const status = response2.status;
+                        return res.status(status).json(data);
+                    });
+                });
             }
             else {
                 return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
             }
         });
     }
-    async usersGroup(req, res) {
-        return await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization').then(async (response) => {
+    async usersGroup(req, res, headers) {
+        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+            method: 'GET',
+            headers: { 'Authorization': `${headers.authorization}` }
+        }).then(async (response) => {
             if (response.status == 200) {
-                res.set('Id', response.headers.get('Id'));
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
+                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: { 'Id': `${response.headers.get('Id')}` }
+                }).then(response2 => {
+                    response2.json().then(data => {
+                        res.set('Id', `${response.headers.get('Id')}`);
+                        const status = response2.status;
+                        return res.status(status).json(data);
+                    });
+                });
             }
             else {
                 return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
@@ -190,120 +321,137 @@ __decorate([
     (0, common_1.Post)('/create/'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Headers)()),
+    __param(3, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], GroupsController.prototype, "createGroup", null);
 __decorate([
-    (0, common_1.Post)('/update/:sender'),
+    (0, common_1.Post)('/update/'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Headers)()),
+    __param(3, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], GroupsController.prototype, "sender", null);
 __decorate([
     (0, common_1.Get)('/add/:acess/:groupID/:userID/'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Headers)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], GroupsController.prototype, "addUser", null);
 __decorate([
     (0, common_1.Get)('/us/:userid'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Headers)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], GroupsController.prototype, "GetByUserId", null);
 __decorate([
-    (0, common_1.Get)('/request/:groupid/:userid/'),
+    (0, common_1.Get)('/req/:groupid/'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Headers)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], GroupsController.prototype, "request", null);
 __decorate([
-    (0, common_1.Get)('/invge/:groupid/:sender/'),
+    (0, common_1.Get)('/invgr/:groupid/'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Headers)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], GroupsController.prototype, "listRequest", null);
 __decorate([
-    (0, common_1.Get)('/invus/:userid'),
+    (0, common_1.Get)('/invus/'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Headers)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], GroupsController.prototype, "usersInvites", null);
 __decorate([
     (0, common_1.Get)('/not/:groupid/:userid'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Headers)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], GroupsController.prototype, "deleteRequest", null);
 __decorate([
-    (0, common_1.Get)('/right/:groupid/:userid/:sender'),
+    (0, common_1.Get)('/right/:groupid/:userid/'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Headers)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], GroupsController.prototype, "getRight", null);
 __decorate([
-    (0, common_1.Get)('/delete/:groupid/:userid/:sender'),
+    (0, common_1.Get)('/delete/:groupid/:userid/'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Headers)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], GroupsController.prototype, "deleteUser", null);
 __decorate([
-    (0, common_1.Get)('/exterminatus/:groupid/:sender'),
+    (0, common_1.Get)('/exterminatus/:groupid/'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Headers)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], GroupsController.prototype, "removeGroup", null);
 __decorate([
     (0, common_1.Get)('/gr/:groupid'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Headers)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], GroupsController.prototype, "GetDataGroup", null);
 __decorate([
     (0, common_1.Get)('/ingroup/:groupid'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Headers)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], GroupsController.prototype, "UsersOfGroup", null);
 __decorate([
     (0, common_1.Get)('/allgroups/'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Headers)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], GroupsController.prototype, "allGroups", null);
 __decorate([
     (0, common_1.Get)('/us/:userID'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Headers)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], GroupsController.prototype, "usersGroup", null);
 GroupsController = __decorate([
