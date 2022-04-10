@@ -2,7 +2,7 @@ import { Column, CreatedAt, DataType, Model, Table } from "sequelize-typescript"
 
 interface NewsCreationAtts {
     user_id: number;
-    group_id: number;
+    public_id: number;
     title: string;
     content: string;
     dt_create: Date;
@@ -18,7 +18,7 @@ export class News extends Model<News, NewsCreationAtts> {
     user_id: number;
 
     @Column({type: DataType.INTEGER})
-    group_id: number;
+    public_id: number;
 
     @Column({type: DataType.STRING, allowNull: true})
     title: string;

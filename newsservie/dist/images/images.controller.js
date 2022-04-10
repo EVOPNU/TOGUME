@@ -14,23 +14,27 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ImagesController = void 0;
 const common_1 = require("@nestjs/common");
-const create_image_dto_1 = require("./dto/create-image.dto");
 const platform_express_1 = require("@nestjs/platform-express");
 const images_service_1 = require("./images.service");
 let ImagesController = class ImagesController {
     constructor(imageService) {
         this.imageService = imageService;
     }
-    createImage(dto, image) {
-        return this.imageService.create(dto, image);
+    createImage(image, news_id, headers, body) {
+        console.log(headers);
+        console.log(body);
+        return this.imageService.create(news_id, body.image);
     }
     findAllByNewsId(id) {
         return this.imageService.findAllByNewsId(id);
     }
-    findOneByImageId(id) {
-        return this.imageService.findOneByImageId(id);
+    async findOneByImageId(id) {
+        return await this.imageService.findOneByImageId(id);
     }
-    findAll() {
+    async findAll() {
+        const y = await this.imageService.findAll();
+        console.log(y);
+        return y;
         return this.imageService.findAll();
     }
     deleteImage(id) {
@@ -38,12 +42,14 @@ let ImagesController = class ImagesController {
     }
 };
 __decorate([
-    (0, common_1.Post)(),
+    (0, common_1.Post)(':news_id'),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('image')),
-    __param(0, (0, common_1.Body)()),
-    __param(1, (0, common_1.UploadedFile)()),
+    __param(0, (0, common_1.UploadedFile)()),
+    __param(1, (0, common_1.Param)('news_id')),
+    __param(2, (0, common_1.Headers)()),
+    __param(3, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_image_dto_1.CreateImageDto, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object, Object]),
     __metadata("design:returntype", void 0)
 ], ImagesController.prototype, "createImage", null);
 __decorate([
@@ -58,13 +64,13 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], ImagesController.prototype, "findOneByImageId", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], ImagesController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Delete)(':id'),

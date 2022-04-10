@@ -30,7 +30,7 @@ __decorate([
     __metadata("design:type", Date)
 ], Image.prototype, "dt_create", void 0);
 Image = __decorate([
-    (0, sequelize_typescript_1.Table)({ tableName: 'image', updatedAt: false, createdAt: false })
+    (0, sequelize_typescript_1.Table)({ tableName: 'images', updatedAt: false, createdAt: false })
 ], Image);
 exports.Image = Image;
 //# sourceMappingURL=images.model.js.map

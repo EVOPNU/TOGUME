@@ -11,7 +11,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
   imports: [
     SequelizeModule.forRoot({
       dialect: 'mysql',
-      host: 'localhost',
+      host: 'db',
       port: 3306,
       username: 'root',
       password: 'root',

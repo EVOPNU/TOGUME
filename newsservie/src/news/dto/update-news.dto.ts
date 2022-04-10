@@ -1,5 +1,5 @@
 export class UpdateNewsDto {
-    readonly GroupID: number;
+    readonly public_id: number;
     readonly title: string;
     readonly content: string;
 }

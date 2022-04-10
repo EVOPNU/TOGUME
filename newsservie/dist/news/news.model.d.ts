@@ -1,7 +1,7 @@
 import { Model } from "sequelize-typescript";
 interface NewsCreationAtts {
     user_id: number;
-    group_id: number;
+    public_id: number;
     title: string;
     content: string;
     dt_create: Date;
@@ -9,7 +9,7 @@ interface NewsCreationAtts {
 export declare class News extends Model<News, NewsCreationAtts> {
     id: number;
     user_id: number;
-    group_id: number;
+    public_id: number;
     title: string;
     content: string;
     dt_create: Date;

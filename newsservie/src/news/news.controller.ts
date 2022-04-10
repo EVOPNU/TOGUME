@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Post, Put, Body, Param, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, Delete, Get, Post, Put, Body, Param, UseInterceptors, UploadedFile, Headers } from '@nestjs/common';
 import { CreateNewsDto } from './dto/create-news.dto';
 import { UpdateNewsDto } from './dto/update-news.dto';
 import { NewsService } from './news.service';

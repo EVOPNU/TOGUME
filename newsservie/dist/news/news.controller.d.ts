@@ -6,8 +6,8 @@ export declare class NewsController {
     private newsService;
     constructor(newsService: NewsService);
     createNews(dto: CreateNewsDto): Promise<import("./news.model").News>;
-    findById(id: number): Promise<import("./news.model").News>;
-    findAll(): Promise<import("./news.model").News[]>;
+    findById(id: number): Promise<import("./news.model").News | import("@nestjs/common").HttpException>;
+    findAll(): Promise<import("@nestjs/common").HttpException | import("./news.model").News[]>;
     deleteNews(dto: DeleteNewsDto): Promise<import("@nestjs/common").HttpStatus>;
     updateNews(dto: UpdateNewsDto, id: number): Promise<import("./news.model").News>;
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, UploadedFile, UseInterceptors } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, UploadedFile, UseInterceptors, Headers } from "@nestjs/common";
 import { CreateImageDto } from "./dto/create-image.dto";
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ImagesService } from "./images.service";
@@ -8,10 +8,10 @@ export class ImagesController {
 
     constructor(private imageService: ImagesService) {}
 
-    @Post()
+    @Post(':news_id')
     @UseInterceptors(FileInterceptor('image'))
-    createImage(@Body() dto: CreateImageDto, @UploadedFile() image) {
-        return this.imageService.create(dto, image);
+    createImage(@UploadedFile() image, @Param('news_id') news_id, @Headers() headers, @Body() body) {
+        return this.imageService.create(news_id, body.image);
     }
 
     @Get('/byNewsId/:id')
@@ -20,12 +20,12 @@ export class ImagesController {
     }
 
     @Get('/byImageId/:id')
-    findOneByImageId(@Param('id') id: number) {
-        return this.imageService.findOneByImageId(id);
+    async findOneByImageId(@Param('id') id: number) {
+        return await this.imageService.findOneByImageId(id);
     }
 
     @Get()
-    findAll() {
+    async findAll() {
         return this.imageService.findAll();
     }
 

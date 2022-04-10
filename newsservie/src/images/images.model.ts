@@ -6,7 +6,7 @@ interface CreateImageAtts {
     dt_create: Date;
 }
 
-@Table({tableName: 'image', updatedAt: false, createdAt: false})
+@Table({tableName: 'images', updatedAt: false, createdAt: false})
 export class Image extends Model<Image, CreateImageAtts> {
 
     @Column({type: DataType.INTEGER, autoIncrement: true, unique: true, primaryKey: true})

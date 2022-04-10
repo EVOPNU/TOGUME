@@ -30,27 +30,47 @@ let ImagesService = class ImagesService {
             if (!fs.existsSync(imagePath)) {
                 fs.mkdirSync(imagePath, { recursive: true });
             }
-            fs.writeFileSync(path.join(imagePath, imageName), image.buffer);
+            fs.writeFileSync(path.join(imagePath, imageName), image);
             return imageName;
         }
         catch (e) {
+            console.log(e);
             throw new common_1.HttpException('Произошла ошибка при записи файла', common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    async create(dto, image) {
+    async create(news_id, image) {
+        let dto;
         const imageName = await this.createImage(image);
         const dateNow = new Date;
-        const _image = await this.imageRepository.create(Object.assign(Object.assign({}, dto), { image: imageName, dt_create: dateNow }));
+        const _image = await this.imageRepository.create(Object.assign(Object.assign({}, dto), { news_id: news_id, image: imageName, dt_create: dateNow }));
         return _image;
     }
     async findAllByNewsId(id) {
-        return this.imageRepository.findAll({ where: { news_id: id } });
+        const image = await this.imageRepository.findAll({ where: { news_id: id } });
+        if (image === null) {
+            return new common_1.HttpException('Image is not be finded', common_1.HttpStatus.NOT_FOUND);
+        }
+        else {
+            return image;
+        }
     }
     async findOneByImageId(id) {
-        return this.imageRepository.findOne({ where: { id: id } });
+        const image = await this.imageRepository.findOne({ where: { id: id } });
+        if (image === null) {
+            return new common_1.HttpException('Image is not be finded', common_1.HttpStatus.NOT_FOUND);
+        }
+        else {
+            return image;
+        }
     }
     async findAll() {
-        return this.imageRepository.findAll();
+        const images = await this.imageRepository.findAll();
+        if (images === null) {
+            return new common_1.HttpException('Images is not be finded', common_1.HttpStatus.NOT_FOUND);
+        }
+        else {
+            return images;
+        }
     }
     async deleteImage(id) {
         return this.imageRepository.destroy({ where: { id: id } });

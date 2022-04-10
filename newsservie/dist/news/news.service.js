@@ -25,17 +25,28 @@ let NewsService = class NewsService {
     }
     async createNews(dto) {
         const dateNow = new Date;
-        console.log(dateNow);
         return this.newsRepository.create(Object.assign(Object.assign({}, dto), { dt_create: dateNow }));
     }
     async findById(id) {
-        return this.newsRepository.findOne({ where: { id: id } });
+        const news = await this.newsRepository.findOne({ where: { id: id } });
+        if (news === null) {
+            return new common_1.HttpException('News is not be finded', common_1.HttpStatus.NOT_FOUND);
+        }
+        else {
+            return news;
+        }
     }
     async findAll() {
-        return this.newsRepository.findAll();
+        const news = await this.newsRepository.findAll();
+        if (news === null) {
+            return new common_1.HttpException('News is not be finded', common_1.HttpStatus.NOT_FOUND);
+        }
+        else {
+            return news;
+        }
     }
     async deleteNews(dto) {
-        if (dto.group_id && dto.user_delete_id && dto.id) {
+        if (dto.public_id && dto.user_delete_id && dto.id) {
             const userCreate = await this.newsRepository.findOne({ where: { id: dto.id } });
             if (dto.user_delete_id === userCreate.user_id) {
                 await this.newsRepository.destroy({ where: { id: dto.id } });

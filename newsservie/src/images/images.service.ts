@@ -19,30 +19,50 @@ export class ImagesService {
             if (!fs.existsSync(imagePath)) {
                 fs.mkdirSync(imagePath, {recursive: true})
             }
-            fs.writeFileSync(path.join(imagePath, imageName), image.buffer)
+            fs.writeFileSync(path.join(imagePath, imageName), image)
             return imageName;
         } catch (e) {
+            console.log(e);
             throw new HttpException('Произошла ошибка при записи файла', HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }
 
-    async create(dto: CreateImageDto, image: any) {
+    async create(news_id: number, image: any) {
+        let dto: CreateImageDto;
         const imageName = await this.createImage(image);
         const dateNow = new Date;
-        const _image = await this.imageRepository.create({...dto, image: imageName, dt_create: dateNow});
+        const _image = await this.imageRepository.create({... dto,news_id: news_id, image: imageName, dt_create: dateNow});
         return _image;
     }
 
     async findAllByNewsId(id: number) {
-        return this.imageRepository.findAll({where:{news_id: id}});
+        const image = await this.imageRepository.findAll({where:{news_id: id}});
+        if(image === null) {
+            return new HttpException('Image is not be finded', HttpStatus.NOT_FOUND)
+        }
+        else {
+            return image;
+        }
     }
 
     async findOneByImageId(id: number) {
-        return this.imageRepository.findOne({where:{id: id}})
+        const image = await this.imageRepository.findOne({where:{id: id}});
+        if(image === null) {
+            return new HttpException('Image is not be finded', HttpStatus.NOT_FOUND)
+        }
+        else {
+            return image;
+        }
     }
 
     async findAll() {
-        return this.imageRepository.findAll();
+        const images = await this.imageRepository.findAll();
+        if(images === null) {
+            return new HttpException('Images is not be finded', HttpStatus.NOT_FOUND)
+        }
+        else {
+            return images;
+        }
     }
 
     async deleteImage(id: number) {
