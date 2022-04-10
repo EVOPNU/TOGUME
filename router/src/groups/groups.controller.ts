@@ -8,7 +8,7 @@ export class GroupsController {
         return  res.redirect(307, `http://localhost:5062${req.originalUrl}`);
     }
 
-    @Post('/update/:sender')
+    @Post('/update/')
     async sender(@Req() req, @Res() res) {
         return  res.redirect(307, `http://localhost:5062${req.originalUrl}`); 
     }
@@ -28,12 +28,12 @@ export class GroupsController {
         return  res.redirect(307, `http://localhost:5062${req.originalUrl}`);
     }
 
-    @Get('/invge/:groupid/:sender/')
+    @Get('/invge/:groupid/')
     async listRequest(@Req() req, @Res() res) {
         return  res.redirect(307, `http://localhost:5062${req.originalUrl}`);
     }
 
-    @Get('/invus/:userid')
+    @Get('/invus/')
     async usersInvites(@Req() req, @Res() res) {
         return  res.redirect(307, `http://localhost:5062${req.originalUrl}`);
     }
@@ -43,17 +43,17 @@ export class GroupsController {
         return  res.redirect(307, `http://localhost:5062${req.originalUrl}`);
     }
 
-    @Get('/right/:groupid/:userid/:sender')
+    @Get('/right/:groupid/:userid/')
     async getRight(@Req() req, @Res() res) {
         return  res.redirect(307, `http://localhost:5062${req.originalUrl}`);
     }
 
-    @Get('/delete/:groupid/:userid/:sender')
+    @Get('/delete/:groupid/:userid/')
     async deleteUser(@Req() req, @Res() res) {
         return  res.redirect(307, `http://localhost:5062${req.originalUrl}`);
     }
 
-    @Get('/exterminatus/:groupid/:sender')
+    @Get('/exterminatus/:groupid/')
     async removeGroup(@Req() req, @Res() res) {
         return  res.redirect(307, `http://localhost:5062${req.originalUrl}`);
     }

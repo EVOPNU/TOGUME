@@ -1,4 +1,4 @@
-import { Controller, Get, Put, Delete, Post, Req, Res, HttpStatus } from "@nestjs/common";
+import { Controller, Get, Put, Delete, Post, Req, Res, HttpStatus, Headers } from "@nestjs/common";
 import fetch from "node-fetch";
 
 @Controller('/api/v1/news/')
@@ -20,7 +20,8 @@ export class NewsController {
     }
 
     @Post('')
-    async PostRedirect(@Req() req, @Res() res) {
+    async PostRedirect(@Req() req, @Res() res, @Headers() headers) {
+        console.log(headers);
         return  res.redirect(307, `http://localhost:3000${req.originalUrl}`);
     }
 

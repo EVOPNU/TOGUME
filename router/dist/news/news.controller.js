@@ -24,7 +24,8 @@ let NewsController = class NewsController {
     async DeleteRedirect(req, res) {
         return res.redirect(307, `http://localhost:3000${req.originalUrl}`);
     }
-    async PostRedirect(req, res) {
+    async PostRedirect(req, res, headers) {
+        console.log(headers);
         return res.redirect(307, `http://localhost:3000${req.originalUrl}`);
     }
     async PutRedirect(req, res) {
@@ -59,8 +60,9 @@ __decorate([
     (0, common_1.Post)(''),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Headers)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], NewsController.prototype, "PostRedirect", null);
 __decorate([

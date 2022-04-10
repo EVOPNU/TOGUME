@@ -14,6 +14,9 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ImagesController = void 0;
 const common_1 = require("@nestjs/common");
+const platform_express_1 = require("@nestjs/platform-express");
+const node_fetch_1 = require("node-fetch");
+const FormData = require("form-data");
 let ImagesController = class ImagesController {
     async getRedirect(req, res) {
         return res.redirect(307, `http://localhost:3000${req.originalUrl}`);
@@ -27,8 +30,19 @@ let ImagesController = class ImagesController {
     async DeleteRedirect(req, res) {
         return res.redirect(307, `http://localhost:3000${req.originalUrl}`);
     }
-    async PostRedirect(req, res) {
-        return res.redirect(307, `http://localhost:3000${req.originalUrl}`);
+    async PostRedirect(req, res, body, headers, image) {
+        console.log('----------------------------');
+        const imageData = JSON.parse(body.image).buffer;
+        console.log(body.image);
+        console.log('----------------------------');
+        let formData = new FormData();
+        formData.append('image', JSON.stringify(body));
+        (0, node_fetch_1.default)(`http://localhost:3000${req.originalUrl}`, {
+            method: 'POST',
+            body: formData
+        }).then(response2 => {
+            return res.status(response2.status).json(response2.json());
+        });
     }
 };
 __decorate([
@@ -64,11 +78,15 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ImagesController.prototype, "DeleteRedirect", null);
 __decorate([
-    (0, common_1.Post)(''),
+    (0, common_1.Post)(':news_id'),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('image')),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Body)()),
+    __param(3, (0, common_1.Headers)()),
+    __param(4, (0, common_1.UploadedFile)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], ImagesController.prototype, "PostRedirect", null);
 ImagesController = __decorate([

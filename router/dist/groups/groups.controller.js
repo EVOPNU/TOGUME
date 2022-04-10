@@ -70,7 +70,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], GroupsController.prototype, "createGroup", null);
 __decorate([
-    (0, common_1.Post)('/update/:sender'),
+    (0, common_1.Post)('/update/'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
@@ -102,7 +102,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], GroupsController.prototype, "request", null);
 __decorate([
-    (0, common_1.Get)('/invge/:groupid/:sender/'),
+    (0, common_1.Get)('/invge/:groupid/'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
@@ -110,7 +110,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], GroupsController.prototype, "listRequest", null);
 __decorate([
-    (0, common_1.Get)('/invus/:userid'),
+    (0, common_1.Get)('/invus/'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
@@ -126,7 +126,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], GroupsController.prototype, "deleteRequest", null);
 __decorate([
-    (0, common_1.Get)('/right/:groupid/:userid/:sender'),
+    (0, common_1.Get)('/right/:groupid/:userid/'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
@@ -134,7 +134,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], GroupsController.prototype, "getRight", null);
 __decorate([
-    (0, common_1.Get)('/delete/:groupid/:userid/:sender'),
+    (0, common_1.Get)('/delete/:groupid/:userid/'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
@@ -142,7 +142,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], GroupsController.prototype, "deleteUser", null);
 __decorate([
-    (0, common_1.Get)('/exterminatus/:groupid/:sender'),
+    (0, common_1.Get)('/exterminatus/:groupid/'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),

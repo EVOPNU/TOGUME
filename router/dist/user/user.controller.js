@@ -16,37 +16,37 @@ exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
 let UserController = class UserController {
     async changePassword(req, res) {
-        return res.redirect(307, `http://localhost:5265${req.originalUrl}`);
+        return res.redirect(307, `http://localhost:5262${req.originalUrl}`);
     }
     async getUserById(req, res) {
-        return res.redirect(307, `http://localhost:5265${req.originalUrl}`);
+        return res.redirect(307, `http://localhost:5262${req.originalUrl}`);
     }
     async updateFirstName(req, res) {
-        return res.redirect(307, `http://localhost:5265${req.originalUrl}`);
+        return res.redirect(307, `http://localhost:5262${req.originalUrl}`);
     }
     async updateLastName(req, res) {
-        return res.redirect(307, `http://localhost:5265${req.originalUrl}`);
+        return res.redirect(307, `http://localhost:5262${req.originalUrl}`);
     }
     async updateThirdName(req, res) {
-        return res.redirect(307, `http://localhost:5265${req.originalUrl}`);
+        return res.redirect(307, `http://localhost:5262${req.originalUrl}`);
     }
     async updateBirthday(req, res) {
-        return res.redirect(307, `http://localhost:5265${req.originalUrl}`);
+        return res.redirect(307, `http://localhost:5262${req.originalUrl}`);
     }
     async updateGroupUniversity(req, res) {
-        return res.redirect(307, `http://localhost:5265${req.originalUrl}`);
+        return res.redirect(307, `http://localhost:5262${req.originalUrl}`);
     }
     async updateteFakulty(req, res) {
-        return res.redirect(307, `http://localhost:5265${req.originalUrl}`);
+        return res.redirect(307, `http://localhost:5262${req.originalUrl}`);
     }
     async updateNickname(req, res) {
-        return res.redirect(307, `http://localhost:5265${req.originalUrl}`);
+        return res.redirect(307, `http://localhost:5262${req.originalUrl}`);
     }
     async updateStatusInProfile(req, res) {
-        return res.redirect(307, `http://localhost:5265${req.originalUrl}`);
+        return res.redirect(307, `http://localhost:5262${req.originalUrl}`);
     }
     async updateMainPhoto(req, res) {
-        return res.redirect(307, `http://localhost:5265${req.originalUrl}`);
+        return res.redirect(307, `http://localhost:5262${req.originalUrl}`);
     }
 };
 __decorate([
@@ -58,7 +58,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "changePassword", null);
 __decorate([
-    (0, common_1.Get)(':id'),
+    (0, common_1.Get)(''),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
