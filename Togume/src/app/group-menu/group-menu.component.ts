@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../services/login/http.service';
 import { GroupService } from '../services/group/group.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-group-menu',
@@ -13,7 +14,9 @@ export class GroupMenuComponent implements OnInit {
   allGroup:any
 
   constructor(public groupService:GroupService,
-    public httpService:HttpService) { }
+    public httpService:HttpService,
+    public rout:ActivatedRoute, 
+    public router:Router) { }
 
   ngOnInit(): void {
     let id = NaN;
@@ -41,6 +44,11 @@ export class GroupMenuComponent implements OnInit {
     } else {
       alert('ERROR // id is NaN')
     }
+  }
+
+  routingToGroupPage(id:number){
+    this.router.navigateByUrl('/group/'+id)
+    //прописать в appModule роутинг для групп
   }
 
 }
