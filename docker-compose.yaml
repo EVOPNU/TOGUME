@@ -1,6 +1,14 @@
 version: '3'
 services:
 
+  db-controller:
+    image: apatrios/db-control-module:latest
+    ports:
+      - 8189:8189
+    depends_on:
+      - db
+    command: bash -c "/apps/wait-for-service.sh db 3306 && /apps/entrypoint.sh"
+
   endsercurity:
     image: enderwar/togumesecurity:latest
     environment:
@@ -32,13 +40,20 @@ services:
     image: bleedcloud/togurouter:latest
     ports:
       - 3001:3001
+  newsservice:
+    image: bleedcloud/newsservice:latest
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+
   messages:
-    image: suraifokkusu/message-service:v.1.0
+    image: suraifokkusu/message-service:v.1.2
     ports:
       - 8080:8080
-#    depends_on:
-#      - db
-    command: bash -c "/apps/entrypoint.sh"
+    depends_on:
+      - db
+    command: bash -c "/apps/wait-for-service.sh db 3306 && /apps/entrypoint.sh"
 
   db:
   #    image: postgres
@@ -52,9 +67,11 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: "root"
     ports:
-       - 3306:3306
+       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
+
+
   apatrios-webfrontend:
     image: alexawler/frontendtogume:latest
     ports:
