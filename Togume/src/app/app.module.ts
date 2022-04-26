@@ -23,7 +23,7 @@ export const appRoutes:Routes=[
   {path:'', canActivate:[AuthGuard] ,component:FeedComponent},
   {path:'feed', canActivate:[AuthGuard] ,component:FeedComponent},
   {path:'groups', canActivate:[AuthGuard] ,component:GroupMenuComponent},
-  {path:'group', canActivate:[AuthGuard] ,component:GroupCreateComponent},
+  {path:'groups/:id', canActivate:[AuthGuard] ,component:GroupCreateComponent},
   {path:'profile/:id', canActivate:[AuthGuard] ,component:ProfileComponent},
   {path:'settings', canActivate:[AuthGuard] ,component:ConfigurationComponent},
   {path:'logIn', component:LoginComponent},

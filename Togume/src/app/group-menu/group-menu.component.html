@@ -1,3 +1,23 @@
 <div class="container">
     <p>group-menu works!</p>
+    <div class="groupInner" *ngFor="let group from allGroup">
+        <div (click)="routingToGroupPage(group.id)">
+            <div class="imageIcon"></div>
+            <div class="textInfoInner">
+                <div class="label">{{group.name}}</div>
+                <div class="countOfMembers">{{group.amount}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="groupInner">
+        <div (click)="routingToGroupPage(1)">
+            <div class="imageIcon">
+                <img src="" alt="">
+            </div>
+            <div class="textInfoInner">
+                <div class="label">PNU EDU</div>
+                <div class="countOfMembers">777777</div>
+            </div>
+        </div>
+    </div>
 </div>
