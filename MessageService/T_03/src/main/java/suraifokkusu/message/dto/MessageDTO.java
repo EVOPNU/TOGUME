@@ -25,12 +25,12 @@ public class MessageDTO {
     @NotNull(groups = {New.class,Update.class})
     @JsonProperty("chat_id")
     @JsonView({Exist.class, AdminDetail.class, Detail.class})
-    private Integer chat_id;
+    private Integer chat_id;//TODO при отправке месседжа мы не получим в теле запроса id чата, сделать через валидацию данное поле Null. Оно будет заполнено в дальнейшем (см. ChatController)
 
     @NotNull(groups = {New.class,Update.class})
     @JsonProperty("sender_id")
     @JsonView({Exist.class, AdminDetail.class, Detail.class})
-    private Integer sender_id;
+    private Integer sender_id;//TODO при отправке месседжа мы не получим в теле запроса id сендера, сделать через валидацию данное поле Null. Оно будет заполнено в дальнейшем (см. ChatController)
 
     @NotNull(groups = {New.class,Update.class})
     @JsonProperty("message")

@@ -55,6 +55,13 @@ public class MessageService {
      messageRepository.deleteById(id);
     }
 
+    public List<MessageDTO> getMessagesByChatId(Integer id) {
+        List<MessageEntity> messages = messageRepository.findAllByChatId(id);
+        return messages.stream()
+                .map(MessageDTO::new)
+                .collect(Collectors.toList());
+    }
+
 //    private MessageEntity dtoToEntity(MessageDTO dto){
 //        log.info(dto.toString());
 //
