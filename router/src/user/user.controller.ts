@@ -8,52 +8,52 @@ export class UserController {
 
     @Put('/change/password/')
     async changePassword(@Req() req, @Res() res) {
-        return  res.redirect(307, `http://localhost:5262${req.originalUrl}`);
+        return  res.redirect(307, `http://users:5262${req.originalUrl}`);
     }
 
     @Get('')
     async getUserById(@Req() req, @Res() res) {
-        return  res.redirect(307, `http://localhost:5262${req.originalUrl}`);
+        return  res.redirect(307, `http://users:5262${req.originalUrl}`);
     }
 
     @Put('/change/firstname')
     async updateFirstName(@Req() req, @Res() res) {
-        return res.redirect(307, `http://localhost:5262${req.originalUrl}`);
+        return res.redirect(307, `http://users:5262${req.originalUrl}`);
     }
 
     @Put('/change/lastname')
     async updateLastName(@Req() req, @Res() res) {
-        return res.redirect(307, `http://localhost:5262${req.originalUrl}`);
+        return res.redirect(307, `http://users:5262${req.originalUrl}`);
     }
 
     @Put('/change/thirdname')
     async updateThirdName(@Req() req, @Res() res) {
-        return res.redirect(307, `http://localhost:5262${req.originalUrl}`);
+        return res.redirect(307, `http://users:5262${req.originalUrl}`);
     }
 
     @Put('/change/birthday')
     async updateBirthday(@Req() req, @Res() res) {
-        return res.redirect(307, `http://localhost:5262${req.originalUrl}`);
+        return res.redirect(307, `http://users:5262${req.originalUrl}`);
     }
 
     @Put('/change/groupuniversity')
     async updateGroupUniversity(@Req() req, @Res() res) {
-        return res.redirect(307, `http://localhost:5262${req.originalUrl}`);
+        return res.redirect(307, `http://users:5262${req.originalUrl}`);
     }
 
     @Put('/change/changefakulty')
     async updateteFakulty(@Req() req, @Res() res) {
-        return res.redirect(307, `http://localhost:5262${req.originalUrl}`);
+        return res.redirect(307, `http://users:5262${req.originalUrl}`);
     }
 
     @Put('/change/nickname')
     async updateNickname(@Req() req, @Res() res) {
-        return res.redirect(307, `http://localhost:5262${req.originalUrl}`);
+        return res.redirect(307, `http://users:5262${req.originalUrl}`);
     }
 
     @Put('/change/statusinprofile')
     async updateStatusInProfile(@Req() req, @Res() res) {
-        return res.redirect(307, `http://localhost:5262${req.originalUrl}`);
+        return res.redirect(307, `http://users:5262${req.originalUrl}`);
     }
 
     @Put('/change/mainphoto')
@@ -61,7 +61,7 @@ export class UserController {
     async updateMainPhoto(@Req() req, @Res() res, @Body() body) {
         let formData = new FormData();
         formData.append('image', JSON.stringify(body));
-        fetch(`http://localhost:5262${req.originalUrl}`, {
+        fetch(`http://users:5262${req.originalUrl}`, {
             method: 'PUT',
             body: formData
         }).then(response2 => {

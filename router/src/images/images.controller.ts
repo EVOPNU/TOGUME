@@ -8,22 +8,22 @@ export class ImagesController {
     
     @Get('')
     async getRedirect(@Req() req, @Res() res) {
-        return  res.redirect(307, `http://localhost:3000${req.originalUrl}`);
+        return  res.redirect(307, `http://news:3000${req.originalUrl}`);
     }
 
     @Get('/byImageId/:id/')
     async GetByImageId(@Req() req, @Res() res) {
-        return  res.redirect(307, `http://localhost:3000${req.originalUrl}`);
+        return  res.redirect(307, `http://news:3000${req.originalUrl}`);
     }
 
     @Get('/byNewsId/:id/')
     async GetByNewsId(@Req() req, @Res() res) {
-        return  res.redirect(307, `http://localhost:3000${req.originalUrl}`);
+        return  res.redirect(307, `http://news:3000${req.originalUrl}`);
     }
 
     @Delete(':id')
     async DeleteRedirect(@Req() req, @Res() res) {
-        return  res.redirect(307, `http://localhost:3000${req.originalUrl}`);
+        return  res.redirect(307, `http://news:3000${req.originalUrl}`);
     }
 
     @Post(':news_id')
@@ -31,7 +31,7 @@ export class ImagesController {
     async PostRedirect(@Req() req, @Res() res, @Body() body, @Headers() headers, @UploadedFile() image) {
         let formData = new FormData();
         formData.append('image', JSON.stringify(body));
-        fetch(`http://localhost:3000${req.originalUrl}`, {
+        fetch(`http://news:3000${req.originalUrl}`, {
             method: 'POST',
             body: formData
         }).then(response2 => {
