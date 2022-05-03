@@ -50,11 +50,11 @@ export class NewsService {
             }
             else {
                 try{
-                    await fetch('http://localhost:5062/api/v1/Groups/Yura');
+                    await fetch('http://groups:5062/api/v1/Groups/Yura');
                 }catch(err) {
                     throw new HttpException('Произошла ошибка при попытке отправить запрос на сервис проверки роли', HttpStatus.INTERNAL_SERVER_ERROR)
                 }
-                await fetch('http:localhost:5062/api/v1/Groups/Yura', {
+                await fetch('http://groups:5062/api/v1/Groups/Yura', {
                     method: 'POST',
                     headers: {
                         'Content-Type':'application/json'
@@ -79,7 +79,7 @@ export class NewsService {
     }
 
     async updateNews(id: number, dto: UpdateNewsDto) {
-        await this.newsRepository.update(dto, {where: {id: id}});
+        await this.newsRepository.update({...dto}, {where: {id: id}});
         const user = await this.newsRepository.findOne({where: {id: id}});
         return user;
     }
