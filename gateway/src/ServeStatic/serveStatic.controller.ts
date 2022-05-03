@@ -6,7 +6,7 @@ export class ServeStaticController{
 
     @Get(':image')
     async GetRedirect(@Req() req, @Res() res, @Headers() headers) {
-        await fetch('http://localhost:5113/api/v1/authorization', {
+        await fetch('http://security:5113/api/v1/authorization', {
             method: 'GET', 
             headers: {'Authorization':`${headers.authorization}`}
         }).then(async response => {

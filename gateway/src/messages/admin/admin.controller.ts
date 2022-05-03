@@ -6,12 +6,12 @@ export class MessageAdminController {
 
     @Get('')
     async get(@Req() req, @Res() res, @Headers() headers) {
-        await fetch('http://localhost:5113/api/v1/authorization', {
+        await fetch('http://security:5113/api/v1/authorization', {
             method: 'GET', 
             headers: {'Authorization':`${headers.authorization}`}
         }).then(async response => {
             if(response.status == 200) {
-                fetch(`http://localhost:3001${req.originalUrl}`, {
+                fetch(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: {'Id' : `${response.headers.get('Id')}`}
                 }).then(response2 => {
@@ -30,12 +30,12 @@ export class MessageAdminController {
 
     @Get(':id')
     async getById(@Req() req, @Res() res, @Headers() headers) {
-        await fetch('http://localhost:5113/api/v1/authorization', {
+        await fetch('http://security:5113/api/v1/authorization', {
             method: 'GET', 
             headers: {'Authorization':`${headers.authorization}`}
         }).then(async response => {
             if(response.status == 200) {
-                fetch(`http://localhost:3001${req.originalUrl}`, {
+                fetch(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: {'Id' : `${response.headers.get('Id')}`}
                 }).then(response2 => {

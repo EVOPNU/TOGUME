@@ -8,14 +8,12 @@ export class UserController {
 
     @Put('/change/password/')
     async changePassword(@Req() req, @Res() res, @Headers() headers, @Body() body) {
-        console.log('1');
-        await fetch('http://localhost:5113/api/v1/authorization', {
+        await fetch('http://security:5113/api/v1/authorization', {
             method: 'GET', 
             headers: {'Authorization':`${headers.authorization}`}
         }).then(async response => {
-        console.log('2');
             if(response.status == 200) {
-                fetch(`http://localhost:3001${req.originalUrl}`, {
+                fetch(`http://router:3001${req.originalUrl}`, {
                     method: 'PUT',
                     headers: {'Id' : `${response.headers.get('Id')}`, 'Content-Type':'application/json'},
                     body: JSON.stringify(body)
@@ -31,12 +29,12 @@ export class UserController {
 
     @Get('')
     async getUserById(@Req() req, @Res() res, @Headers() headers) {
-        await fetch('http://localhost:5113/api/v1/authorization', {
+        await fetch('http://security:5113/api/v1/authorization', {
             method: 'GET', 
             headers: {'Authorization':`${headers.authorization}`}
         }).then(async response => {
             if(response.status == 200) {
-                fetch(`http://localhost:3001${req.originalUrl}`, {
+                fetch(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: {'Id' : `${response.headers.get('Id')}`},
                 }).then(response2 => {
@@ -55,12 +53,12 @@ export class UserController {
 
     @Put('/change/firstname/')
     async changeFistName(@Res() req, @Res() res, @Headers() headers, @Body() body) {
-        await fetch('http://localhost:5113/api/v1/authorization', {
+        await fetch('http://security:5113/api/v1/authorization', {
             method: 'GET', 
             headers: {'Authorization':`${headers.authorization}`}
         }).then(async response => {
             if(response.status == 200) {
-                fetch(`http://localhost:3001${req.originalUrl}`, {
+                fetch(`http://router:3001${req.originalUrl}`, {
                     method: 'PUT',
                     headers: {'Id' : `${response.headers.get('Id')}`, 'Content-Type':'application/json'},
                     body: JSON.stringify(body)
@@ -76,12 +74,12 @@ export class UserController {
 
     @Put('/change/lastname/')
     async changeLastName(@Res() req, @Res() res, @Headers() headers, @Body() body) {
-        await fetch('http://localhost:5113/api/v1/authorization', {
+        await fetch('http://security:5113/api/v1/authorization', {
             method: 'GET', 
             headers: {'Authorization':`${headers.authorization}`}
         }).then(async response => {
             if(response.status == 200) {
-                fetch(`http://localhost:3001${req.originalUrl}`, {
+                fetch(`http://router:3001${req.originalUrl}`, {
                     method: 'PUT',
                     headers: {'Id' : `${response.headers.get('Id')}`, 'Content-Type':'application/json'},
                     body: JSON.stringify(body)
@@ -97,12 +95,12 @@ export class UserController {
 
     @Put('/change/thirdname/')
     async changeThirdName(@Res() req, @Res() res, @Headers() headers, @Body() body) {
-        await fetch('http://localhost:5113/api/v1/authorization', {
+        await fetch('http://security:5113/api/v1/authorization', {
             method: 'GET', 
             headers: {'Authorization':`${headers.authorization}`}
         }).then(async response => {
             if(response.status == 200) {
-                fetch(`http://localhost:3001${req.originalUrl}`, {
+                fetch(`http://router:3001${req.originalUrl}`, {
                     method: 'PUT',
                     headers: {'Id' : `${response.headers.get('Id')}`, 'Content-Type':'application/json'},
                     body: JSON.stringify(body)
@@ -118,12 +116,12 @@ export class UserController {
 
     @Put('/change/birthday/')
     async changeBirthday(@Res() req, @Res() res, @Headers() headers, @Body() body) {
-        await fetch('http://localhost:5113/api/v1/authorization', {
+        await fetch('http://security:5113/api/v1/authorization', {
             method: 'GET', 
             headers: {'Authorization':`${headers.authorization}`}
         }).then(async response => {
             if(response.status == 200) {
-                fetch(`http://localhost:3001${req.originalUrl}`, {
+                fetch(`http://router:3001${req.originalUrl}`, {
                     method: 'PUT',
                     headers: {'Id' : `${response.headers.get('Id')}`, 'Content-Type':'application/json'},
                     body: JSON.stringify(body)
@@ -139,12 +137,12 @@ export class UserController {
 
     @Put('/change/groupuniversity/')
     async changeGroupUniversity(@Res() req, @Res() res, @Headers() headers, @Body() body) {
-        await fetch('http://localhost:5113/api/v1/authorization', {
+        await fetch('http://security:5113/api/v1/authorization', {
             method: 'GET', 
             headers: {'Authorization':`${headers.authorization}`}
         }).then(async response => {
             if(response.status == 200) {
-                fetch(`http://localhost:3001${req.originalUrl}`, {
+                fetch(`http://router:3001${req.originalUrl}`, {
                     method: 'PUT',
                     headers: {'Id' : `${response.headers.get('Id')}`, 'Content-Type':'application/json'},
                     body: JSON.stringify(body)
@@ -160,12 +158,12 @@ export class UserController {
 
     @Put('/change/changefakulty/')
     async changeFakulty(@Res() req, @Res() res, @Headers() headers, @Body() body) {
-        await fetch('http://localhost:5113/api/v1/authorization', {
+        await fetch('http://security:5113/api/v1/authorization', {
             method: 'GET', 
             headers: {'Authorization':`${headers.authorization}`}
         }).then(async response => {
             if(response.status == 200) {
-                fetch(`http://localhost:3001${req.originalUrl}`, {
+                fetch(`http://router:3001${req.originalUrl}`, {
                     method: 'PUT',
                     headers: {'Id' : `${response.headers.get('Id')}`, 'Content-Type':'application/json'},
                     body: JSON.stringify(body)
@@ -181,12 +179,12 @@ export class UserController {
 
     @Put('/change/nickname/')
     async changeNickname(@Res() req, @Res() res, @Headers() headers, @Body() body) {
-        await fetch('http://localhost:5113/api/v1/authorization', {
+        await fetch('http://security:5113/api/v1/authorization', {
             method: 'GET', 
             headers: {'Authorization':`${headers.authorization}`}
         }).then(async response => {
             if(response.status == 200) {
-                fetch(`http://localhost:3001${req.originalUrl}`, {
+                fetch(`http://router:3001${req.originalUrl}`, {
                     method: 'PUT',
                     headers: {'Id' : `${response.headers.get('Id')}`, 'Content-Type':'application/json'},
                     body: JSON.stringify(body)
@@ -202,12 +200,12 @@ export class UserController {
 
     @Put('/change/statusinprofile/')
     async changeStatusInProfile(@Res() req, @Res() res, @Headers() headers, @Body() body) {
-        await fetch('http://localhost:5113/api/v1/authorization', {
+        await fetch('http://security:5113/api/v1/authorization', {
             method: 'GET', 
             headers: {'Authorization':`${headers.authorization}`}
         }).then(async response => {
             if(response.status == 200) {
-                fetch(`http://localhost:3001${req.originalUrl}`, {
+                fetch(`http://router:3001${req.originalUrl}`, {
                     method: 'PUT',
                     headers: {'Id' : `${response.headers.get('Id')}`, 'Content-Type':'application/json'},
                     body: JSON.stringify(body)
@@ -224,14 +222,14 @@ export class UserController {
     @Put('/change/mainphoto/')
     @UseInterceptors()
     async changeMainPhoto(@Res() req, @Res() res, @Headers() headers, @Body() body, @UploadedFile() image) {
-        await fetch('http://localhost:5113/api/v1/authorization', {
+        await fetch('http://security:5113/api/v1/authorization', {
             method: 'GET', 
             headers: {'Authorization':`${headers.authorization}`}
         }).then(async response => {
             if(response.status == 200) {
                 let formData = new FormData();
                 formData.append('image', JSON.stringify(image))
-                fetch(`http://localhost:3001${req.originalUrl}`, {
+                fetch(`http://router:3001${req.originalUrl}`, {
                     method: 'PUT',
                     headers: {'Id' : `${response.headers.get('Id')}`},
                     body: formData

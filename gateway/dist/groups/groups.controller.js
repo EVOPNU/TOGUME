@@ -34,9 +34,6 @@ let GroupsController = class GroupsController {
                     });
                 });
             }
-            else {
-                return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
-            }
         });
     }
     async sender(req, res, headers, body) {

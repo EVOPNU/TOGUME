@@ -10,12 +10,12 @@ export class ImagesController {
     
     @Get('')
     async getRedirect(@Req() req, @Res() res, @Headers() headers) {
-        await fetch('http://localhost:5113/api/v1/authorization', {
+        await fetch('http://security:5113/api/v1/authorization', {
             method: 'GET', 
             headers: {'Authorization':`${headers.authorization}`}
         }).then(async response => {
             if(response.status == 200) {
-                fetch(`http://localhost:3001${req.originalUrl}`, {
+                fetch(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: {'Id' : `${response.headers.get('Id')}`}
                 }).then(response2 => {
@@ -34,12 +34,12 @@ export class ImagesController {
 
     @Get('/byImageId/:id/')
     async GetByImageId(@Req() req, @Res() res, @Headers() headers) {
-        await fetch('http://localhost:5113/api/v1/authorization', {
+        await fetch('http://security:5113/api/v1/authorization', {
             method: 'GET', 
             headers: {'Authorization':`${headers.authorization}`}
         }).then(async response => {
             if(response.status == 200) {
-                fetch(`http://localhost:3001${req.originalUrl}`, {
+                fetch(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: {'Id' : `${response.headers.get('Id')}`}
                 }).then(response2 => {
@@ -58,12 +58,12 @@ export class ImagesController {
 
     @Get('/byNewsId/:id/')
     async GetByNewsId(@Req() req, @Res() res, @Headers() headers) {
-        await fetch('http://localhost:5113/api/v1/authorization', {
+        await fetch('http://security:5113/api/v1/authorization', {
             method: 'GET', 
             headers: {'Authorization':`${headers.authorization}`}
         }).then(async response => {
             if(response.status == 200) {
-                fetch(`http://localhost:3001${req.originalUrl}`, {
+                fetch(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: {'Id' : `${response.headers.get('Id')}`}
                 }).then(response2 => {
@@ -82,12 +82,12 @@ export class ImagesController {
 
     @Delete(':id')
     async DeleteRedirect(@Req() req, @Res() res, @Headers() headers) {
-        await fetch('http://localhost:5113/api/v1/authorization', {
+        await fetch('http://security:5113/api/v1/authorization', {
             method: 'GET', 
             headers: {'Authorization':`${headers.authorization}`}
         }).then(async response => {
             if(response.status == 200) {
-                fetch(`http://localhost:3001${req.originalUrl}`, {
+                fetch(`http://router:3001${req.originalUrl}`, {
                     method: 'POST',
                     headers: {'Id' : `${response.headers.get('Id')}`}
                 }).then(response2 => {
@@ -103,14 +103,14 @@ export class ImagesController {
     @Post(':news_id')
     @UseInterceptors(FileInterceptor('image'))
     async PostRedirect(@Req() req, @Res() res: Response, @Headers() headers, @UploadedFile() image) {
-        await fetch('http://localhost:5113/api/v1/authorization', {
+        await fetch('http://security:5113/api/v1/authorization', {
             method: 'GET', 
             headers: {'Authorization':`${headers.authorization}`}
         }).then(async response => {
             if(response.status == 200) {
                 let formData = new FormData();
                 formData.append('image', JSON.stringify(image));
-                fetch(`http://localhost:3001${req.originalUrl}`, {
+                fetch(`http://router:3001${req.originalUrl}`, {
                     method: 'POST',
                     headers: {'Id':`${response.headers.get('Id')}`},
                     body: formData

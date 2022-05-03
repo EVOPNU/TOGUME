@@ -14,15 +14,14 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
+const FormData = require("form-data");
 const node_fetch_1 = require("node-fetch");
 let UserController = class UserController {
     async changePassword(req, res, headers, body) {
-        console.log('1');
         await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
-            console.log('2');
             if (response.status == 200) {
                 (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
                     method: 'PUT',
@@ -211,16 +210,18 @@ let UserController = class UserController {
             }
         });
     }
-    async changeMainPhoto(req, res, headers, body) {
+    async changeMainPhoto(req, res, headers, body, image) {
         await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
+                let formData = new FormData();
+                formData.append('image', JSON.stringify(image));
                 (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
                     method: 'PUT',
-                    headers: { 'Id': `${response.headers.get('Id')}`, 'Content-Type': 'application/json' },
-                    body: JSON.stringify(body)
+                    headers: { 'Id': `${response.headers.get('Id')}` },
+                    body: formData
                 }).then(response2 => {
                     return res.status(response2.status).send({});
                 });
@@ -332,12 +333,14 @@ __decorate([
 ], UserController.prototype, "changeStatusInProfile", null);
 __decorate([
     (0, common_1.Put)('/change/mainphoto/'),
+    (0, common_1.UseInterceptors)(),
     __param(0, (0, common_1.Res)()),
     __param(1, (0, common_1.Res)()),
     __param(2, (0, common_1.Headers)()),
     __param(3, (0, common_1.Body)()),
+    __param(4, (0, common_1.UploadedFile)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object, Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "changeMainPhoto", null);
 UserController = __decorate([

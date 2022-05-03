@@ -10,7 +10,7 @@ services:
     command: bash -c "/apps/wait-for-service.sh db 3306 && /apps/entrypoint.sh"
 
 
-  endsercurity:
+  security:
     image: enderwar/togumesecurity:latest
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -19,44 +19,45 @@ services:
       - 5113:5113
 
 
-  # vainrikgroups:
-  #   image: vainrik/groups:latest
-  #   environment:
-  #     - ASPNETCORE_ENVIRONMENT=Development
-  #     - ASPNETCORE_URLS=http://+:5062/
-  #   ports:
-  #     - 5062:5062
+  groups:
+    image: vainrik/groups:latest
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5062/
+    ports:
+      - 5062:5062
 
 
-  # endusers:
-  #   image: enderwar/togumeusers:latest
-  #   environment:
-  #     - ASPNETCORE_ENVIRONMENT=Development
-  #     - ASPNETCORE_URLS=http://+:5262/
-  #   ports:
-  #     - 5262:5262
+  users:
+    image: enderwar/togumeusers:latest
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5262/
+    ports:
+      - 5262:5262
 
 
-  # gateway:
-  #   image: bleedcloud/togugateway:latest
-  #   ports:
-  #     - 4000:4000
+  gateway:
+    image: bleedcloud/togugateway:latest
+    # image: bleedcloud/togugateway:test
+    ports:
+      - 4000:4000
 
 
-  # router:
-  #   image: bleedcloud/togurouter:latest
-  #   ports:
-  #     - 3001:3001
+  router:
+    image: bleedcloud/togurouter:latest
+    ports:
+      - 3001:3001
 
 
-  # newsservice:
-  #   image: bleedcloud/newsservice:latest
-  #   ports:
-  #     - 3000:3000
-  #   depends_on:
-  #     - db
+  news:
+    image: bleedcloud/newsservice:latest
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
 
-  # messages:
+  # message:
   #   image: suraifokkusu/message-service:v.1.1
   #   ports:
   #     - 8080:8080
