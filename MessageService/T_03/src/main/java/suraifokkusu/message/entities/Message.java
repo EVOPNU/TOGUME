@@ -10,7 +10,7 @@ import java.util.Date;
 @Entity
 @Table(name="message_entity")
 @AllArgsConstructor
-public class MessageEntity {
+public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer message_id;
@@ -33,7 +33,7 @@ public class MessageEntity {
     @Column(name="user_id", nullable = false)
     private Integer sender_id;
 
-    public MessageEntity() {
+    public Message() {
     }
 
     public Integer getMessage_id() {
@@ -88,7 +88,7 @@ public class MessageEntity {
 
     @Override
     public String toString() {
-        return "MessageEntity{" +
+        return "Message{" +
                 "message_id=" + message_id +
                 ", chat_id=" + chat_id +
                 ", dtCreate=" + dtCreate +

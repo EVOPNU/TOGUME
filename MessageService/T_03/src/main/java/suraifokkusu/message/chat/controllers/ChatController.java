@@ -1,12 +1,14 @@
-package suraifokkusu.chat.controllers;
+package suraifokkusu.message.chat.controllers;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import suraifokkusu.chat.entities.Chat;
-import suraifokkusu.chat.services.ChatService;
+import suraifokkusu.message.chat.entities.Chat;
+import suraifokkusu.message.chat.services.ChatService;
 import suraifokkusu.message.dto.MessageDTO;
-import suraifokkusu.message.dto.transfer.New;
+import suraifokkusu.message.dto.transfer.ChatDetail;
 import suraifokkusu.message.services.MessageService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +19,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ChatController {
 
+    @Setter
+    @Autowired
     private ChatService chatService;
 
     private MessageService messageService;
@@ -41,6 +45,7 @@ public class ChatController {
     }
 
     @PostMapping("/{id}")
+   // @JsonView(ChatDetail.class)
     private MessageDTO sendMessage(HttpServletRequest request,
                                    @PathVariable("id") Integer chatId,
                                    @RequestBody

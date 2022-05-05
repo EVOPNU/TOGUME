@@ -1,11 +1,10 @@
 package suraifokkusu.message.services;
 
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import suraifokkusu.message.dto.MessageDTO;
-import suraifokkusu.message.entities.MessageEntity;
+import suraifokkusu.message.entities.Message;
 import suraifokkusu.message.repositories.MessageRepository;
 
 import javax.transaction.Transactional;
@@ -44,7 +43,7 @@ public class MessageService {
     @Transactional
     public Optional<MessageDTO> save(MessageDTO messageDTO)
     {
-        return Optional.of(messageRepository.save(new MessageEntity(messageDTO.getMessage_id(),
+        return Optional.of(messageRepository.save(new Message(messageDTO.getMessage_id(),
                 messageDTO.getChat_id(), messageDTO.getDate_departure(), messageDTO.getDate_of_change(),
                 messageDTO.getMessage(), messageDTO.getSender_id())))
                 .map(MessageDTO::new);
@@ -56,7 +55,7 @@ public class MessageService {
     }
 
     public List<MessageDTO> getMessagesByChatId(Integer id) {
-        List<MessageEntity> messages = messageRepository.findAllByChatId(id);
+        List<Message> messages = messageRepository.findAllByChatId(id);
         return messages.stream()
                 .map(MessageDTO::new)
                 .collect(Collectors.toList());

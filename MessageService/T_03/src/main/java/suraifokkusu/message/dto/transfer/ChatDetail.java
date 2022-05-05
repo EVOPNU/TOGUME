@@ -1,2 +1,4 @@
-package suraifokkusu.message.dto.transfer;public interface ChatDetail {
+package suraifokkusu.message.dto.transfer;
+
+public interface ChatDetail {
 }

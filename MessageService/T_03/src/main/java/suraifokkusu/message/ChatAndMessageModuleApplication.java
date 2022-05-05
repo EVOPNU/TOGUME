@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class T03Application {
+public class ChatAndMessageModuleApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(T03Application.class, args);
+		SpringApplication.run(ChatAndMessageModuleApplication.class, args);
 	}
 
 }

@@ -1,12 +1,12 @@
-package suraifokkusu.chat.services;
+package suraifokkusu.message.chat.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import suraifokkusu.chat.entities.Chat;
-import suraifokkusu.chat.entities.ChatMembers;
-import suraifokkusu.chat.repositories.ChatMembersRepository;
-import suraifokkusu.chat.repositories.ChatRepository;
-import suraifokkusu.chat.utils.Converter;
+import suraifokkusu.message.chat.entities.Chat;
+import suraifokkusu.message.chat.entities.ChatMembers;
+import suraifokkusu.message.chat.repositories.ChatMembersRepository;
+import suraifokkusu.message.chat.repositories.ChatRepository;
+import suraifokkusu.message.chat.utils.Converter;
 
 import java.util.List;
 

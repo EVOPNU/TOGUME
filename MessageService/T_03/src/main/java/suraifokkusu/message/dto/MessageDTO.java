@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import suraifokkusu.message.dto.transfer.*;
-import suraifokkusu.message.entities.MessageEntity;
+import suraifokkusu.message.entities.Message;
 
 
 import javax.validation.constraints.NotNull;
@@ -16,38 +16,39 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 public class MessageDTO {
-    @Null(groups = {New.class})
+    @Null(groups = {New.class, ChatDetail.class})
     @NotNull(groups = {Update.class})
     @JsonProperty("message_id")
-    @JsonView({Exist.class, AdminDetail.class, Detail.class})
+    @JsonView({Exist.class, AdminDetail.class, Detail.class, ChatDetail.class})
     private Integer message_id;
 
-    @NotNull(groups = {New.class,Update.class})
+    @NotNull(groups = {New.class,Update.class, ChatDetail.class})
     @JsonProperty("chat_id")
-    @JsonView({Exist.class, AdminDetail.class, Detail.class})
-    private Integer chat_id;//TODO при отправке месседжа мы не получим в теле запроса id чата, сделать через валидацию данное поле Null. Оно будет заполнено в дальнейшем (см. ChatController)
+    @JsonView({Exist.class, AdminDetail.class, Detail.class, ChatDetail.class})
+    private Integer chat_id;
 
+    @Null(groups = ChatDetail.class)
     @NotNull(groups = {New.class,Update.class})
     @JsonProperty("sender_id")
-    @JsonView({Exist.class, AdminDetail.class, Detail.class})
-    private Integer sender_id;//TODO при отправке месседжа мы не получим в теле запроса id сендера, сделать через валидацию данное поле Null. Оно будет заполнено в дальнейшем (см. ChatController)
+    @JsonView({Exist.class, AdminDetail.class, Detail.class, ChatDetail.class})
+    private Integer sender_id;
 
-    @NotNull(groups = {New.class,Update.class})
+    @NotNull(groups = {New.class,Update.class, ChatDetail.class})
     @JsonProperty("message")
-    @JsonView({Exist.class, AdminDetail.class, Detail.class})
+    @JsonView({Exist.class, AdminDetail.class, Detail.class, ChatDetail.class})
     private String message;
 
     @JsonProperty("date_departure")
-    @JsonView({Exist.class, AdminDetail.class, Detail.class})
-    @Null(groups = {New.class, Update.class})
+    @JsonView({Exist.class, AdminDetail.class, Detail.class, ChatDetail.class})
+    @Null(groups = {New.class, Update.class, ChatDetail.class})
     private Date date_departure;
 
     @JsonProperty("date_of_change")
-    @JsonView({ AdminDetail.class, Detail.class})
-    @Null(groups = {Update.class, New.class})
+    @JsonView({ AdminDetail.class, Detail.class, ChatDetail.class})
+    @Null(groups = {Update.class, New.class, ChatDetail.class})
     private Date date_of_change;
 
-    public MessageDTO(MessageEntity message){
+    public MessageDTO(Message message){
         this.message_id = message.getMessage_id();
         this.chat_id = message.getChat_id();
         this.sender_id = message.getSender_id();

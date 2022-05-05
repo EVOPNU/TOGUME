@@ -1,6 +1,6 @@
-package suraifokkusu.chat.utils;
+package suraifokkusu.message.chat.utils;
 
-import suraifokkusu.chat.entities.ChatMembers;
+import suraifokkusu.message.chat.entities.ChatMembers;
 
 import java.util.ArrayList;
 import java.util.List;

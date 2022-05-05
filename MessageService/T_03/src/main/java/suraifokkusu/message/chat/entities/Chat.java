@@ -1,4 +1,4 @@
-package suraifokkusu.chat.entities;
+package suraifokkusu.message.chat.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,4 +22,7 @@ public class Chat {
 
     @Column(nullable = false, name = "total_messages")
     private Long totalMessages;
+
+    public Chat(int i, String test_lobby, String s, int i1) {
+    }
 }

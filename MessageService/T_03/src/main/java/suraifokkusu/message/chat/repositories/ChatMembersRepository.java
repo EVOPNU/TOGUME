@@ -1,8 +1,7 @@
-package suraifokkusu.chat.repositories;
+package suraifokkusu.message.chat.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import suraifokkusu.chat.entities.ChatMembers;
+import suraifokkusu.message.chat.entities.ChatMembers;
 
 import java.util.List;
 
