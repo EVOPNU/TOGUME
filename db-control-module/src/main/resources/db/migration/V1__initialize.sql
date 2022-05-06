@@ -89,7 +89,7 @@ CREATE TABLE chats(
     path varchar(255) null
 );
 
-CREATE TABLE message_entity (
+CREATE TABLE message (
     message_id int primary key NOT NULL AUTO_INCREMENT,
     chat_id int NOT NULL,
     dt_create timestamp NOT NULL DEFAULT NOW(),
@@ -103,9 +103,9 @@ CREATE TABLE message_entity (
 );
 
 CREATE TABLE chat_members(
+  id int primary key not null AUTO_INCREMENT,
   chat_id int not null ,
   user_id int not null,
-  primary key (chat_id, user_id),
   CONSTRAINT FK_chat_mem_user_id
       FOREIGN KEY (user_id) references accounts (id),
   CONSTRAINT FK_chat_mem_chat_id

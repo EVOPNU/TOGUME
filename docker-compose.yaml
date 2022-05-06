@@ -4,7 +4,7 @@ services:
   db-controller:
     image: apatrios/db-control-module:latest
     ports:
-      - 8189:8189
+      - 8080:8080
     depends_on:
       - db
     command: bash -c "/apps/wait-for-service.sh db 3306 && /apps/entrypoint.sh"
@@ -48,9 +48,9 @@ services:
       - db
 
   messages:
-    image: suraifokkusu/message-service:v.1.2
+    image: suraifokkusu/chat-message-service:v.1.0
     ports:
-      - 8080:8080
+      - 8189:8189
     depends_on:
       - db
     command: bash -c "/apps/wait-for-service.sh db 3306 && /apps/entrypoint.sh"
