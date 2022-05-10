@@ -16,14 +16,18 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/chat")
-@RequiredArgsConstructor
+
 public class ChatController {
 
-    @Setter
-    @Autowired
-    private ChatService chatService;
+    private final ChatService chatService;
 
-    private MessageService messageService;
+    private final MessageService messageService;
+
+    @Autowired
+    public ChatController(ChatService chatService, MessageService messageService) {
+        this.chatService = chatService;
+        this.messageService = messageService;
+    }
 
     @GetMapping
     private List<Chat> getAllChats(HttpServletRequest request){
@@ -36,7 +40,8 @@ public class ChatController {
             @PathVariable(name = "id") Integer id) {
         Integer userId = Integer.valueOf(request.getHeader("Id"));
         List<Chat> chats = chatService.getChats(userId);
-        Chat chat = chats.get(id);
+        //  chats.stream().forEach( ); //TODO ЗАГЛЯНУТЬ ВНУТРЬ ЧАТА И ВЫТАЩИТЬ АЙДИ ЧАТА (с ним и работаем дальше)
+        Chat chat = chats.get(id-1);
         if(chat==null){
             throw new RuntimeException();
         }
@@ -55,3 +60,5 @@ public class ChatController {
         return messageService.save(messageDTO).orElseThrow();
     }
 }
+ //TODO ликвидировать возможность запроса чего угодно, если юзер не состоит в чате (через вброс ошибок) if(throw->new)
+//TODO СДЕЛАТЬ EXCEPTION HANDLER И ДОПИСАТЬ ВСЕ OR.ELSE.THROW

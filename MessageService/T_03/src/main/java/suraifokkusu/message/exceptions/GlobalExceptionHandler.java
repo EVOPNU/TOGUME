@@ -19,4 +19,4 @@ public class GlobalExceptionHandler {
         log.error(e.getMessage(), e);
         return new ResponseEntity<>(new MessageError(HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
     }
-}
+}//TODO ДОПИСАТЬ ДЛЯ ЧАТА + НОВЫЕ ЭКЧПЕПШЕНЫ (401-403)

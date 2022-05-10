@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
-@Table(name ="chat_members")
+@Table(name ="chat_members_new")
 @Data
 @NoArgsConstructor
 public class ChatMembers {

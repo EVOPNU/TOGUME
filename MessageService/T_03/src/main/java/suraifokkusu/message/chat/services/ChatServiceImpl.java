@@ -1,6 +1,8 @@
 package suraifokkusu.message.chat.services;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import suraifokkusu.message.chat.entities.Chat;
 import suraifokkusu.message.chat.entities.ChatMembers;
@@ -11,14 +13,20 @@ import suraifokkusu.message.chat.utils.Converter;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class ChatServiceImpl implements ChatService {
 
-    private ChatRepository chatRepository;
+    private final ChatRepository chatRepository;
 
-    private ChatMembersRepository chatMembersRepository;
+    private final ChatMembersRepository chatMembersRepository;
 
-    private Converter converter;
+    private final Converter converter;
+
+    @Autowired
+    public ChatServiceImpl(ChatRepository chatRepository, ChatMembersRepository chatMembersRepository, Converter converter) {
+        this.chatRepository = chatRepository;
+        this.chatMembersRepository = chatMembersRepository;
+        this.converter = converter;
+    }
 
     @Override
     public List<Chat> getChats(Integer userId) {
