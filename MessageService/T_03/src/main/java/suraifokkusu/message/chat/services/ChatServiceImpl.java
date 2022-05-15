@@ -48,7 +48,7 @@ public class ChatServiceImpl implements ChatService {
     }
 
     @Transactional
-    public Chat save(@RequestBody Chat chat){
+    public Chat save(@RequestBody Chat chat) {
         return chatRepository.save(
                 new Chat(
                         chat.getId(),
@@ -58,4 +58,11 @@ public class ChatServiceImpl implements ChatService {
                 )
         );
     }
+
+    @Transactional
+    public ChatMembers addUserToChat(Integer chatId, Integer userId){
+        ChatMembers chatMembers = new ChatMembers(chatId, userId);
+       return chatMembersRepository.save(chatMembers);
+    }
 }
+

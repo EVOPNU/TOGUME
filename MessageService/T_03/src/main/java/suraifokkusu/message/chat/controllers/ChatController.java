@@ -72,20 +72,20 @@ public class ChatController {
         return messageService.save(messageDTO).orElseThrow();
     }
 
- /*   @PostMapping("/addChat")
+    @PostMapping("/addChat")
     //@ApiOperation(value = "Add chat")
-    public Chat addChat(@RequestBody Chat chat){
+    private Chat addChat(@RequestBody Chat chat){
        return chatService.save(chat);
     }
 
     //@ApiOperation(value = "Add user to chat")
     //@ApiImplicitParam(paramType = "header")
     @PostMapping("/addUser/${id}")
-    public ChatMembers addUser(HttpServletRequest request,
+    private ChatMembers addUser(HttpServletRequest request,
                                 @PathVariable("id") Integer chatId){
         Integer userId = Integer.valueOf(request.getHeader("Id"));
-        return new ChatMembers(chatId, userId);
-    }*/
+        return chatService.addUserToChat(chatId, userId);
+    }
 
 }
 //TODO ликвидировать возможность запроса чего угодно, если юзер не состоит в чате (через вброс ошибок) if(throw->new)

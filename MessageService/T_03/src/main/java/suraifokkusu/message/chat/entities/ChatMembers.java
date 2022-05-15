@@ -23,8 +23,8 @@ public class ChatMembers {
     @Column(nullable = false, name = "user_id")
     private Integer userId;
 
- /*   public ChatMembers(Integer chatId, Integer userId) {
+   public ChatMembers(Integer chatId, Integer userId) {
         this.chatId = chatId;
         this.userId = userId;
-    }*/
+    }
 }
