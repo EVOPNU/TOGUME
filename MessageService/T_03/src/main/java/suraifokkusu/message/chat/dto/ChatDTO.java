@@ -1,4 +1,8 @@
 package suraifokkusu.message.chat.dto;
 
-public class ChatDTO {
+import suraifokkusu.message.chat.entities.Chat;
+import suraifokkusu.message.dto.MessageDTO;
+
+public class ChatDTO extends Chat {
+
 }

@@ -23,6 +23,6 @@ public class Chat {
     @Column(nullable = false, name = "total_messages")
     private Long totalMessages;
 
-    public Chat(int i, String test_lobby, String s, int i1) {
+    public Chat(int i, String test_lobby, String s, Long i1) {
     }
 }

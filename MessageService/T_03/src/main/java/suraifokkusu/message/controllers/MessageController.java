@@ -1,6 +1,8 @@
 package suraifokkusu.message.controllers;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -16,6 +18,7 @@ import java.util.List;
 
     @RestController
     @RequestMapping("/api/v1/message")
+    @Api(value = "Message")
     public class MessageController {
     private final MessageService service;
     @Autowired
@@ -24,6 +27,7 @@ import java.util.List;
     }
 
     @GetMapping()
+    @ApiOperation(value = "Get messages to simple user")
     @JsonView(Exist.class)
     public List<MessageDTO> simpleUsersFindAll() {
         return service.findAll();
@@ -31,6 +35,7 @@ import java.util.List;
 
 
     @GetMapping(value="/admin")
+    @ApiOperation(value = "Get messages to admin")
     @JsonView(AdminDetail.class)
         public List<MessageDTO> AdminFindAll() {
             return service.findAll();
@@ -38,12 +43,14 @@ import java.util.List;
 
 
     @GetMapping(value = "/{id}")
+    @ApiOperation(value = "Get message by id")
     @JsonView(Exist.class)
     public MessageDTO findById(@PathVariable Integer id) {
         return service.findById(id).orElseThrow(MessageNotFoundException::new);
     }
 
     @PostMapping()
+    @ApiOperation(value = "Add message")
     @JsonView(Exist.class)
     public MessageDTO save(@Validated(New.class) @RequestBody MessageDTO dto) {
         if (dto.getMessage_id()!=null){
@@ -53,6 +60,7 @@ import java.util.List;
     }
 
     @PutMapping()
+    @ApiOperation(value = "Edit message by id")
     @JsonView(Exist.class)
     public MessageDTO update(@Validated(Update.class) @RequestBody MessageDTO dto) {
         if (dto.getMessage_id() ==null){
@@ -62,6 +70,7 @@ import java.util.List;
         }
 
     @DeleteMapping("/{id}")
+    @ApiOperation(value = "Delete message by id")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable Integer id) {
         service.deleteById(id);
