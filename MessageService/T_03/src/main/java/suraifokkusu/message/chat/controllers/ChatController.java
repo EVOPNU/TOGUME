@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-//@Api(value = "Chat")
+@Api(value = "Chat")
 @RequestMapping("/chat")
 public class ChatController {
 
@@ -34,17 +34,17 @@ public class ChatController {
     }
 
     @GetMapping
-    //@ApiOperation(value = "Get all chats")
-    private List<Chat> getAllChats(HttpServletRequest request){
+    @ApiOperation(value = "Get all chats")
+    public List<Chat> getAllChats(HttpServletRequest request){
         Integer userId = Integer.valueOf(request.getHeader("Id"));
         return chatService.getChats(userId);
     }
 
 
     @GetMapping("/{id}")
-   // @ApiOperation(value = "Get messages by chat_ID")
-  //  @ApiImplicitParam(paramType = "header")
-    private List<MessageDTO> getMessagesByChatId(HttpServletRequest request,
+    @ApiOperation(value = "Get messages by chat_ID")
+    @ApiImplicitParam(paramType = "header")
+    public List<MessageDTO> getMessagesByChatId(HttpServletRequest request,
             @PathVariable(name = "id") Integer id) {
         Integer userId = Integer.valueOf(request.getHeader("Id"));
         List<Chat> chats = chatService.getChats(userId);
@@ -58,10 +58,10 @@ public class ChatController {
     }
 
     @PostMapping("/{id}")
-    //@ApiOperation(value = "Send message")
-    //@ApiImplicitParam(paramType = "header")
+    @ApiOperation(value = "Send message")
+    @ApiImplicitParam(paramType = "header")
     @JsonView(ChatDetail.class)
-    private MessageDTO sendMessage(HttpServletRequest request, //todo менять в чате тоталмэсседжес* +
+    public MessageDTO sendMessage(HttpServletRequest request, //todo менять в чате тоталмэсседжес* +
                                    @PathVariable("id") Integer chatId,
                                    @RequestBody
                                            MessageDTO messageDTO){
@@ -73,16 +73,16 @@ public class ChatController {
     }
 
     @PostMapping("/addChat")
-    //@ApiOperation(value = "Add chat")
-    private Chat addChat(@RequestBody Chat chat){
+    @ApiOperation(value = "Add chat")
+    public Chat addChat(@RequestBody Chat chat){
        return chatService.save(chat);
     }
 
-    //@ApiOperation(value = "Add user to chat")
-    //@ApiImplicitParam(paramType = "header")
-    @PostMapping("/addUser/${id}")
-    private ChatMembers addUser(HttpServletRequest request,
-                                @PathVariable("id") Integer chatId){
+    @ApiOperation(value = "Add user to chat")
+    @ApiImplicitParam(paramType = "header")
+    @PostMapping("/addUser/{chatId}")
+    public ChatMembers addUser(HttpServletRequest request,
+                                @PathVariable("chatId") Integer chatId){
         Integer userId = Integer.valueOf(request.getHeader("Id"));
         return chatService.addUserToChat(chatId, userId);
     }

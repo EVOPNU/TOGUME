@@ -2,10 +2,7 @@ package suraifokkusu.message.chat.entities;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name ="chat_members_new")
@@ -14,7 +11,7 @@ import javax.persistence.Table;
 public class ChatMembers {
 
     @Id
-    @Column(nullable = false, name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(nullable = false, name = "chat_id")
