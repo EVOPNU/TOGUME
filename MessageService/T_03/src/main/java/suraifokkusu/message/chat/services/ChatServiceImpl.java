@@ -42,8 +42,15 @@ public class ChatServiceImpl implements ChatService {
     @Transactional
     public Chat increaseTotalMessagesByOne(Integer chatId) {
         Chat chat = chatRepository.getChatById(chatId);
-        Long messages = chat.getTotalMessages();
-        chat.setTotalMessages(messages++);
+        Long messages = chat.getTotalMessages() + 1;
+        chat.setTotalMessages(messages);
+        return chat;
+    }
+    @Override
+    @Transactional
+    public Chat increaseTotalMessagesByOne(Chat chat) { // сделал перегруженный метод чтобы избавиться от лишнего запроса в бд.
+        Long messages = chat.getTotalMessages() + 1;
+        chat.setTotalMessages(messages);
         return chat;
     }
 
@@ -51,7 +58,7 @@ public class ChatServiceImpl implements ChatService {
     public Chat save(@RequestBody Chat chat) {
         return chatRepository.save(
                 new Chat(
-                        chat.getId(),
+                        chat.getId(), //TODO проверить на nullPointerException
                         chat.getName(),
                         chat.getPath(),
                         chat.getTotalMessages()
@@ -61,7 +68,7 @@ public class ChatServiceImpl implements ChatService {
 
     @Transactional
     public ChatMembers addUserToChat(Integer chatId, Integer userId){
-        ChatMembers chatMembers = new ChatMembers(chatId, userId);
+        ChatMembers chatMembers = new ChatMembers(chatId, userId); //Стоит сделать проверку потом на уже возможное наличие данного юзера в чате. чтобы не захламлять бд одинаковыми записями.
        return chatMembersRepository.save(chatMembers);
     }
 }

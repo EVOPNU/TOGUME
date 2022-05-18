@@ -12,6 +12,9 @@ import suraifokkusu.message.chat.entities.ChatMembers;
 import suraifokkusu.message.chat.services.ChatService;
 import suraifokkusu.message.dto.MessageDTO;
 import suraifokkusu.message.dto.transfer.ChatDetail;
+import suraifokkusu.message.exceptions.ChatCreationException;
+import suraifokkusu.message.exceptions.InvalidAttributeValueException;
+import suraifokkusu.message.exceptions.UserHaveNotAccess;
 import suraifokkusu.message.services.MessageService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,12 +50,14 @@ public class ChatController {
     public List<MessageDTO> getMessagesByChatId(HttpServletRequest request,
             @PathVariable(name = "id") Integer id) {
         Integer userId = Integer.valueOf(request.getHeader("Id"));
-        List<Chat> chats = chatService.getChats(userId);
-        chats.stream().filter((chat -> chat.getId() == id)).collect(Collectors.toList()); //TODO ЗАГЛЯНУТЬ ВНУТРЬ ЧАТА И ВЫТАЩИТЬ АЙДИ ЧАТА (с ним и работаем дальше) +
-        Chat chat = chats.get(id-1);
-        if(chat==null){
-            throw new RuntimeException();
-        }
+        //Модуль определяющий имеет ли юзер право работать с чатом
+        List<Chat> chats = chatService.getChats(userId); //TODO по хорошему вынести его потом в сервисы.
+        Chat currentChat = chats.stream()
+                .filter((chat -> chat.getId().equals(id)))
+                .findFirst()
+                .orElseThrow(() ->
+                        new UserHaveNotAccess(String.format("Юзер:id= %d не имеет право работать с этим чатом:id= %d", userId, id)));//ты так и не сделал эту задачу. наполовину ты ее сделал. надо было удалить строчку с Chat chat = service.getChat(id-1);
+
         return messageService.getMessagesByChatId(id);
 
     }
@@ -66,32 +71,39 @@ public class ChatController {
                                    @RequestBody
                                            MessageDTO messageDTO){
        Integer userId = Integer.valueOf(request.getHeader("Id"));
+
+        List<Chat> chats = chatService.getChats(userId); //TODO по хорошему вынести его потом в сервисы.
+        Chat currentChat = chats.stream()
+                .filter((chat -> chat.getId().equals(chatId)))
+                .findFirst()
+                .orElseThrow(() ->
+                        new UserHaveNotAccess(String.format("Юзер:id= %d не имеет право работать с этим чатом:id= %d", userId, chatId)));//ты так и не сделал эту задачу. наполовину ты ее сделал. надо было удалить строчку с Chat chat = service.getChat(id-1);
+
         messageDTO.setSender_id(userId);
         messageDTO.setChat_id(chatId);
-        chatService.increaseTotalMessagesByOne(chatId);
-        return messageService.save(messageDTO).orElseThrow();
+        chatService.increaseTotalMessagesByOne(currentChat); //чтобы не отправлять лишние запросы в бд
+        return messageService.save(messageDTO).orElseThrow(()-> new InvalidAttributeValueException("Неверно сформированно тело сообщения"));
     }
 
     @PostMapping("/addChat")
     @ApiOperation(value = "Add chat")
     public Chat addChat(@RequestBody Chat chat){
+        if(chat.getId() !=null){
+            throw new ChatCreationException("При создании чата id должен отсутствовать"); //нужно для того, чтобы репозиторий не переписал существующие чаты.
+        }
        return chatService.save(chat);
     }
 
     @ApiOperation(value = "Add user to chat")
     @ApiImplicitParam(paramType = "header")
-    @PostMapping("/addUser/{chatId}")
+    @GetMapping("/addUser/{chatId}") //зачем post если мы тело не передаем
     public ChatMembers addUser(HttpServletRequest request,
                                 @PathVariable("chatId") Integer chatId){
         Integer userId = Integer.valueOf(request.getHeader("Id"));
-        return chatService.addUserToChat(chatId, userId);
+        return chatService.addUserToChat(chatId, userId); //по хорошему надо бы навешать сюда еще проверку какую-нибудь на то , что данного юзера уже нет в данном чате. но поидеи бд нам об этом скажет, вроде бы я поля уникальные делал.
     }
 
 }
-//TODO ликвидировать возможность запроса чего угодно, если юзер не состоит в чате (через вброс ошибок) if(throw->new)
-//TODO СДЕЛАТЬ EXCEPTION HANDLER И ДОПИСАТЬ ВСЕ OR.ELSE.THROW
-
-//TODO API FOR ADD CHAT+
-//TODO USER ADD TO CHAT+
-//TODO VALIDATION FOR MEESSAGE TO SEND IN CHAT МНЕ НЕ НУЖНО В ДТОШКЕ CHAT_ID AND SEND_ID ПОТОМУ ЧТО ПОЛУЧАЕМ ИХ ИЗ ХЕДЕРОВ И ИЗ ПУТИ, НУЖЕН ТОЛЬКО МЭССЕДЖ+
+//TODO затестить текущий сервис. Работает или нет? В туду из сервиса попробовать отловить nullPointerException
+//TODO на дальнейшее будущее. переместить все выбросы exception'ов на уровень сервисов. Или на уровень Actions(новый уровень, похожий на сервисы, но не он)
 //todo сделать сваггер** +

@@ -10,6 +10,7 @@ import java.util.Optional;
 public interface ChatService {
     List<Chat> getChats(Integer userId);
     Chat increaseTotalMessagesByOne (Integer chatId);
+    Chat increaseTotalMessagesByOne (Chat chat);
     Chat save(@RequestBody Chat chat);
     ChatMembers addUserToChat(Integer chatId, Integer userId);
 }
