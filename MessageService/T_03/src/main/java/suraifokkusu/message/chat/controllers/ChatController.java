@@ -66,7 +66,7 @@ public class ChatController {
     @ApiOperation(value = "Send message")
     @ApiImplicitParam(paramType = "header")
     @JsonView(ChatDetail.class)
-    public MessageDTO sendMessage(HttpServletRequest request, //todo менять в чате тоталмэсседжес* +
+    public MessageDTO sendMessage(HttpServletRequest request,
                                    @PathVariable("id") Integer chatId,
                                    @RequestBody
                                            MessageDTO messageDTO){
