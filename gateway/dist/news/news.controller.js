@@ -17,12 +17,42 @@ const common_1 = require("@nestjs/common");
 const node_fetch_1 = require("node-fetch");
 let NewsController = class NewsController {
     async getRedirect(req, res, headers) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: { 'Id': `${response.headers.get('Id')}` }
+                }).then(response2 => {
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        console.log(err);
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
+                    });
+                });
+            }
+            else {
+                return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
+            }
+        });
+    }
+    async GetByGroupIdRedirect(req, res, headers) {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
+            method: 'GET',
+            headers: { 'Authorization': `${headers.authorization}` }
+        }).then(async (response) => {
+            if (response.status == 200) {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: { 'Id': `${response.headers.get('Id')}` }
                 }).then(response2 => {
@@ -39,12 +69,12 @@ let NewsController = class NewsController {
         });
     }
     async GetRedirect(req, res, headers) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: { 'Id': `${response.headers.get('Id')}` }
                 }).then(response2 => {
@@ -61,12 +91,12 @@ let NewsController = class NewsController {
         });
     }
     async DeleteRedirect(req, res, headers, body) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
                     method: 'DELETE',
                     headers: { 'Id': `${response.headers.get('Id')}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify(body)
@@ -80,12 +110,12 @@ let NewsController = class NewsController {
         });
     }
     async PostRedirect(req, res, headers, body) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
                     method: 'POST',
                     headers: { 'Id': `${response.headers.get('Id')}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify(body)
@@ -103,12 +133,12 @@ let NewsController = class NewsController {
         });
     }
     async PutRedirect(req, res, headers, body) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
                     method: 'PUT',
                     headers: { 'Id': `${response.headers.get('Id')}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify(body)
@@ -135,6 +165,15 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], NewsController.prototype, "getRedirect", null);
+__decorate([
+    (0, common_1.Get)('/ByGroupId/:public_id'),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Headers)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object, Object]),
+    __metadata("design:returntype", Promise)
+], NewsController.prototype, "GetByGroupIdRedirect", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Req)()),

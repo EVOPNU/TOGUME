@@ -17,12 +17,12 @@ const common_1 = require("@nestjs/common");
 const node_fetch_1 = require("node-fetch");
 let MessageAdminController = class MessageAdminController {
     async get(req, res, headers) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: { 'Id': `${response.headers.get('Id')}` }
                 }).then(response2 => {
@@ -39,12 +39,12 @@ let MessageAdminController = class MessageAdminController {
         });
     }
     async getById(req, res, headers) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: { 'Id': `${response.headers.get('Id')}` }
                 }).then(response2 => {

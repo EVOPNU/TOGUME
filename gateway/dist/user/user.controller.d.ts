@@ -1,7 +1,7 @@
 export declare class UserController {
     changePassword(req: any, res: any, headers: any, body: any): Promise<void>;
-    getUserById(req: any, res: any, headers: any): Promise<void>;
     changeFistName(req: any, res: any, headers: any, body: any): Promise<void>;
+    getUserById(req: any, res: any, headers: any): Promise<void>;
     changeLastName(req: any, res: any, headers: any, body: any): Promise<void>;
     changeThirdName(req: any, res: any, headers: any, body: any): Promise<void>;
     changeBirthday(req: any, res: any, headers: any, body: any): Promise<void>;

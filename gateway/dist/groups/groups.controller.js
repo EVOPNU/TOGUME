@@ -17,40 +17,54 @@ const common_1 = require("@nestjs/common");
 const node_fetch_1 = require("node-fetch");
 let GroupsController = class GroupsController {
     async createGroup(req, res, headers, body) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001/api/v1/Groups/create`, {
                     method: 'POST',
                     headers: { 'Id': `${response.headers.get('Id')}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify(body)
                 }).then(response2 => {
-                    response2.json().then(data => {
-                        res.set('Id', `${response.headers.get('Id')}`);
-                        const status = response2.status;
-                        return res.status(status).json(data);
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
                     });
                 });
             }
         });
     }
     async sender(req, res, headers, body) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
                     method: 'POST',
                     headers: { 'Id': `${response.headers.get('Id')}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify(body)
                 }).then(response2 => {
-                    response2.json().then(data => {
-                        res.set('Id', `${response.headers.get('Id')}`);
-                        const status = response2.status;
-                        return res.status(status).json(data);
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
                     });
                 });
             }
@@ -60,16 +74,27 @@ let GroupsController = class GroupsController {
         });
     }
     async addUser(req, res, headers) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: { 'Id': `${response.headers.get('Id')}` }
                 }).then(response2 => {
-                    return res.status(response2.status).send({});
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
+                    });
                 });
             }
             else {
@@ -78,16 +103,27 @@ let GroupsController = class GroupsController {
         });
     }
     async GetByUserId(req, res, headers) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: { 'Id': `${response.headers.get('Id')}` }
                 }).then(response2 => {
-                    return res.status(response2.status).send({});
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
+                    });
                 });
             }
             else {
@@ -96,16 +132,27 @@ let GroupsController = class GroupsController {
         });
     }
     async request(req, res, headers) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: { 'Id': `${response.headers.get('Id')}` }
                 }).then(response2 => {
-                    return res.status(response2.status).send({});
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
+                    });
                 });
             }
             else {
@@ -114,19 +161,26 @@ let GroupsController = class GroupsController {
         });
     }
     async listRequest(req, res, headers) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: { 'Id': `${response.headers.get('Id')}` }
                 }).then(response2 => {
-                    response2.json().then(data => {
-                        res.set('Id', `${response.headers.get('Id')}`);
-                        const status = response2.status;
-                        return res.status(status).json(data);
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
                     });
                 });
             }
@@ -136,19 +190,26 @@ let GroupsController = class GroupsController {
         });
     }
     async usersInvites(req, res, headers) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: { 'Id': `${response.headers.get('Id')}` }
                 }).then(response2 => {
-                    response2.json().then(data => {
-                        res.set('Id', `${response.headers.get('Id')}`);
-                        const status = response2.status;
-                        return res.status(status).json(data);
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
                     });
                 });
             }
@@ -158,16 +219,27 @@ let GroupsController = class GroupsController {
         });
     }
     async deleteRequest(req, res, headers) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: { 'Id': `${response.headers.get('Id')}` }
                 }).then(response2 => {
-                    return res.status(response2.status).send({});
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
+                    });
                 });
             }
             else {
@@ -176,16 +248,27 @@ let GroupsController = class GroupsController {
         });
     }
     async getRight(req, res, headers) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: { 'Id': `${response.headers.get('Id')}` }
                 }).then(response2 => {
-                    return res.status(response2.status).send({});
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
+                    });
                 });
             }
             else {
@@ -194,16 +277,27 @@ let GroupsController = class GroupsController {
         });
     }
     async deleteUser(req, res, headers) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: { 'Id': `${response.headers.get('Id')}` }
                 }).then(response2 => {
-                    return res.status(response2.status).send({});
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
+                    });
                 });
             }
             else {
@@ -212,16 +306,27 @@ let GroupsController = class GroupsController {
         });
     }
     async removeGroup(req, res, headers) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: { 'Id': `${response.headers.get('Id')}` }
                 }).then(response2 => {
-                    return res.status(response2.status).send({});
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
+                    });
                 });
             }
             else {
@@ -230,16 +335,27 @@ let GroupsController = class GroupsController {
         });
     }
     async GetDataGroup(req, res, headers) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: { 'Id': `${response.headers.get('Id')}` }
                 }).then(response2 => {
-                    return res.status(response2.status).send({});
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
+                    });
                 });
             }
             else {
@@ -248,19 +364,26 @@ let GroupsController = class GroupsController {
         });
     }
     async UsersOfGroup(req, res, headers) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: { 'Id': `${response.headers.get('Id')}` }
                 }).then(response2 => {
-                    response2.json().then(data => {
-                        res.set('Id', `${response.headers.get('Id')}`);
-                        const status = response2.status;
-                        return res.status(status).json(data);
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
                     });
                 });
             }
@@ -270,19 +393,26 @@ let GroupsController = class GroupsController {
         });
     }
     async allGroups(req, res, headers) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: { 'Id': `${response.headers.get('Id')}` }
                 }).then(response2 => {
-                    response2.json().then(data => {
-                        res.set('Id', `${response.headers.get('Id')}`);
-                        const status = response2.status;
-                        return res.status(status).json(data);
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
                     });
                 });
             }
@@ -292,19 +422,26 @@ let GroupsController = class GroupsController {
         });
     }
     async usersGroup(req, res, headers) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: { 'Id': `${response.headers.get('Id')}` }
                 }).then(response2 => {
-                    response2.json().then(data => {
-                        res.set('Id', `${response.headers.get('Id')}`);
-                        const status = response2.status;
-                        return res.status(status).json(data);
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
                     });
                 });
             }

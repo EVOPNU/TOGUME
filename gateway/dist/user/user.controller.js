@@ -18,38 +18,27 @@ const FormData = require("form-data");
 const node_fetch_1 = require("node-fetch");
 let UserController = class UserController {
     async changePassword(req, res, headers, body) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001/api/v1/user/account/change/password`, {
                     method: 'PUT',
                     headers: { 'Id': `${response.headers.get('Id')}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify(body)
                 }).then(response2 => {
-                    return res.status(response2.status).send({});
-                });
-            }
-            else {
-                return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
-            }
-        });
-    }
-    async getUserById(req, res, headers) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
-            method: 'GET',
-            headers: { 'Authorization': `${headers.authorization}` }
-        }).then(async (response) => {
-            if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
-                    method: 'GET',
-                    headers: { 'Id': `${response.headers.get('Id')}` },
-                }).then(response2 => {
-                    response2.json().then(data => {
-                        res.set('Id', `${response.headers.get('Id')}`);
-                        const status = response2.status;
-                        return res.status(status).json(data);
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
                     });
                 });
             }
@@ -59,17 +48,57 @@ let UserController = class UserController {
         });
     }
     async changeFistName(req, res, headers, body) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001/api/v1/user/account/change/firstname`, {
                     method: 'PUT',
                     headers: { 'Id': `${response.headers.get('Id')}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify(body)
                 }).then(response2 => {
-                    return res.status(response2.status).send({});
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
+                    });
+                });
+            }
+            else {
+                return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
+            }
+        });
+    }
+    async getUserById(req, res, headers) {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
+            method: 'GET',
+            headers: { 'Authorization': `${headers.authorization}` }
+        }).then(async (response) => {
+            if (response.status == 200) {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
+                    method: 'GET',
+                    headers: { 'Id': `${response.headers.get('Id')}` },
+                }).then(response2 => {
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
+                    });
                 });
             }
             else {
@@ -78,17 +107,28 @@ let UserController = class UserController {
         });
     }
     async changeLastName(req, res, headers, body) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001/api/v1/user/account/change/lastname`, {
                     method: 'PUT',
                     headers: { 'Id': `${response.headers.get('Id')}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify(body)
                 }).then(response2 => {
-                    return res.status(response2.status).send({});
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
+                    });
                 });
             }
             else {
@@ -97,17 +137,28 @@ let UserController = class UserController {
         });
     }
     async changeThirdName(req, res, headers, body) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001/api/v1/user/account/change/thirdname`, {
                     method: 'PUT',
                     headers: { 'Id': `${response.headers.get('Id')}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify(body)
                 }).then(response2 => {
-                    return res.status(response2.status).send({});
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
+                    });
                 });
             }
             else {
@@ -116,17 +167,28 @@ let UserController = class UserController {
         });
     }
     async changeBirthday(req, res, headers, body) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001/api/v1/user/account/change/birthday`, {
                     method: 'PUT',
                     headers: { 'Id': `${response.headers.get('Id')}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify(body)
                 }).then(response2 => {
-                    return res.status(response2.status).send({});
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
+                    });
                 });
             }
             else {
@@ -135,17 +197,28 @@ let UserController = class UserController {
         });
     }
     async changeGroupUniversity(req, res, headers, body) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001/api/v1/user/account/change/groupuniversity`, {
                     method: 'PUT',
                     headers: { 'Id': `${response.headers.get('Id')}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify(body)
                 }).then(response2 => {
-                    return res.status(response2.status).send({});
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
+                    });
                 });
             }
             else {
@@ -154,17 +227,28 @@ let UserController = class UserController {
         });
     }
     async changeFakulty(req, res, headers, body) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001/api/v1/user/account/change/changefakulty`, {
                     method: 'PUT',
                     headers: { 'Id': `${response.headers.get('Id')}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify(body)
                 }).then(response2 => {
-                    return res.status(response2.status).send({});
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
+                    });
                 });
             }
             else {
@@ -173,17 +257,28 @@ let UserController = class UserController {
         });
     }
     async changeNickname(req, res, headers, body) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001/api/v1/user/account/change/nickname`, {
                     method: 'PUT',
                     headers: { 'Id': `${response.headers.get('Id')}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify(body)
                 }).then(response2 => {
-                    return res.status(response2.status).send({});
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
+                    });
                 });
             }
             else {
@@ -192,17 +287,28 @@ let UserController = class UserController {
         });
     }
     async changeStatusInProfile(req, res, headers, body) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001/api/v1/user/account/change/statusinprofile`, {
                     method: 'PUT',
                     headers: { 'Id': `${response.headers.get('Id')}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify(body)
                 }).then(response2 => {
-                    return res.status(response2.status).send({});
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
+                    });
                 });
             }
             else {
@@ -211,19 +317,30 @@ let UserController = class UserController {
         });
     }
     async changeMainPhoto(req, res, headers, body, image) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
                 let formData = new FormData();
                 formData.append('image', JSON.stringify(image));
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001/api/v1/user/account/change/mainphoto`, {
                     method: 'PUT',
                     headers: { 'Id': `${response.headers.get('Id')}` },
                     body: formData
                 }).then(response2 => {
-                    return res.status(response2.status).send({});
+                    let count = 0;
+                    res.set('Id', `${response.headers.get('Id')}`);
+                    response2.json()
+                        .catch(err => {
+                        count = 1;
+                        return res.status(response2.status).send({});
+                    })
+                        .then(data => {
+                        if (count == 0) {
+                            return res.status(response2.status).json(data);
+                        }
+                    });
                 });
             }
             else {
@@ -243,15 +360,6 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "changePassword", null);
 __decorate([
-    (0, common_1.Get)(''),
-    __param(0, (0, common_1.Req)()),
-    __param(1, (0, common_1.Res)()),
-    __param(2, (0, common_1.Headers)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object, Object]),
-    __metadata("design:returntype", Promise)
-], UserController.prototype, "getUserById", null);
-__decorate([
     (0, common_1.Put)('/change/firstname/'),
     __param(0, (0, common_1.Res)()),
     __param(1, (0, common_1.Res)()),
@@ -261,6 +369,15 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "changeFistName", null);
+__decorate([
+    (0, common_1.Get)(''),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Headers)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object, Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getUserById", null);
 __decorate([
     (0, common_1.Put)('/change/lastname/'),
     __param(0, (0, common_1.Res)()),

@@ -19,12 +19,12 @@ const node_fetch_1 = require("node-fetch");
 const FormData = require("form-data");
 let ImagesController = class ImagesController {
     async getRedirect(req, res, headers) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: { 'Id': `${response.headers.get('Id')}` }
                 }).then(response2 => {
@@ -41,12 +41,12 @@ let ImagesController = class ImagesController {
         });
     }
     async GetByImageId(req, res, headers) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: { 'Id': `${response.headers.get('Id')}` }
                 }).then(response2 => {
@@ -63,12 +63,12 @@ let ImagesController = class ImagesController {
         });
     }
     async GetByNewsId(req, res, headers) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
                     method: 'GET',
                     headers: { 'Id': `${response.headers.get('Id')}` }
                 }).then(response2 => {
@@ -85,13 +85,13 @@ let ImagesController = class ImagesController {
         });
     }
     async DeleteRedirect(req, res, headers) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
-                    method: 'POST',
+                (0, node_fetch_1.default)(`http://router:3001${req.originalUrl}`, {
+                    method: 'DELETE',
                     headers: { 'Id': `${response.headers.get('Id')}` }
                 }).then(response2 => {
                     return res.status(response2.status).send({});
@@ -103,24 +103,23 @@ let ImagesController = class ImagesController {
         });
     }
     async PostRedirect(req, res, headers, image) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
-            method: 'GET',
-            headers: { 'Authorization': `${headers.authorization}` }
-        }).then(async (response) => {
-            if (response.status == 200) {
-                let formData = new FormData();
-                formData.append('image', JSON.stringify(image));
-                (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
-                    method: 'POST',
-                    headers: { 'Id': `${response.headers.get('Id')}` },
-                    body: formData
-                }).then(response2 => {
-                    return res.status(response2.status).json(response2.json());
-                });
-            }
-            else {
-                return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
-            }
+        let formData = new FormData();
+        formData.append('image', JSON.stringify(image));
+        (0, node_fetch_1.default)(`http://localhost:3001${req.originalUrl}`, {
+            method: 'POST',
+            body: formData
+        }).then(response2 => {
+            let count = 0;
+            response2.json()
+                .catch(err => {
+                count = 1;
+                return res.status(response2.status).send({});
+            })
+                .then(data => {
+                if (count == 0) {
+                    return res.status(response2.status).json(data);
+                }
+            });
         });
     }
 };

@@ -38,20 +38,19 @@ services:
 
 
   gateway:
-    image: bleedcloud/togugateway:latest
-    # image: bleedcloud/togugateway:test
+    image: bleedcloud/togugateway:1.0.0
     ports:
       - 4000:4000
 
 
   router:
-    image: bleedcloud/togurouter:latest
+    image: bleedcloud/togurouter:1.0.0
     ports:
       - 3001:3001
 
 
   news:
-    image: bleedcloud/newsservice:latest
+    image: bleedcloud/newsservice:1.0.0
     ports:
       - 3000:3000
     depends_on:

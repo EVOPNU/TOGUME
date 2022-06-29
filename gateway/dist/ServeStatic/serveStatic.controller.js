@@ -17,12 +17,12 @@ const common_1 = require("@nestjs/common");
 const node_fetch_1 = require("node-fetch");
 let ServeStaticController = class ServeStaticController {
     async GetRedirect(req, res, headers) {
-        await (0, node_fetch_1.default)('http://localhost:5113/api/v1/authorization', {
+        await (0, node_fetch_1.default)('http://security:5113/api/v1/authorization', {
             method: 'GET',
             headers: { 'Authorization': `${headers.authorization}` }
         }).then(async (response) => {
             if (response.status == 200) {
-                return res.redirect(307, `http://localhost:3001${req.originalUrl}`);
+                return res.redirect(307, `http://router:3001${req.originalUrl}`);
             }
             else {
                 return res.status(common_1.HttpStatus.FORBIDDEN).send('You don`t have access. You need to login.');
