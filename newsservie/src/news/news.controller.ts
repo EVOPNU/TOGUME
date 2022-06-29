@@ -14,6 +14,11 @@ export class NewsController {
         return this.newsService.createNews(dto);
     }
 
+    @Get('/ByGroupId/:public_id')
+    findByGroupId(@Param('public_id') public_id: number) {
+        return this.newsService.findByGroupId(public_id);
+    }
+
     @Get(':id')
     findById(@Param('id') id: number) {
         return this.newsService.findById(id);

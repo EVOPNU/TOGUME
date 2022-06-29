@@ -1,4 +1,4 @@
-import { Injectable, HttpException, HttpStatus } from "@nestjs/common";
+import { Injectable, HttpException, HttpStatus, ParseIntPipe } from "@nestjs/common";
 import { InjectModel } from '@nestjs/sequelize';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -14,12 +14,14 @@ export class ImagesService {
 
     async createImage(image): Promise<string> {
         try {
+            const image_buffer = JSON.parse(JSON.parse(image.image).image).buffer;
+            const buffer = Buffer.from(image_buffer.data);
             const imageName = uuid.v4() + '.jpg';
-            const imagePath = path.resolve(__dirname,'..','..', 'images')
+            const imagePath = path.resolve(__dirname,'..','..', 'images');
             if (!fs.existsSync(imagePath)) {
                 fs.mkdirSync(imagePath, {recursive: true})
             }
-            fs.writeFileSync(path.join(imagePath, imageName), image)
+            fs.writeFileSync(path.join(imagePath, imageName), buffer);
             return imageName;
         } catch (e) {
             console.log(e);
@@ -31,8 +33,8 @@ export class ImagesService {
         let dto: CreateImageDto;
         const imageName = await this.createImage(image);
         const dateNow = new Date;
-        const _image = await this.imageRepository.create({... dto,news_id: news_id, image: imageName, dt_create: dateNow});
-        return _image;
+        const imageInfo = await this.imageRepository.create({... dto,news_id: news_id, image: imageName, dt_create: dateNow});
+        return imageInfo;
     }
 
     async findAllByNewsId(id: number) {

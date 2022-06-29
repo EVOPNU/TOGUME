@@ -25,6 +25,9 @@ let NewsController = class NewsController {
     createNews(dto) {
         return this.newsService.createNews(dto);
     }
+    findByGroupId(public_id) {
+        return this.newsService.findByGroupId(public_id);
+    }
     findById(id) {
         return this.newsService.findById(id);
     }
@@ -45,6 +48,13 @@ __decorate([
     __metadata("design:paramtypes", [create_news_dto_1.CreateNewsDto]),
     __metadata("design:returntype", void 0)
 ], NewsController.prototype, "createNews", null);
+__decorate([
+    (0, common_1.Get)('/ByGroupId/:public_id'),
+    __param(0, (0, common_1.Param)('public_id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], NewsController.prototype, "findByGroupId", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),

@@ -9,8 +9,9 @@ export declare class NewsService {
     private imageRepository;
     constructor(newsRepository: typeof News, imageRepository: typeof Image);
     createNews(dto: CreateNewsDto): Promise<News>;
+    findByGroupId(public_id: number): Promise<News[] | HttpException>;
     findById(id: number): Promise<News | HttpException>;
-    findAll(): Promise<HttpException | News[]>;
+    findAll(): Promise<News[] | HttpException>;
     deleteNews(dto: DeleteNewsDto): Promise<HttpStatus>;
     updateNews(id: number, dto: UpdateNewsDto): Promise<News>;
 }

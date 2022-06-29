@@ -21,9 +21,7 @@ let ImagesController = class ImagesController {
         this.imageService = imageService;
     }
     createImage(image, news_id, headers, body) {
-        console.log(headers);
-        console.log(body);
-        return this.imageService.create(news_id, body.image);
+        return this.imageService.create(news_id, body);
     }
     findAllByNewsId(id) {
         return this.imageService.findAllByNewsId(id);
@@ -32,9 +30,6 @@ let ImagesController = class ImagesController {
         return await this.imageService.findOneByImageId(id);
     }
     async findAll() {
-        const y = await this.imageService.findAll();
-        console.log(y);
-        return y;
         return this.imageService.findAll();
     }
     deleteImage(id) {

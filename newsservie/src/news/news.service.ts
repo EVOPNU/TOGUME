@@ -20,23 +20,33 @@ export class NewsService {
 
     }
 
-    async findById(id: number) {
-        const news = await this.newsRepository.findOne({where:{id: id}});
-        if(news === null) {
-            return new HttpException('News is not be finded', HttpStatus.NOT_FOUND);
+    async findByGroupId(public_id: number) {
+        const news = await this.newsRepository.findAll({where: {public_id: public_id}});
+        if(news[0]) {
+            return news;
         }
         else {
+            return new HttpException('News is not be finded', HttpStatus.NOT_FOUND);
+        }
+    }
+
+    async findById(id: number) {
+        const news = await this.newsRepository.findOne({where:{id: id}});
+        if(news) {
             return news;
+        }
+        else {
+            return new HttpException('News is not be finded', HttpStatus.NOT_FOUND);
         }
     }
 
     async findAll() {
         const news = await this.newsRepository.findAll();
-        if(news === null) {
-            return new HttpException('News is not be finded', HttpStatus.NOT_FOUND);
+        if(news[0]) {
+            return news;
         }
         else {
-            return news;
+            return new HttpException('News is not be finded', HttpStatus.NOT_FOUND);
         }
     }
 
@@ -67,7 +77,6 @@ export class NewsService {
                         return HttpStatus.OK;
                     }
                     else {
-                        console.log('qeqe');
                         throw new HttpException('Пользователь не может удалить новость, т.к. не является администратором или её создателем', HttpStatus.FORBIDDEN);
                     }
                 });

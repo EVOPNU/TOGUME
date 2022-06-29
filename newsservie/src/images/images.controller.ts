@@ -11,7 +11,7 @@ export class ImagesController {
     @Post(':news_id')
     @UseInterceptors(FileInterceptor('image'))
     createImage(@UploadedFile() image, @Param('news_id') news_id, @Headers() headers, @Body() body) {
-        return this.imageService.create(news_id, body.image);
+        return this.imageService.create(news_id, body);
     }
 
     @Get('/byNewsId/:id')

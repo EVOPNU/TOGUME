@@ -27,22 +27,31 @@ let NewsService = class NewsService {
         const dateNow = new Date;
         return this.newsRepository.create(Object.assign(Object.assign({}, dto), { dt_create: dateNow }));
     }
-    async findById(id) {
-        const news = await this.newsRepository.findOne({ where: { id: id } });
-        if (news === null) {
-            return new common_1.HttpException('News is not be finded', common_1.HttpStatus.NOT_FOUND);
+    async findByGroupId(public_id) {
+        const news = await this.newsRepository.findAll({ where: { public_id: public_id } });
+        if (news[0]) {
+            return news;
         }
         else {
+            return new common_1.HttpException('News is not be finded', common_1.HttpStatus.NOT_FOUND);
+        }
+    }
+    async findById(id) {
+        const news = await this.newsRepository.findOne({ where: { id: id } });
+        if (news) {
             return news;
+        }
+        else {
+            return new common_1.HttpException('News is not be finded', common_1.HttpStatus.NOT_FOUND);
         }
     }
     async findAll() {
         const news = await this.newsRepository.findAll();
-        if (news === null) {
-            return new common_1.HttpException('News is not be finded', common_1.HttpStatus.NOT_FOUND);
+        if (news[0]) {
+            return news;
         }
         else {
-            return news;
+            return new common_1.HttpException('News is not be finded', common_1.HttpStatus.NOT_FOUND);
         }
     }
     async deleteNews(dto) {
@@ -55,12 +64,12 @@ let NewsService = class NewsService {
             }
             else {
                 try {
-                    await (0, node_fetch_1.default)('http://localhost:5062/api/v1/Groups/Yura');
+                    await (0, node_fetch_1.default)('http://groups:5062/api/v1/Groups/Yura');
                 }
                 catch (err) {
                     throw new common_1.HttpException('Произошла ошибка при попытке отправить запрос на сервис проверки роли', common_1.HttpStatus.INTERNAL_SERVER_ERROR);
                 }
-                await (0, node_fetch_1.default)('http:localhost:5062/api/v1/Groups/Yura', {
+                await (0, node_fetch_1.default)('http://groups:5062/api/v1/Groups/Yura', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -73,7 +82,6 @@ let NewsService = class NewsService {
                         return common_1.HttpStatus.OK;
                     }
                     else {
-                        console.log('qeqe');
                         throw new common_1.HttpException('Пользователь не может удалить новость, т.к. не является администратором или её создателем', common_1.HttpStatus.FORBIDDEN);
                     }
                 });
@@ -84,7 +92,7 @@ let NewsService = class NewsService {
         }
     }
     async updateNews(id, dto) {
-        await this.newsRepository.update(dto, { where: { id: id } });
+        await this.newsRepository.update(Object.assign({}, dto), { where: { id: id } });
         const user = await this.newsRepository.findOne({ where: { id: id } });
         return user;
     }

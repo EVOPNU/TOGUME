@@ -25,12 +25,14 @@ let ImagesService = class ImagesService {
     }
     async createImage(image) {
         try {
+            const image_buffer = JSON.parse(JSON.parse(image.image).image).buffer;
+            const buffer = Buffer.from(image_buffer.data);
             const imageName = uuid.v4() + '.jpg';
             const imagePath = path.resolve(__dirname, '..', '..', 'images');
             if (!fs.existsSync(imagePath)) {
                 fs.mkdirSync(imagePath, { recursive: true });
             }
-            fs.writeFileSync(path.join(imagePath, imageName), image);
+            fs.writeFileSync(path.join(imagePath, imageName), buffer);
             return imageName;
         }
         catch (e) {
@@ -42,8 +44,8 @@ let ImagesService = class ImagesService {
         let dto;
         const imageName = await this.createImage(image);
         const dateNow = new Date;
-        const _image = await this.imageRepository.create(Object.assign(Object.assign({}, dto), { news_id: news_id, image: imageName, dt_create: dateNow }));
-        return _image;
+        const imageInfo = await this.imageRepository.create(Object.assign(Object.assign({}, dto), { news_id: news_id, image: imageName, dt_create: dateNow }));
+        return imageInfo;
     }
     async findAllByNewsId(id) {
         const image = await this.imageRepository.findAll({ where: { news_id: id } });

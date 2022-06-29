@@ -25,8 +25,8 @@ AppModule = __decorate([
                 host: 'localhost',
                 port: 3306,
                 username: 'root',
-                password: 'root',
-                database: 'togumetest',
+                password: '01RFHfcm11@',
+                database: 'news',
                 models: [news_model_1.News, images_model_1.Image],
                 autoLoadModels: true
             }),
