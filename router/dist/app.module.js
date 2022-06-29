@@ -9,12 +9,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const images_module_1 = require("./images/images.module");
+const serveStatic_module_1 = require("./ServeStatic/serveStatic.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             images_module_1.ImagesModule,
+            serveStatic_module_1.ServeStaticModule,
         ]
     })
 ], AppModule);

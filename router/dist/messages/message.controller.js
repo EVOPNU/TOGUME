@@ -16,19 +16,19 @@ exports.MessageController = void 0;
 const common_1 = require("@nestjs/common");
 let MessageController = class MessageController {
     async get(req, res) {
-        return res.redirect(307, `http://localhost:8080${req.originalUrl}`);
+        return res.redirect(307, `http://message:8189${req.originalUrl}`);
     }
     async getById(req, res) {
-        return res.redirect(307, `http://localhost:8080${req.originalUrl}`);
+        return res.redirect(307, `http://message:8189${req.originalUrl}`);
     }
     async delete(req, res) {
-        return res.redirect(307, `http://localhost:8080${req.originalUrl}`);
+        return res.redirect(307, `http://message:8189${req.originalUrl}`);
     }
     async post(req, res) {
-        return res.redirect(307, `http://localhost:8080${req.originalUrl}`);
+        return res.redirect(307, `http://message:8189${req.originalUrl}`);
     }
     async put(req, res) {
-        return res.redirect(307, `http://localhost:8080${req.originalUrl}`);
+        return res.redirect(307, `http://message:8189${req.originalUrl}`);
     }
 };
 __decorate([

@@ -16,49 +16,49 @@ exports.GroupsController = void 0;
 const common_1 = require("@nestjs/common");
 let GroupsController = class GroupsController {
     async createGroup(req, res) {
-        return res.redirect(307, `http://localhost:5062${req.originalUrl}`);
+        return res.redirect(307, `http://groups:5062${req.originalUrl}`);
     }
     async sender(req, res) {
-        return res.redirect(307, `http://localhost:5062${req.originalUrl}`);
+        return res.redirect(307, `http://groups:5062${req.originalUrl}`);
     }
     async addUser(req, res) {
-        return res.redirect(307, `http://localhost:5062${req.originalUrl}`);
+        return res.redirect(307, `http://groups:5062${req.originalUrl}`);
     }
     async GetByUserId(req, res) {
-        return res.redirect(307, `http://localhost:5062${req.originalUrl}`);
+        return res.redirect(307, `http://groups:5062${req.originalUrl}`);
     }
     async request(req, res) {
-        return res.redirect(307, `http://localhost:5062${req.originalUrl}`);
+        return res.redirect(307, `http://groups:5062${req.originalUrl}`);
     }
     async listRequest(req, res) {
-        return res.redirect(307, `http://localhost:5062${req.originalUrl}`);
+        return res.redirect(307, `http://groups:5062${req.originalUrl}`);
     }
     async usersInvites(req, res) {
-        return res.redirect(307, `http://localhost:5062${req.originalUrl}`);
+        return res.redirect(307, `http://groups:5062${req.originalUrl}`);
     }
     async deleteRequest(req, res) {
-        return res.redirect(307, `http://localhost:5062${req.originalUrl}`);
+        return res.redirect(307, `http://groups:5062${req.originalUrl}`);
     }
     async getRight(req, res) {
-        return res.redirect(307, `http://localhost:5062${req.originalUrl}`);
+        return res.redirect(307, `http://groups:5062${req.originalUrl}`);
     }
     async deleteUser(req, res) {
-        return res.redirect(307, `http://localhost:5062${req.originalUrl}`);
+        return res.redirect(307, `http://groups:5062${req.originalUrl}`);
     }
     async removeGroup(req, res) {
-        return res.redirect(307, `http://localhost:5062${req.originalUrl}`);
+        return res.redirect(307, `http://groups:5062${req.originalUrl}`);
     }
     async GetDataGroup(req, res) {
-        return res.redirect(307, `http://localhost:5062${req.originalUrl}`);
+        return res.redirect(307, `http://groups:5062${req.originalUrl}`);
     }
     async UsersOfGroup(req, res) {
-        return res.redirect(307, `http://localhost:5062${req.originalUrl}`);
+        return res.redirect(307, `http://groups:5062${req.originalUrl}`);
     }
     async allGroups(req, res) {
-        return res.redirect(307, `http://localhost:5062${req.originalUrl}`);
+        return res.redirect(307, `http://groups:5062${req.originalUrl}`);
     }
     async usersGroup(req, res) {
-        return res.redirect(307, `http://localhost:5062${req.originalUrl}`);
+        return res.redirect(307, `http://groups:5062${req.originalUrl}`);
     }
 };
 __decorate([
@@ -94,7 +94,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], GroupsController.prototype, "GetByUserId", null);
 __decorate([
-    (0, common_1.Get)('/request/:groupid/:userid/'),
+    (0, common_1.Get)('/req/:groupid/'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
@@ -102,7 +102,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], GroupsController.prototype, "request", null);
 __decorate([
-    (0, common_1.Get)('/invge/:groupid/'),
+    (0, common_1.Get)('/invgr/:groupid/'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),

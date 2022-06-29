@@ -11,6 +11,11 @@ export class NewsController {
         return  res.redirect(307, `http://news:3000${req.originalUrl}`);
     }
 
+    @Get('/ByGroupId/:public_id')
+    async GetByGroupIdRedirect(@Req() req, @Res() res) {
+        return res.redirect(307, `http://news:3000${req.originalUrl}`);
+    }
+
     @Get(':id')
     async GetRedirect(@Req() req, @Res() res) {
         return  res.redirect(307, `http://news:3000${req.originalUrl}`);
@@ -23,7 +28,6 @@ export class NewsController {
 
     @Post('')
     async PostRedirect(@Req() req, @Res() res, @Headers() headers) {
-        console.log(headers);
         return  res.redirect(307, `http://news:3000${req.originalUrl}`);
     }
 

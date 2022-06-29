@@ -16,10 +16,10 @@ exports.MessageAdminController = void 0;
 const common_1 = require("@nestjs/common");
 let MessageAdminController = class MessageAdminController {
     async get(req, res) {
-        return res.redirect(307, `http://localhost:8080${req.originalUrl}`);
+        return res.redirect(307, `http://message:8189${req.originalUrl}`);
     }
     async getById(req, res) {
-        return res.redirect(307, `http://localhost:8080${req.originalUrl}`);
+        return res.redirect(307, `http://message:8189${req.originalUrl}`);
     }
 };
 __decorate([

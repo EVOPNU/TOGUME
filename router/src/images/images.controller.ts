@@ -1,4 +1,4 @@
-import { Controller, Get, Res, Req, Delete, Post, Headers, Body, UseInterceptors, UploadedFile } from "@nestjs/common";
+import { Controller, Get, Res, Req, Delete, Post, Headers, Body, UseInterceptors, UploadedFile, ConsoleLogger } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import fetch from "node-fetch";
 import * as FormData from 'form-data';
@@ -35,7 +35,21 @@ export class ImagesController {
             method: 'POST',
             body: formData
         }).then(response2 => {
-            return res.status(response2.status).json(response2.json());
+            let count = 0; 
+            //"count" for counting response if 1 then response is true if 0 then response is false 
+            //Need for error if "then" block is not been, because if dont do this response will be sends twice
+            //Блок catch нужен для проверки на body, если выдаёт ошибку(то есть попадает в этот блок), значит тела нет
+            // res.set('Id', `${response.headers.get('Id')}`);
+            response2.json()
+            .catch(err => {
+                count = 1;
+                return res.status(response2.status).send({});
+            })
+            .then(data => {
+                if(count == 0) {
+                    return res.status(response2.status).json(data);
+                }
+            });
         });
     }
 

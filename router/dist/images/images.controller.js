@@ -19,29 +19,35 @@ const node_fetch_1 = require("node-fetch");
 const FormData = require("form-data");
 let ImagesController = class ImagesController {
     async getRedirect(req, res) {
-        return res.redirect(307, `http://localhost:3000${req.originalUrl}`);
+        return res.redirect(307, `http://news:3000${req.originalUrl}`);
     }
     async GetByImageId(req, res) {
-        return res.redirect(307, `http://localhost:3000${req.originalUrl}`);
+        return res.redirect(307, `http://news:3000${req.originalUrl}`);
     }
     async GetByNewsId(req, res) {
-        return res.redirect(307, `http://localhost:3000${req.originalUrl}`);
+        return res.redirect(307, `http://news:3000${req.originalUrl}`);
     }
     async DeleteRedirect(req, res) {
-        return res.redirect(307, `http://localhost:3000${req.originalUrl}`);
+        return res.redirect(307, `http://news:3000${req.originalUrl}`);
     }
     async PostRedirect(req, res, body, headers, image) {
-        console.log('----------------------------');
-        const imageData = JSON.parse(body.image).buffer;
-        console.log(body.image);
-        console.log('----------------------------');
         let formData = new FormData();
         formData.append('image', JSON.stringify(body));
         (0, node_fetch_1.default)(`http://localhost:3000${req.originalUrl}`, {
             method: 'POST',
             body: formData
         }).then(response2 => {
-            return res.status(response2.status).json(response2.json());
+            let count = 0;
+            response2.json()
+                .catch(err => {
+                count = 1;
+                return res.status(response2.status).send({});
+            })
+                .then(data => {
+                if (count == 0) {
+                    return res.status(response2.status).json(data);
+                }
+            });
         });
     }
 };

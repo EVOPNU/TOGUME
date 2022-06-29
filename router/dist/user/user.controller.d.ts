@@ -9,5 +9,5 @@ export declare class UserController {
     updateteFakulty(req: any, res: any): Promise<any>;
     updateNickname(req: any, res: any): Promise<any>;
     updateStatusInProfile(req: any, res: any): Promise<any>;
-    updateMainPhoto(req: any, res: any): Promise<any>;
+    updateMainPhoto(req: any, res: any, body: any): Promise<void>;
 }

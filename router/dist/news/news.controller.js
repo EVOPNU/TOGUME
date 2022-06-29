@@ -16,20 +16,22 @@ exports.NewsController = void 0;
 const common_1 = require("@nestjs/common");
 let NewsController = class NewsController {
     async getRedirect(req, res) {
-        return res.redirect(307, `http://localhost:3000${req.originalUrl}`);
+        return res.redirect(307, `http://news:3000${req.originalUrl}`);
+    }
+    async GetByGroupIdRedirect(req, res) {
+        return res.redirect(307, `http://news:3000${req.originalUrl}`);
     }
     async GetRedirect(req, res) {
-        return res.redirect(307, `http://localhost:3000${req.originalUrl}`);
+        return res.redirect(307, `http://news:3000${req.originalUrl}`);
     }
     async DeleteRedirect(req, res) {
-        return res.redirect(307, `http://localhost:3000${req.originalUrl}`);
+        return res.redirect(307, `http://news:3000${req.originalUrl}`);
     }
     async PostRedirect(req, res, headers) {
-        console.log(headers);
-        return res.redirect(307, `http://localhost:3000${req.originalUrl}`);
+        return res.redirect(307, `http://news:3000${req.originalUrl}`);
     }
     async PutRedirect(req, res) {
-        return res.redirect(307, `http://localhost:3000${req.originalUrl}`);
+        return res.redirect(307, `http://news:3000${req.originalUrl}`);
     }
 };
 __decorate([
@@ -41,6 +43,14 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], NewsController.prototype, "getRedirect", null);
 __decorate([
+    (0, common_1.Get)('/ByGroupId/:public_id'),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], NewsController.prototype, "GetByGroupIdRedirect", null);
+__decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
@@ -49,7 +59,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], NewsController.prototype, "GetRedirect", null);
 __decorate([
-    (0, common_1.Delete)(':id'),
+    (0, common_1.Delete)(''),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
